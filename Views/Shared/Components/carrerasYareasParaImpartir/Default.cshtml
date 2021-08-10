@@ -1,0 +1,72 @@
+﻿@model IEnumerable<areasCarrera>
+<h5>Carreras para impartir</h5>
+<div class="combbt1 fas fa-angle-double-down">
+    <select id="combo1">
+        <option disabled selected>Elija una opcion</option>
+        @foreach (areasCarrera datos in Model)
+        {
+            <option value="@datos.idArea">@datos.area</option>
+        }
+    </select>
+</div>
+<div class="combbt2 fas fa-angle-double-down"><select id="combo2" disabled></select></div>
+<button id="ins">Insertar Carrera</button>
+<script type="text/javascript">
+    var url = '@Url.Action("mostrarcarreras2", "Log")';
+    var combobox1 = document.getElementById('combo1');
+    var combobox2 = document.getElementById('combo2');
+    var boton2 = document.getElementById('ins');
+    var ulrj = '@Url.Action("subircarrera2","Log")';
+    combobox1.addEventListener('change', () => {
+        event.preventDefault();
+        $.ajax({
+            url: url,
+            type: 'get',
+            data: { i: combobox1.value },
+            success: (succ) => {
+                combobox2.removeAttribute('disabled');
+                combobox2.innerHTML = '';
+                succ.forEach(con => {
+                    var op = document.createElement('option');
+                    op.setAttribute('value', con.idCarrera);
+                    op.textContent = con.carrera;
+                    combobox2.appendChild(op);
+                });
+            },
+            error: (err) => { console.log(err); }
+        });
+    });
+    boton2.addEventListener('click', () => {
+        event.preventDefault();
+        if (combobox2.hasAttribute('disabled')) {
+            Swal.fire({
+                background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                title: 'Debe de tener un area para poder insertar su carrera',
+                icon: 'error',
+                timer: 2000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: true,
+                allowEnterKey: false,
+                stopKeydownPropagation: true,
+                showConfirmButton: false
+            });   
+        }
+        else {
+            $.ajax({
+                url: ulrj,
+                type: 'post',
+                async: false,
+                cache: false,
+                data: { i: combobox2.value },
+                success: (succ) => {
+                    console.log(succ);
+                    combobox1.selectedIndex = '0';
+                    combobox2.setAttribute('disabled', true);
+                    combobox2.innerHTML = '';
+                },
+            error: (err) => { console.log(err) }
+        });
+        }
+    });
+</script>

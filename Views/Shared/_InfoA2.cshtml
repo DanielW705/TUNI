@@ -1,0 +1,87 @@
+﻿@model TRITUPLE
+<div class="most">
+    <input type="hidden" id="d" value="@Model.model1.idA" />
+    <h5>Informacion del Alumno</h5>
+    <p><span>Nombre del usuario:</span>@Model.model1.usuario</p>
+    <p><span>Nombre:</span>@Model.model1.nombre</p>
+    <p><span>Apellido Paterno:</span>@Model.model1.ap</p>
+    <p><span>Apellido Materno:</span>@Model.model1.am</p>
+    <embed class="pdfac" src="@Model.model1.ruta" type="application/pdf" />
+    <p class="archname"><span>Nombre del archivo:</span>@Model.model1.arch</p>
+</div>
+<div class="mostinfod">
+    <h5>Reconocimientos subidos por el usuario</h5>
+    @if (Model.model2 == null)
+    {
+        <p class="faltainfo">No hay datos</p>
+    }
+    else
+    {
+        @foreach (var datos in Model.model2)
+        {
+            <embed src="@datos.ruta" type="apllication/pdf" />
+            <p><span>Nombre del archivo: </span> @datos.namerecon</p>
+        }
+    }
+</div>
+<div class="mostarTal">
+    <h5>Carreras tecnicas subidas por el usuario</h5>
+    @if (Model.model3 == null)
+    {
+        <p class="faltainfo">No hay informacion</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var datos in Model.model3)
+            {
+                <li><span>Carrera Tecnica seleccionada:</span>  @datos.carreratecsel</li>
+            }
+        </ul>
+    }
+</div>
+<div class="seccionbuttones">
+    <button id="a">Acceptar</button>
+    <button id="r">Rechazar</button>
+</div>
+<script>
+    var idx = document.getElementById('d').value;
+    document.getElementById('a').addEventListener('click', function () {
+        $.ajax({
+            url: '@Url.Action("aceptado", "Principal")',
+            method: 'post',
+            data: { id: idx },
+            async: true,
+            timeout: 0,
+            success: function (succ) {
+                if (succ > 1) {
+                    alert('exito de la operacion');
+                    location.reload();
+                }
+                else {
+                    alert('ocurrio un error');
+                }
+            },
+            error: function (err) { console.log(err); }
+        });
+    });
+    document.getElementById('r').addEventListener('click', function () {
+        $.ajax({
+            url: '@Url.Action("rechazo", "Principal")',
+            method: 'post',
+            data: { id: idx },
+            async: true,
+            timeout: 0,
+            success: function (succ) {
+                if (succ > 1) {
+                    alert('exito de la operacion');
+                    location.reload();
+                }
+                else {
+                    alert('ocurrio un error');
+                }
+            },
+            error: function (err) { console.log(err); }
+        });
+    });
+</script>

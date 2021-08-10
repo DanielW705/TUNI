@@ -1,0 +1,147 @@
+﻿@model IEnumerable<areasCarrera>
+<div class="section total">
+    <div class="section primera">
+        <div class="primercombobtn fas fa-angle-double-down">
+            <select id="combo" class="primercombo">
+                <option value="0" disabled selected>Seleccione una opcion</option>
+                @foreach (var data in Model)
+                {
+                    <option value="@data.idArea">@data.area</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="section segunda">
+        <div class="segundocombobtn fas fa-angle-double-down">
+            <select id="combo2" disabled class="segundocombo"></select>
+        </div>
+    </div>
+    <button id="presoname">Subir carrera</button>
+</div>
+<script type="text/javascript">
+    var combobox = document.getElementById('combo');
+    var combobox2 = document.getElementById('combo2');
+    var url1 = '@Url.Action("_vercarreras", "Log")';
+    var url2 = '@Url.Action("subircarrera","Log")';
+    var botton = document.getElementById('presoname');
+    combobox.addEventListener('change', () => {
+        event.preventDefault();
+        if (combobox.value == 0) {
+            combobox2.innerHTML = '';
+            combobox2.setAttribute('disabled', true);
+        }
+        else {
+        $.ajax({
+            url: url1,
+            type: 'get',
+            data: { id: combobox.value },
+            success: function (succ) {
+                var combobox2 = document.getElementById('combo2');
+                combobox2.innerHTML = '';
+                combobox2.removeAttribute('disabled');
+                succ.forEach(con => {
+                    var op = document.createElement('option');
+                    op.setAttribute('value', con.idCarrera)
+                    op.textContent = con.carrera;
+                    combobox2.appendChild(op);
+                });
+            },
+            error: function (err) { console.log(err); }
+        });
+    }
+    });
+    botton.addEventListener('click', () => {
+        if (combobox2.hasAttribute('disabled')) {
+            Swal.fire({
+                title: 'Debes seleccionar una area para subir tu carrera',
+                icon: 'error',
+                background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                position: 'center',
+                backdrop: true,
+                timer: 2000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                stopKeydownPropagation: false,
+                showConfirmButton: false,
+                customClass:
+                {
+                    title: 'titlemd'
+                },
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        }
+        else {
+            $.ajax({
+            url: url2,
+            data: { id: combobox2.value },
+                type: 'get',
+                success: (succ) => {
+                    if (succ == false) {
+                        Swal.fire({
+                            title: 'Ya tienes esa carrera',
+                            icon: 'warning',
+                            background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                            position: 'center',
+                            backdrop: true,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            stopKeydownPropagation: false,
+                            showConfirmButton: false,
+                            customClass:
+                            {
+                                title: 'titlemd'
+                            },
+                            showClass: {
+                                popup: 'animate__animated animate__zoomIn'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__zoomOut'
+                            }
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'Carrera subida con exito',
+                            icon: 'success',
+                            background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                            position: 'center',
+                            backdrop: true,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            stopKeydownPropagation: false,
+                            showConfirmButton: false,
+                            customClass:
+                            {
+                                title: 'titlemd'
+                            },
+                            showClass: {
+                                popup: 'animate__animated animate__bounceIn'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__backOutDown'
+                            }
+                        });
+                    }
+                    combobox.selectedIndex = '0';
+                    combobox2.innerHTML = '';
+                    combobox2.setAttribute('disabled', true);
+                },
+            error: (err) => { console.log(err); }
+             });
+        }
+    });
+
+</script>

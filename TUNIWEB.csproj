@@ -1,0 +1,152 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200426023101_1.cs" />
+    <Compile Remove="Migrations\20200426023101_1.Designer.cs" />
+    <Compile Remove="Migrations\20200426023200_1.cs" />
+    <Compile Remove="Migrations\20200426023200_1.Designer.cs" />
+    <Compile Remove="Migrations\20200426193040_1.cs" />
+    <Compile Remove="Migrations\20200426193040_1.Designer.cs" />
+    <Compile Remove="Migrations\20200426193207_1.cs" />
+    <Compile Remove="Migrations\20200426193207_1.Designer.cs" />
+    <Compile Remove="Migrations\20200426200519_1.cs" />
+    <Compile Remove="Migrations\20200426200519_1.Designer.cs" />
+    <Compile Remove="Migrations\20200429024620_1.cs" />
+    <Compile Remove="Migrations\20200429024620_1.Designer.cs" />
+    <Compile Remove="Migrations\20200429032418_n.cs" />
+    <Compile Remove="Migrations\20200429032418_n.Designer.cs" />
+    <Compile Remove="Migrations\20200429032649_n.cs" />
+    <Compile Remove="Migrations\20200429032649_n.Designer.cs" />
+    <Compile Remove="Migrations\20200429034252_f.cs" />
+    <Compile Remove="Migrations\20200429034252_f.Designer.cs" />
+    <Compile Remove="Migrations\20200507015214_1.cs" />
+    <Compile Remove="Migrations\20200507015214_1.Designer.cs" />
+    <Compile Remove="Migrations\20200512031211_2.cs" />
+    <Compile Remove="Migrations\20200512031211_2.Designer.cs" />
+    <Compile Remove="Migrations\20200514175408_3.cs" />
+    <Compile Remove="Migrations\20200514175408_3.Designer.cs" />
+    <Compile Remove="Migrations\20200514175559_o.cs" />
+    <Compile Remove="Migrations\20200514175559_o.Designer.cs" />
+    <Compile Remove="Migrations\20200514175735_1.cs" />
+    <Compile Remove="Migrations\20200514175735_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514180557_1.cs" />
+    <Compile Remove="Migrations\20200514180557_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514180708_1.cs" />
+    <Compile Remove="Migrations\20200514180708_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514181039_2.cs" />
+    <Compile Remove="Migrations\20200514181039_2.Designer.cs" />
+    <Compile Remove="Migrations\20200514181132_1.cs" />
+    <Compile Remove="Migrations\20200514181132_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514181748_1.cs" />
+    <Compile Remove="Migrations\20200514181748_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514182035_1.cs" />
+    <Compile Remove="Migrations\20200514182035_1.Designer.cs" />
+    <Compile Remove="Migrations\20200514182140_1.cs" />
+    <Compile Remove="Migrations\20200514182140_1.Designer.cs" />
+    <Compile Remove="Migrations\20200515024348_1.cs" />
+    <Compile Remove="Migrations\20200515024348_1.Designer.cs" />
+    <Compile Remove="Migrations\20200515024705_1.cs" />
+    <Compile Remove="Migrations\20200515024705_1.Designer.cs" />
+    <Compile Remove="Migrations\20200515030616_1.cs" />
+    <Compile Remove="Migrations\20200515030616_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518172253_1.cs" />
+    <Compile Remove="Migrations\20200518172253_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518173346_1.cs" />
+    <Compile Remove="Migrations\20200518173346_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518175034_1.cs" />
+    <Compile Remove="Migrations\20200518175034_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518175753_1.cs" />
+    <Compile Remove="Migrations\20200518175753_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518180303_1.cs" />
+    <Compile Remove="Migrations\20200518180303_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518180700_1.cs" />
+    <Compile Remove="Migrations\20200518180700_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518185246_1.cs" />
+    <Compile Remove="Migrations\20200518185246_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518192728_1.cs" />
+    <Compile Remove="Migrations\20200518192728_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518193030_1.cs" />
+    <Compile Remove="Migrations\20200518193030_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518194738_1.cs" />
+    <Compile Remove="Migrations\20200518194738_1.Designer.cs" />
+    <Compile Remove="Migrations\20200518195214_1.cs" />
+    <Compile Remove="Migrations\20200518195214_1.Designer.cs" />
+    <Compile Remove="Migrations\20200523212755_1.cs" />
+    <Compile Remove="Migrations\20200523212755_1.Designer.cs" />
+    <Compile Remove="Migrations\20200523213415_1.cs" />
+    <Compile Remove="Migrations\20200523213415_1.Designer.cs" />
+    <Compile Remove="Migrations\20200523213903_1.cs" />
+    <Compile Remove="Migrations\20200523213903_1.Designer.cs" />
+    <Compile Remove="Migrations\20200523214547_1.cs" />
+    <Compile Remove="Migrations\20200523214547_1.Designer.cs" />
+    <Compile Remove="Migrations\20200524023546_1.cs" />
+    <Compile Remove="Migrations\20200524023546_1.Designer.cs" />
+    <Compile Remove="Migrations\20200524031809_1.cs" />
+    <Compile Remove="Migrations\20200524031809_1.Designer.cs" />
+    <Compile Remove="Migrations\20200524032118_1.cs" />
+    <Compile Remove="Migrations\20200524032118_1.Designer.cs" />
+    <Compile Remove="Migrations\20200525182241_d.cs" />
+    <Compile Remove="Migrations\20200525182241_d.Designer.cs" />
+    <Compile Remove="Migrations\20200525201936_1.cs" />
+    <Compile Remove="Migrations\20200525201936_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526030534_1.cs" />
+    <Compile Remove="Migrations\20200526030534_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526031618_1.cs" />
+    <Compile Remove="Migrations\20200526031618_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526035112_1.cs" />
+    <Compile Remove="Migrations\20200526035112_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526172731_1.cs" />
+    <Compile Remove="Migrations\20200526172731_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526182200_2.cs" />
+    <Compile Remove="Migrations\20200526182200_2.Designer.cs" />
+    <Compile Remove="Migrations\20200526182519_1.cs" />
+    <Compile Remove="Migrations\20200526182519_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526182657_1.cs" />
+    <Compile Remove="Migrations\20200526182657_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526182819_1.cs" />
+    <Compile Remove="Migrations\20200526182819_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526184156_1.cs" />
+    <Compile Remove="Migrations\20200526184156_1.Designer.cs" />
+    <Compile Remove="Migrations\20200526204536_1.cs" />
+    <Compile Remove="Migrations\20200526204536_1.Designer.cs" />
+    <Compile Remove="Migrations\20200605001348_f.cs" />
+    <Compile Remove="Migrations\20200605001348_f.Designer.cs" />
+    <Compile Remove="Migrations\20200605003719_1.cs" />
+    <Compile Remove="Migrations\20200605003719_1.Designer.cs" />
+    <Compile Remove="Migrations\20200605005412_1.cs" />
+    <Compile Remove="Migrations\20200605005412_1.Designer.cs" />
+    <Compile Remove="Migrations\20200605225811_1.cs" />
+    <Compile Remove="Migrations\20200605225811_1.Designer.cs" />
+    <Compile Remove="Migrations\20200605230157_1.cs" />
+    <Compile Remove="Migrations\20200605230157_1.Designer.cs" />
+    <Compile Remove="Migrations\20200609054244_1.cs" />
+    <Compile Remove="Migrations\20200609054244_1.Designer.cs" />
+    <Compile Remove="Migrations\20200609055218_1.cs" />
+    <Compile Remove="Migrations\20200609055218_1.Designer.cs" />
+    <Compile Remove="Migrations\20200610024305_1.cs" />
+    <Compile Remove="Migrations\20200610024305_1.Designer.cs" />
+    <Compile Remove="Migrations\20200610033504_1.cs" />
+    <Compile Remove="Migrations\20200610033504_1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.14" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

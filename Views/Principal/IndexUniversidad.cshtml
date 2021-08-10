@@ -1,0 +1,88 @@
+﻿<nav class="navi">
+    <ul>
+        <li>
+            <i id="iconito" class="fas fa-mail-bulk"></i>
+        </li>
+        <li>
+            <form asp-action="cerrarsecion" asp-controller="Principal" method="get">
+                <button type="submit">Cerrar sesion</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+<div id="bandejadeentrada" hidden>
+    <div id="entrada"></div>
+</div>
+<div id="vista" hidden></div>
+<script>
+    var iconito = document.getElementById('iconito')
+    iconito.addEventListener('click', function () {
+        if (iconito.hasAttribute('cerrado')) {
+            document.getElementById('bandejadeentrada').setAttribute('hidden', '');
+            iconito.removeAttribute('cerrado');
+            document.getElementById('mensajito').remove();
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("versolicitudes","Principal")',
+                type: 'get',
+                success: function (succ) {
+                    var div = document.createElement('div');
+                    div.className = 'divmesaje';
+                    if (succ == null) {
+                        var div2 = document.createElement('div');
+                        div.id = 'mensajito';
+                        div2.className = 'mesaje';
+                        var spn = document.createElement('span');
+                        spn.textContent = 'Todavia no tiene Solicitudes';
+                        div2.appendChild(spn);
+                        div.appendChild(div2);
+                        document.getElementById('entrada').appendChild(div);
+                        iconito.setAttribute('cerrado', true);
+                        document.getElementById('bandejadeentrada').removeAttribute('hidden');
+                    }
+                    else {
+                        iconito.setAttribute('cerrado', true);
+                         var div = document.createElement('div');
+                         div.className = 'divmesaje';
+                        succ.forEach(function (objt) {
+                                var div2 = document.createElement('div');
+
+                            div.id = 'mensajito';
+                            div2.className = 'mesaje';
+                            var input = document.createElement('button');
+                            input.setAttribute('btms', '');
+                            input.textContent = 'Ver alumno';
+                            input.value = objt.id;
+                            var spn = document.createElement('span');
+                            spn.textContent = objt.nombre;
+                            div2.appendChild(spn);
+                            div2.appendChild(input);
+                            div.appendChild(div2);
+                            document.getElementById('entrada').appendChild(div);
+                                document.getElementById('bandejadeentrada').removeAttribute('hidden');
+                            
+                        });
+                        document.querySelectorAll('[btms]').forEach(function (objeto) {
+                            objeto.addEventListener('click', function () {
+                                $.ajax({
+                                    url: '@Url.Action("verAlumno", "Principal")',
+                                    type: 'post',
+                                    async: true,
+                                    timeout: 0,
+                                    data: { id: objeto.value },
+                                    success: function (succ) {
+                                        $('#vista').removeAttr('hidden');
+                                        $('#vista').append(succ);
+                                    },
+                                    error: function (err) { console.log(err); }
+                                });
+                            });
+                        });
+                    }
+                },
+                error: function (err) { console.log(err) }
+            });
+        }
+    });
+</script>

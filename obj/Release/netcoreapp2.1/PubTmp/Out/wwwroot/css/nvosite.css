@@ -1,0 +1,4427 @@
+﻿/***Mod swetalert**/
+.rojo {
+    color: red !important;
+}
+
+.swetalert-contAr {
+    width: 100%;
+}
+
+.titlemd {
+    font-size: 20px !important;
+}
+
+.swetalertcontsuccA {
+    overflow: hidden !important;
+}
+/********/
+label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,0) 70.71%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,0) 70.71%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,0) 70.71%);
+    display: flex;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #a608f6);
+    border-radius: 3px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(transparent,#a608f6);
+    }
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(solid,read);
+    box-shadow: inset 0 0 2.5px 2px rgba(0,0,0,0.5);
+}
+
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.section {
+    width: 100%;
+}
+
+.menu {
+    background-color: rebeccapurple;
+    height: 50px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 15%;
+}
+
+.register {
+    background-color: rgba(255, 255, 255, 0.6);
+    height: 400px;
+    width: 250px;
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.footer {
+    background-color: aqua;
+    display: none;
+}
+
+.register > .warnings {
+    color: red;
+}
+
+.register > .title {
+    margin: 5px;
+    width: 100%;
+    height: 20%;
+    text-align: center;
+}
+
+    .register > .title > h1 {
+        font-size: 25px;
+    }
+
+.register > .groupbtn {
+    width: 70%;
+    height: 8%;
+    margin: 20px auto;
+    position: relative;
+    box-shadow: 0 0 20px 1px #4FEAD8;
+    border-radius: 30px;
+}
+
+    .register > .groupbtn > #btn {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(to left, #07F5F5, #6707F5);
+        border-radius: 30px;
+        transition: 0.5s;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        padding: 5px 5%;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        outline: none;
+        position: relative;
+        left: 5%;
+        bottom: 5%;
+        font-size: 12px;
+        height: 100%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        padding: 5px 5%;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        outline: none;
+        position: relative;
+        left: 14%;
+        bottom: 5%;
+        font-size: 12px;
+        height: 100%;
+    }
+
+.forms {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+}
+
+    .forms > .frm {
+        position: relative;
+        min-width: 100%;
+        transition: 0.5s;
+    }
+
+        .forms > .frm.get {
+            left: 5%;
+        }
+
+            .forms > .frm.get > h1 {
+                text-align: center;
+                font-size: 150%;
+                margin: 0;
+            }
+
+        .forms > .frm.post > h1 {
+            text-align: center;
+            font-size: 150%;
+        }
+
+        .forms > .frm > .radio-check {
+            display: flex;
+            height: 15%;
+            flex-direction: column;
+        }
+
+            .forms > .frm > .radio-check > .section-radio {
+                min-height: 90%;
+                display: flex;
+                justify-content: space-around;
+            }
+
+                .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+                    position: relative;
+                    margin-right: 5px;
+                    top: 2px;
+                    background: #c6c6c6;
+                    width: 50px;
+                    height: 50%;
+                    outline: none;
+                    -webkit-appearance: none;
+                    border-radius: 20px;
+                    box-shadow: inset 0 0 2px rgba(0,0,0,0.2);
+                    transition: 0.5s;
+                }
+
+                .forms > .frm > .radio-check > .section-radio > input:checked[type=radio] {
+                    background: #03a9f4;
+                }
+
+                .forms > .frm > .radio-check > .section-radio > input[type=radio]:before {
+                    content: '';
+                    position: absolute;
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 20px;
+                    bottom: 0px;
+                    left: 0;
+                    background: white;
+                    transform: scale(1.1);
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                    transition: 0.5s;
+                }
+
+                .forms > .frm > .radio-check > .section-radio > input:checked[type=radio]:before {
+                    left: 60%;
+                }
+
+            .forms > .frm > .radio-check > .label-text {
+                position: relative;
+                bottom: 20px;
+                display: flex;
+                justify-content: space-around;
+                font-size: 12px;
+            }
+
+        .forms > .frm > .section-insert {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 70%;
+        }
+
+            .forms > .frm > .section-insert > input[type=text] {
+                margin-top: 15px;
+                width: 90%;
+                height: 20%;
+            }
+
+            .forms > .frm > .section-insert > input[type=password],
+            .forms > .frm > .section-insert > button {
+                margin-top: 10px;
+                width: 90%;
+                height: 20%;
+            }
+
+            .forms > .frm > .section-insert > input[type=text],
+            .forms > .frm > .section-insert > input[type=password] {
+                font-size: 90%;
+                border: none;
+                border-bottom: 1px solid black;
+                background-color: transparent;
+            }
+
+            .forms > .frm > .section-insert > button {
+                border-radius: 20px;
+                cursor: pointer;
+                border: none;
+                height: 25px;
+            }
+
+            .forms > .frm > .section-insert > span {
+                font-size: 100%;
+                color: red;
+                width: 90%;
+            }
+
+/*********Seccion de registrar alumno***********/
+.navebar {
+    background-color: rebeccapurple;
+}
+
+ul {
+    margin: 0;
+}
+
+.section.one {
+    display: flex;
+    justify-content: center;
+    height: 0;
+}
+
+    .section.one > .section.two {
+        position: relative;
+        top: 70px;
+        width: 248px;
+        height: 400px;
+    }
+
+        .section.one > .section.two > .section.tree {
+            background-color: rgba(255, 255, 255, 0.6);
+            height: 450px;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            position: relative;
+            width: 90%;
+            left: 15px;
+        }
+
+.section .controller {
+    width: 78px;
+    min-height: 450px;
+    top: 70px;
+    position: relative;
+    font-size: 10px;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    right: 9.5px;
+}
+
+    .section .controller > .tabs {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 100%;
+        margin-left: 10px;
+        border-left: 1px solid black;
+        align-items: center;
+    }
+
+        .section .controller > .tabs > li {
+            cursor: pointer;
+            text-align: center;
+            transition: 0.4s;
+            border-radius: 5px;
+            max-width: 90%;
+            color: white;
+            border-radius: 65px;
+        }
+
+
+            .section .controller > .tabs > li:hover {
+                background-color: #9441f0;
+            }
+
+        .section .controller > .tabs > .active {
+            background-color: #9441f0;
+        }
+
+.section.D {
+    background-color: red;
+    width: 228px;
+    position: relative;
+    left: 5%;
+}
+
+.section.one > .section .controller > button {
+    font-size: 30px;
+    width: 25%;
+    height: 60%;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+    .section.one > .section .controller > button:hover {
+        background-color: red;
+    }
+
+.section.one > .section.two > .section.tree > .section.A {
+    height: 100%;
+    min-width: 100%;
+    position: relative;
+    transition: 1s;
+    top: 30px;
+    padding-left: 2%;
+}
+
+    .section.one > .section.two > .section.tree > .section.A > h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > h2 {
+        text-align: center;
+        font-size: 12px;
+        color: red;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            font-size: 20px;
+            border: none;
+            border-bottom: 1px solid black;
+            margin-bottom: 10px;
+            background-color: transparent;
+            width: 90%;
+            font-size: 18px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > span,
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > span {
+            color: red;
+            font-size: 13px;
+            padding-left: 20px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            width: 90%;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            height: 12%;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            display: flex;
+            justify-content: center;
+            width: 60%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                margin: 0;
+                cursor: pointer;
+                padding: 2px 6px;
+                border: 3px solid #1bdbd5;
+                border-radius: 48px;
+                color: white;
+                margin-bottom: 15px;
+                text-align: center;
+                font-size: 15px;
+            }
+
+                .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label:hover {
+                    transform: scale(1.04);
+                    background-color: #1bdbd5;
+                    color: white;
+                }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+                background-color: #1bdbd5;
+                color: white;
+                padding: 3px 12px;
+                font-size: 60%;
+            }
+
+
+.section.one > .section.two > .section.tree > .section.B {
+    min-width: 100%;
+    position: relative;
+    transition: 1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 20px;
+}
+
+    .section.one > .section.two > .section.tree > .section.B > h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > h2 {
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > label {
+            width: 90%;
+            cursor: pointer;
+            padding: 2px 6px;
+            border: 3px solid #1bdbd5;
+            border-radius: 48px;
+            color: white;
+            text-align: center;
+            font-size: 15px;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > label:hover {
+                transform: scale(1.04);
+                background-color: #1bdbd5;
+                color: white;
+            }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+            background-color: #1bdbd5;
+            color: white;
+            padding: 3px 12px;
+            font-size: 78%;
+        }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > button {
+            width: 90%;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            height: 40%;
+        }
+
+.section.one > .section.two > .section.tree > .section.D {
+    min-width: 100%;
+    position: relative;
+    transition: 1s;
+}
+
+.section.options {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+    .section.options select {
+        background-color: transparent;
+        color: white;
+        padding: 10px;
+        width: 120%;
+        height: 35px;
+        border: none;
+        font-size: 12px;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+        -webkit-appearance: button;
+        outline: none;
+        cursor: pointer;
+        border-radius: 5px;
+        position: relative;
+        right: 17px;
+    }
+
+.combobox {
+    margin-bottom: 10px;
+}
+
+    .combobox:before {
+        position: absolute;
+        right: 10%;
+        width: 10%;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        pointer-events: none;
+        background: #af00ff;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 20px;
+    }
+
+.section.options select option {
+    background-color: #0fecea;
+    color: white;
+}
+
+.section.options
+select .selected {
+    color: gray;
+}
+
+.combobox:hover:before {
+    background-color: #0eedeb;
+    cursor: pointer;
+}
+
+.section.options > button {
+    width: 70%;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 40%;
+}
+/****El otro view compoment*********/
+.section.total {
+    width: 100%;
+    height: 33%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .section.total > button {
+        width: 70%;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        height: 15%;
+        margin-top: 10px;
+    }
+
+.section.primera {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+    .section.primera > .primercombobtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 110%;
+            font-size: 10px;
+            cursor: pointer;
+            padding: 10px 10px 10px 5px;
+            height: 100%;
+            border: none;
+            -webkit-appearance: none;
+            color: white;
+            background-color: transparent;
+            box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+            border-radius: 5px;
+            height: 40px;
+            position: relative;
+        }
+
+        .section.primera > .primercombobtn:before {
+            width: 25px;
+            height: 40px;
+            right: 2%;
+            background-color: #af00ff;
+            position: absolute;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 7px 7px 0;
+            color: white;
+            font-size: 20px;
+        }
+
+        .section.primera > .primercombobtn:hover:before {
+            background-color: #0eedeb;
+            cursor: pointer;
+        }
+
+.section.segunda {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        width: 97%;
+        transition: 0.5s;
+        font-size: 10px;
+        cursor: pointer;
+        padding: 10px 5px;
+        height: 130%;
+        -webkit-appearance: none;
+        border: none;
+        color: white;
+        background-color: transparent;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+        border-radius: 7px;
+        position: relative;
+    }
+
+    .section.segunda > .segundocombobtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+        .section.segunda > .segundocombobtn:before {
+            width: 25px;
+            height: 40px;
+            right: 1%;
+            background-color: #af00ff;
+            position: absolute;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 7px 7px 0;
+            color: white;
+            font-size: 20px;
+        }
+
+        .section.segunda > .segundocombobtn:hover:before {
+            background-color: #0eedeb;
+            cursor: pointer;
+        }
+/******GUUGLE Maps**********/
+.sec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 288px;
+    height: 450px;
+    z-index: 1;
+    position: relative;
+    left: 5%;
+    bottom: -90%;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0 1%;
+    border-radius: 20px;
+    transition: 1s;
+    box-shadow: 0px 0px 0px 100px rgba(0,0,0,0.5);
+    padding-bottom: 5%;
+}
+
+    .sec > #autocomplete {
+        width: 255px;
+        border-radius: 5px 5px 0 0;
+        border: none;
+        padding-left: 5%;
+    }
+
+    .sec > #map {
+        width: 90%;
+        height: 80%;
+        background-color: red;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .sec > .controll {
+        width: 90%;
+        display: flex;
+        justify-content: end;
+        margin: 5px 0;
+    }
+
+        .sec > .controll > #close {
+            width: 25%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .sec > .controll > #close:hover {
+                background-color: red;
+                color: white;
+            }
+
+    .sec > button {
+        border: none;
+        border-radius: 20px;
+        width: 80%;
+        cursor: pointer;
+        height: 25px;
+        margin-top: 5px;
+    }
+/**********************Registrar universidad********************/
+.area {
+    width: 100%;
+    height: 100%;
+}
+
+    .area > .element-a {
+        display: flex;
+        justify-content: center;
+    }
+
+        .area > .element-a > .element-b {
+            width: 288px;
+            height: 540px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.6);
+            top: 20px;
+            padding: 0 15px;
+            border-radius: 12px;
+        }
+
+            .area > .element-a > .element-b > h4 {
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: #9973eac4;
+                margin: 0;
+            }
+
+            .area > .element-a > .element-b > h5 {
+                text-align: center;
+                font-size: 12px;
+                color: red;
+                margin: 5px 0;
+            }
+
+            .area > .element-a > .element-b > .elemento-c {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+                .area > .element-a > .element-b > .elemento-c > input {
+                    border: none;
+                    background-color: transparent;
+                    border-bottom: 1px solid black;
+                    margin-bottom: 5px;
+                    width: 100%;
+                }
+
+                .area > .element-a > .element-b > .elemento-c > button {
+                    border: none;
+                    border-radius: 20px;
+                    width: 80%;
+                    cursor: pointer;
+                    height: 25px;
+                    margin-bottom: 5px;
+                }
+
+                    .area > .element-a > .element-b > .elemento-c > button:hover {
+                        transform: scale(1.04);
+                    }
+
+                .area > .element-a > .element-b > .elemento-c > label {
+                    border-radius: 20px;
+                    border: 2px solid #0eebea;
+                    margin: 5px 0;
+                    color: white;
+                    cursor: pointer;
+                    width: 80%;
+                    height: 35px;
+                }
+
+                .area > .element-a > .element-b > .elemento-c > .fileactive {
+                    background-color: #1bdbd5;
+                    color: white;
+                    padding: 3px 12px;
+                    font-size: 10px;
+                    width: 100%;
+                }
+
+                .area > .element-a > .element-b > .elemento-c > label:hover {
+                    background-color: #0eebea;
+                    transform: scale(1.04);
+                }
+
+                .area > .element-a > .element-b > .elemento-c > .errors {
+                    color: red;
+                    font-size: 12px;
+                }
+
+            .area > .element-a > .element-b > .elemento-d {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+                .area > .element-a > .element-b > .elemento-d > input {
+                    width: 100%;
+                    border: none;
+                    margin: 8px 0;
+                    background-color: transparent;
+                    font-size: 15px;
+                    border-bottom: 1px solid black;
+                }
+
+                .area > .element-a > .element-b > .elemento-d > span {
+                    color: red;
+                    font-size: 10px;
+                }
+
+                .area > .element-a > .element-b > .elemento-d > button {
+                    border: none;
+                    border-radius: 20px;
+                    width: 80%;
+                    cursor: pointer;
+                    height: 25px;
+                    margin-bottom: 5px;
+                }
+
+                    .area > .element-a > .element-b > .elemento-d > button:hover {
+                        transform: scale(1.04);
+                    }
+
+            .area > .element-a > .element-b > .elemento-f {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+                .area > .element-a > .element-b > .elemento-f > .combbt1,
+                .area > .element-a > .element-b > .elemento-f > .combbt2 {
+                    width: 100%;
+                    cursor: pointer;
+                }
+
+                    .area > .element-a > .element-b > .elemento-f > .combbt1 > select,
+                    .area > .element-a > .element-b > .elemento-f > .combbt2 > select {
+                        width: 100%;
+                        margin: 5px 0;
+                        -webkit-appearance: none;
+                        border: none;
+                        height: 35px;
+                        background-color: transparent;
+                        box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+                        border-radius: 5px;
+                        color: white;
+                        cursor: pointer;
+                        position: relative;
+                    }
+
+                    .area > .element-a > .element-b > .elemento-f > .combbt1 > select {
+                        font-size: 13px;
+                        padding: 5px 0 5px 2px;
+                    }
+
+                    .area > .element-a > .element-b > .elemento-f > .combbt2 > select {
+                        padding: 5px 0 5px 2px;
+                        font-size: 10px;
+                    }
+
+                .area > .element-a > .element-b > .elemento-f > h5 {
+                    margin: 5px 0;
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #777af0;
+                }
+
+                .area > .element-a > .element-b > .elemento-f > .combbt1:before {
+                    width: 25px;
+                    height: 40px;
+                    right: 15px;
+                    background-color: #af00ff;
+                    position: absolute;
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0 7px 7px 0;
+                    color: white;
+                    font-size: 20px;
+                }
+
+                .area > .element-a > .element-b > .elemento-f > .combbt2:before {
+                    width: 25px;
+                    height: 40px;
+                    right: 15px;
+                    background-color: #af00ff;
+                    position: absolute;
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0 7px 7px 0;
+                    color: white;
+                    font-size: 20px;
+                }
+
+                .area > .element-a > .element-b > .elemento-f > .combbt1:hover:before,
+                .area > .element-a > .element-b > .elemento-f > .combbt2:hover:before {
+                    background-color: #0eedeb;
+                }
+
+                .area > .element-a > .element-b > .elemento-f > button {
+                    border: none;
+                    border-radius: 20px;
+                    width: 80%;
+                    cursor: pointer;
+                    height: 25px;
+                    margin-top: 5px;
+                }
+/*******Index Administrador***********/
+.navi {
+    width: 100%;
+    height: 5%;
+    margin-bottom: 10px;
+    background-color: #996ff4cc;
+}
+
+    .navi > ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 5%;
+        position: sticky;
+    }
+
+        .navi > ul > li {
+            list-style: none;
+            margin-right: 20px;
+        }
+
+            .navi > ul > li > form > button {
+                text-decoration: underline;
+                border: none;
+                background-color: transparent;
+                color: #a0fff1f0
+            }
+
+                .navi > ul > li > form > button:hover {
+                    color: #16e8f3;
+                    cursor: pointer;
+                }
+
+.sections {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+    .sections > .containe {
+        width: 310px;
+        height: 440px;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+        .sections > .containe > .table1cont {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2%;
+            margin-top: 20px;
+            position: relative;
+            transition: 1s;
+        }
+
+    .sections > .nabar {
+        width: 310px;
+        height: 40px;
+        border-bottom: 1px solid black;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 12px 12px 0 0;
+    }
+
+        .sections > .nabar > nav {
+            height: 100%;
+        }
+
+            .sections > .nabar > nav > ul {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+
+                .sections > .nabar > nav > ul > li {
+                    list-style-type: none;
+                    height: 60%;
+                    font-size: 14px;
+                    width: 20%;
+                    text-align: center;
+                    border-radius: 12px;
+                    color: white;
+                    cursor: pointer;
+                }
+
+                .sections > .nabar > nav > ul > .sel1 {
+                    position: relative;
+                    right: 15%;
+                }
+
+                .sections > .nabar > nav > ul > .sel2 {
+                    position: relative;
+                    left: 10%;
+                }
+
+    .sections .nabar > nav > ul > #sel {
+        background-color: rebeccapurple;
+        position: relative;
+        left: 10%;
+        width: 30%;
+        height: 70%;
+        transition: 1s;
+    }
+
+    .sections > .containe > .table1cont > #tablita {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        border-radius: 10px;
+    }
+
+        .sections > .containe > .table1cont > #tablita th,
+        .sections > .containe > .table1cont > #tablita td {
+            padding: 12px 0 10px 7px;
+            text-align: center;
+        }
+
+        .sections > .containe > .table1cont > #tablita thead tr {
+            color: white;
+            background-color: #5ad7b4;
+        }
+
+        .sections > .containe > .table1cont > #tablita tbody tr:nth-child(2n) {
+            color: #005198;
+            border-bottom: 1px solid white;
+        }
+
+        .sections > .containe > .table1cont > #tablita tbody tr:nth-child(2n+1) {
+            color: #98005d;
+            border-bottom: 1px solid white;
+        }
+
+        .sections > .containe > .table1cont > #tablita > thead {
+            line-height: 6px;
+        }
+
+        .sections > .containe > .table1cont > #tablita > tbody > tr:last-of-type {
+            border-bottom: none;
+        }
+
+        .sections > .containe > .table1cont > #tablita > tbody > tr {
+            height: 20px;
+        }
+
+        .sections > .containe > .table1cont > #tablita > thead > tr > th {
+            font-size: 9px;
+            cursor: default;
+            font-weight: bold;
+        }
+
+        .sections > .containe > .table1cont > #tablita > thead > tr > .emp {
+            position: relative;
+            left: 5%;
+        }
+
+        .sections > .containe > .table1cont > #tablita > thead > tr > .empty {
+            border-left: none;
+        }
+        /*#7f67f1*/
+        .sections > .containe > .table1cont > #tablita > tbody > tr > td {
+            font-size: 8px;
+            cursor: default;
+        }
+
+        .sections > .containe > .table1cont > #tablita > tbody > tr > .ancla {
+            width: 15%;
+            padding-right: 10px;
+        }
+
+            .sections > .containe > .table1cont > #tablita > tbody > tr > .ancla > a {
+                cursor: pointer;
+                color: #915ee1;
+                text-decoration: underline;
+            }
+
+                .sections > .containe > .table1cont > #tablita > tbody > tr > .ancla > a:hover {
+                    color: #32c3b9;
+                    text-decoration: none;
+                }
+
+    .sections > .containe > .table1cont > #p {
+        margin-top: 7px;
+        overflow: auto;
+        scrollbar-color: rgba(166,8,246,1) rgba(6,222,224,1);
+        scrollbar-width: thin;
+    }
+
+
+
+        /**********************Vista parcial de para los usuarios******************************************/
+        .sections > .containe > .table1cont > #p > .form-grp > #sec {
+            display: flex;
+            justify-content: end;
+        }
+
+            .sections > .containe > .table1cont > #p > .form-grp > #sec > #close {
+                background-color: transparent;
+                width: 40px;
+                text-align: center;
+                font-size: 10px;
+                color: white;
+            }
+
+                .sections > .containe > .table1cont > #p > .form-grp > #sec > #close:hover {
+                    transform: scale(0.996);
+                    cursor: pointer;
+                    background-color: red;
+                }
+    /*Pantalla de carga*/
+
+    .sections > .containe > .table1cont > #pob {
+        min-width: 100%;
+        min-height: 60%;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .sections > .containe > .table1cont > #pob > .loader {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 6px solid rgba(8, 22, 236, 0.41);
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: -5px -5px 5px rgba(0,0,0,0.2), 5px 5px 5px rgba(0,0,0,0.2), inset -5px -5px 5px rgba(0,0,0,0.2)
+        }
+
+            .sections > .containe > .table1cont > #pob > .loader:before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 25px;
+                right: 25px;
+                bottom: 25px;
+                background-color: rgba(0, 255, 255, 0.8);
+                z-index: 10;
+                border-radius: 50%;
+                border: 2px solid rgba(194, 65, 253, 0.54);
+                box-shadow: inset -2px -2px 5px rgba(255,225,255,0.5), inset 3px 3px 5px rgba(225,5,225,0.5),inset -2px -2px 5px rgba(255,5,255,0.5), inset 3px 3px 5px rgba(225,225,225,0.5)
+            }
+
+            .sections > .containe > .table1cont > #pob > .loader span {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: linear-gradient(#14ffe9,#ffeb3b,#ff00e0);
+                filter: blur(5px);
+                animation: animated 0.5s linear infinite;
+            }
+
+@keyframes animated {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*****************************/
+#vista {
+    width: 30%;
+    height: 90%;
+    background-color: rgba(255,255,255,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 20px;
+    position: relative;
+    border-radius: 5px;
+    overflow-y: auto;
+    padding: 0 1%;
+}
+
+.most {
+    padding-left: 5%;
+}
+
+    .most > h5 {
+        color: #8f3fee;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .most > p {
+        font-size: 12px;
+    }
+
+        .most > p > span {
+            margin-right: 5px;
+            font-weight: bold;
+            color: #008080;
+        }
+
+    .most > .archname {
+        text-align: center;
+    }
+
+    .most > .pdfac {
+        max-width: 95%;
+        min-height: 360px;
+    }
+/*****Parte de la vista parcial*****/
+.mostinfod {
+    text-align: center;
+}
+
+    .mostinfod > .faltainfo {
+        font-weight: bold;
+        text-align: center;
+        color: #008080;
+    }
+
+    .mostinfod > h5 {
+        color: #8f3fee;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .mostinfod > embed {
+        max-width: 95%;
+        min-height: 360px;
+    }
+
+    .mostinfod > p > span {
+        margin-right: 5px;
+        font-weight: bold;
+        color: #008080;
+    }
+
+    .mostinfod > p {
+        text-align: center;
+        font-size: 12px;
+    }
+/*Otra parte de la vista parcial*/
+.mostarTal > .faltainfo {
+    font-weight: bold;
+    text-align: center;
+    color: #008080;
+}
+
+.mostarTal > h5 {
+    color: #8f3fee;
+    text-align: center;
+    font-size: 15px;
+}
+
+.mostarTal > ul {
+    margin-bottom: 10px;
+    padding-left: 5%;
+}
+
+    .mostarTal > ul > li {
+        list-style-type: circle;
+        font-size: 10px;
+    }
+
+        .mostarTal > ul > li::marker {
+            color: white;
+        }
+
+        .mostarTal > ul > li > span {
+            margin-right: 5px;
+            font-weight: bold;
+            color: #008080;
+        }
+/****seccion de la vista parcial*/
+.carrd > h5 {
+    color: #8f3fee;
+    text-align: center;
+    font-size: 15px;
+}
+
+.carrd > .faltainfo {
+    font-weight: bold;
+    text-align: center;
+    color: #008080;
+}
+
+.carrd > p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #008080
+}
+
+.carrd > ul {
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+    .carrd > ul > li {
+        list-style-type: circle;
+        font-size: 10px;
+    }
+
+        .carrd > ul > li::marker {
+            color: white;
+            padding-left: 20px;
+        }
+/******************************/
+.descarga > .faltainfo {
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #008080;
+}
+
+.descarga > form > button {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: #008080;
+    color: #008080;
+    cursor: pointer;
+}
+
+    .descarga > form > button:hover {
+        text-decoration: none;
+        color: #5885f0;
+        transform: scale(0.8);
+    }
+/****************************************************/
+.sections > .containe > .table2cont {
+    min-width: 100%;
+    position: relative;
+    transition: 1s;
+    padding: 2%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .sections > .containe > .table2cont > #tablita2 {
+        width: 100%;
+    }
+
+    .sections > .containe > .table2cont > #tablita2 {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        border-radius: 10px;
+    }
+
+        .sections > .containe > .table2cont > #tablita2 > thead {
+            background-color: #5ad7b4;
+        }
+
+            .sections > .containe > .table2cont > #tablita2 > thead > tr > th {
+                font-size: 10px;
+                text-align: center;
+                padding: 12px 0 10px 7px;
+            }
+
+        .sections > .containe > .table2cont > #tablita2 > tbody > tr > td {
+            font-size: 8px;
+            text-align: center;
+            padding: 12px 0 10px 7px;
+        }
+
+        .sections > .containe > .table2cont > #tablita2 > tbody > tr > .ancle > a {
+            padding-right: 10px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    /**********Pantalla de carga*******************/
+    .sections > .containe > .table2cont > #pob2 {
+        min-width: 100%;
+        min-height: 60%;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .sections > .containe > .table2cont > #pob2 > .loader {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 6px solid rgba(8, 22, 236, 0.41);
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: -5px -5px 5px rgba(0,0,0,0.2), 5px 5px 5px rgba(0,0,0,0.2), inset -5px -5px 5px rgba(0,0,0,0.2)
+        }
+
+            .sections > .containe > .table2cont > #pob2 > .loader:before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 25px;
+                right: 25px;
+                bottom: 25px;
+                background-color: rgba(0, 255, 255, 0.8);
+                z-index: 10;
+                border-radius: 50%;
+                border: 2px solid rgba(194, 65, 253, 0.54);
+                box-shadow: inset -2px -2px 5px rgba(255,225,255,0.5), inset 3px 3px 5px rgba(225,5,225,0.5),inset -2px -2px 5px rgba(255,5,255,0.5), inset 3px 3px 5px rgba(225,225,225,0.5)
+            }
+
+            .sections > .containe > .table2cont > #pob2 > .loader span {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: linear-gradient(#14ffe9,#ffeb3b,#ff00e0);
+                filter: blur(5px);
+                animation: animated 0.5s linear infinite;
+            }
+
+@keyframes animated {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*********************************/
+/*Cerrar vista parcial*/
+.sections > .containe > .table2cont > #p2 {
+    margin-top: 7px;
+    overflow: auto;
+    scrollbar-color: rgba(166,8,246,1) rgba(6,222,224,1);
+    scrollbar-width: thin
+}
+
+    .sections > .containe > .table2cont > #p2 > .form-grp2 {
+        margin-top: 10px;
+    }
+
+        .sections > .containe > .table2cont > #p2 > .form-grp2 > #sec2 {
+            display: flex;
+            justify-content: end;
+        }
+
+            .sections > .containe > .table2cont > #p2 > .form-grp2 > #sec2 > #close {
+                background-color: transparent;
+                width: 40px;
+                text-align: center;
+                font-size: 10px;
+                color: white;
+            }
+
+                .sections > .containe > .table2cont > #p2 > .form-grp2 > #sec2 > #close:hover {
+                    transform: scale(0.996);
+                    cursor: pointer;
+                    background-color: red;
+                }
+/*********Test vocacional********/
+.cuerpodelapag {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+    .cuerpodelapag > .vp {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+    }
+
+        .cuerpodelapag > .vp > #D {
+            width: 50%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+.vistaparcial {
+    width: 85%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+}
+
+
+
+    .vistaparcial > .cabezera {
+        display: flex;
+    }
+
+        .vistaparcial > .cabezera > h1 {
+            font-size: 22px;
+        }
+
+        .vistaparcial > .cabezera > p {
+            font-size: 20px;
+        }
+
+    .vistaparcial > button {
+        margin-top: 30px;
+        width: 80%;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        height: 25px;
+        margin-bottom: 5px
+    }
+
+        .vistaparcial > button:hover {
+            transform: scale(1.04);
+        }
+
+    .vistaparcial > .cuerpo {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+        .vistaparcial > .cuerpo > #op1, #op2, #op3, #op4, #op5, #op6 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            max-width: 16.66%
+        }
+
+            .vistaparcial > .cuerpo > #op1, #op2, #op3, #op4, #op5, #op6 > input[type=text] {
+                width: 100%;
+                cursor: pointer;
+            }
+
+                .vistaparcial > .cuerpo > #op1 > label, #op2 > label, #op3 > label, #op4 > label, #op5 > label, #op6 > label {
+                    font-size: 12px;
+                    cursor: pointer;
+                }
+
+
+
+
+/***/
+.cuerpodelapag > #inf {
+    position: relative;
+    min-width: 50%;
+}
+
+.scs {
+    min-width: 50%;
+    min-height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cuerpodelapag > .scs > .list2 {
+    position: relative;
+    min-width: 50%;
+    min-height: 50%;
+    max-width: 50%;
+    max-height: 50%;
+    padding: 5%;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 5px 5px 0 0;
+}
+
+    .cuerpodelapag > .scs > .list2 > p {
+        text-align: center;
+        font-size: 20px;
+        color: red;
+    }
+
+    .cuerpodelapag > .scs > .list2 > .tabl {
+        max-height: 100%;
+        max-width: 100%;
+        overflow-y: auto;
+        box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.4);
+    }
+
+        .cuerpodelapag > .scs > .list2 > .tabl > table {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+            .cuerpodelapag > .scs > .list2 > .tabl > table > thead {
+                margin: 0;
+                background-color: #36a292;
+                text-align: center;
+                color: white;
+                border-radius: 5px;
+                height: 30px;
+                padding: 1% 0;
+            }
+
+            .cuerpodelapag > .scs > .list2 > .tabl > table > tbody > tr > td {
+                display: flex;
+                justify-content: space-around;
+            }
+
+                .cuerpodelapag > .scs > .list2 > .tabl > table > tbody > tr > td > button {
+                    border: none;
+                    background-color: transparent;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    color: #00b7d5;
+                }
+
+            .cuerpodelapag > .scs > .list2 > .tabl > table > tbody > tr > td {
+                padding: 3%;
+                background-color: transparent;
+                list-style: none;
+                color: #007eca;
+            }
+
+                .cuerpodelapag > .scs > .list2 > .tabl > table > tbody > tr > td > button:hover {
+                    text-decoration: none;
+                    transform: scale(1.04);
+                    color: #8c58fd;
+                }
+
+.cuerpodelapag > .scs > .descargas > .descar {
+    width: 100%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .cuerpodelapag > .scs > .descargas > .descar > button {
+        height: 30%;
+        width: 80%;
+        border-radius: 30px;
+        border: none;
+        background-color: #5f88f1;
+        color: white;
+        font-size: 18px;
+    }
+
+        .cuerpodelapag > .scs > .descargas > .descar > button > i {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        .cuerpodelapag > .scs > .descargas > .descar > button:hover {
+            background-color: white;
+            color: #5f88f1;
+            cursor: pointer;
+            transform: scale(1.04);
+        }
+
+
+.cuerpodelapag > .scs > .descargas > .resultados {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .cuerpodelapag > .scs > .descargas > .resultados > .figurita > button {
+        background-color: #00cfff;
+        border: none;
+        height: 100%;
+        width: 100%;
+        border-radius: 40px;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        padding: 5%;
+    }
+
+        .cuerpodelapag > .scs > .descargas > .resultados > .figurita > button:hover {
+            background-color: white;
+            color: #00cfff;
+            cursor: pointer;
+            transform: scale(1.04);
+        }
+
+    .cuerpodelapag > .scs > .descargas > .resultados > .figurita {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 35%;
+    }
+
+        .cuerpodelapag > .scs > .descargas > .resultados > .figurita:hover::after,
+        .cuerpodelapag > .scs > .descargas > .resultados > .figurita:hover::before {
+            transform: scale(1.04);
+            z-index: 1;
+            left: 50px;
+        }
+
+        .cuerpodelapag > .scs > .descargas > .resultados > .figurita:before {
+            background: linear-gradient(90deg, rgba(58,81,180,1) 0%, rgba(29,225,253,1) 50%, rgba(167,69,252,1) 100%);
+            min-width: 30px;
+            min-height: 10px;
+            position: absolute;
+            content: '';
+            border-radius: 10px;
+            left: 60px;
+            animation: animado 1s linear infinite;
+        }
+
+        .cuerpodelapag > .scs > .descargas > .resultados > .figurita:after {
+            background: linear-gradient(90deg, rgba(58,81,180,1) 0%, rgba(29,225,253,1) 50%, rgba(167,69,252,1) 100%);
+            min-width: 30px;
+            min-height: 10px;
+            position: absolute;
+            content: '';
+            border-radius: 10px;
+            left: 60px;
+            animation: animado2 1s linear infinite;
+        }
+
+@keyframes animado {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animado2 {
+    0% {
+        transform: rotate(360deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.cuerpodelapag > .scs > .descargas {
+    position: relative;
+    min-height: 40%;
+    min-width: 50%;
+    max-height: 20%;
+    max-width: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    margin-bottom: 60px;
+    padding: 0 5%;
+    border-radius: 0 0 5px 5px;
+}
+
+    .cuerpodelapag > .scs > .descargas > .resultados > .divtablitare {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.5);
+    }
+
+        .cuerpodelapag > .scs > .descargas > .resultados > .divtablitare > .tablitare {
+            width: 100%;
+        }
+
+            .cuerpodelapag > .scs > .descargas > .resultados > .divtablitare > .tablitare > thead {
+                text-align: center;
+                height: 30px;
+                background-color: #009af2;
+                color: white;
+            }
+
+            .cuerpodelapag > .scs > .descargas > .resultados > .divtablitare > .tablitare > tbody > tr > td {
+                padding: 2%;
+                color: white;
+            }
+/**********/
+.vistax {
+    position: relative;
+    min-width: 50%;
+    min-height: 90%;
+    max-width: 50%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 5%;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Enviar {
+    position: relative;
+    display: block;
+    padding: 25px 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    max-width: 320px;
+    height: 65px;
+    margin-bottom: 60px;
+    overflow: hidden;
+    color: rgba(255,255,255,1);
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    text-decoration: none;
+    transition: all ease 0.5s;
+    background-color: #18e5f3;
+    top: 20px;
+}
+
+    .Enviar:after, .Enviar:before {
+        width: 80px;
+        height: 200px;
+        content: '';
+        display: block;
+        background: rgba(255,255,255,0.5);
+        transform: rotate(45deg);
+        top: -60px;
+        position: absolute;
+        transition: none;
+        right: -45%;
+        cursor: pointer;
+    }
+
+    .Enviar:before {
+        left: -48%;
+    }
+
+    .Enviar:hover {
+        text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        background-color: #9700FF;
+    }
+
+        .Enviar:hover:after,
+        .Enviar:hover:before {
+            transform: rotate(45deg), scaleX(130%);
+            background: rgba(255,255,255,0.1);
+            transition: all ease 0.5s;
+        }
+
+        .Enviar:hover:after {
+            right: 130%;
+        }
+
+        .Enviar:hover:before {
+            left: 130%;
+        }
+
+.titulo {
+    font-size: 25px;
+}
+
+.descargas > button {
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: auto;
+    position: relative;
+    top: 5px;
+    left: 60px;
+}
+
+    .descargas > button:hover {
+        color: #1883ba;
+        background-color: #ffffff;
+    }
+/*********Swet alert***************/
+.swetalert-contAr {
+    bottom: -10px !important;
+}
+
+.swetalerticonAr {
+    margin-right: 12px;
+    font-size: 12px;
+}
+
+.sewtalerttextAr {
+    font-size: 12px !important;
+}
+
+.swetalert-popAr {
+    height: 50px;
+    width: 70% !important;
+    right: 60px;
+}
+/***********/
+.swetalert-errorA {
+    width: 90% !important;
+}
+
+#bandejadeentrada {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    top: 5%;
+    position: absolute;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15%;
+}
+
+    #bandejadeentrada > #entrada {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 100%;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 1%;
+    }
+
+        #bandejadeentrada > #entrada > .divmesaje {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            font-size: 12px;
+            align-items: center;
+        }
+
+            #bandejadeentrada > #entrada > .divmesaje > .mesaje {
+                width: 90%;
+                background-color: #906ed9;
+                min-height: 40px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 5px;
+                box-shadow: 5px 5px rgba(0,0,0,0.4);
+                margin-bottom: 12px;
+            }
+
+
+                #bandejadeentrada > #entrada > .divmesaje > .mesaje > span {
+                    color: white;
+                }
+
+                #bandejadeentrada > #entrada > .divmesaje > .mesaje > button {
+                    border: none;
+                    background-color: transparent;
+                    text-decoration: underline;
+                    color: #54afff;
+                }
+
+                    #bandejadeentrada > #entrada > .divmesaje > .mesaje > button:hover {
+                        cursor: pointer;
+                        color: #18e6f3;
+                    }
+
+                #bandejadeentrada > #entrada > .divmesaje > .mesaje:hover {
+                    transform: scale(1.04);
+                }
+
+.navi > ul > li > i {
+    color: #1de5f0;
+    cursor: pointer;
+}
+
+.divmesaje > button {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid black;
+    margin-bottom: auto;
+}
+
+    .divmesaje > button:hover {
+        text-decoration: none;
+        transform: scale(1.04);
+        color: #1883ba;
+        background-color: #ffffff;
+    }
+
+#vista > .seccionbuttones {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.seccionbuttones > button {
+    border: none;
+    width: 20%;
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: auto;
+}
+
+    .seccionbuttones > button:hover {
+        text-decoration: none;
+        transform: scale(1.04);
+        color: #1883ba;
+        background-color: #ffffff;
+    }
+
+#vista > .most {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+}
+
+    #vista > .most > p {
+        font-size: 15px;
+    }
+
+    #vista > .most > embed {
+        width: 80%;
+    }
+
+#vista > .mostinfod {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 8px 0;
+}
+
+    #vista > .mostinfod > p {
+        font-size: 20px;
+    }
+
+#vista > .mostarTal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+#vista > .most > h5 {
+    font-size: 30px;
+}
+/********************************************************/
+/*Media Querys*/
+@media only screen and (min-width: 359px) and (max-width: 400px) {
+    .content {
+        bottom: 15%;
+    }
+
+    .register {
+        width: 300px;
+    }
+
+        .register > .groupbtn > .toggle-btn1 {
+            left: 8%;
+            bottom: 10%;
+        }
+
+        .register > .groupbtn > .toggle-btn2 {
+            left: 18%;
+            bottom: 10%;
+        }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        height: 50%;
+    }
+
+    /********Register A************/
+    .section.controller {
+        height: 470px;
+    }
+
+    .section.one > .section.two > .section.tree {
+        height: 470px;
+    }
+
+    .section.one > .section.two {
+        top: 90px;
+    }
+
+    .section.options > button {
+        margin: 10px 0;
+    }
+
+    .section.controller {
+        right: 9.6px;
+        top: 90px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+        font-size: 15px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+        width: 80%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+            width: 95%;
+        }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+        margin-top: 10px;
+    }
+
+    .swetalert-contAr {
+        bottom: -10px !important;
+    }
+
+    .swetalert-popAr {
+        width: 70% !important;
+        right: 65px;
+    }
+
+    .swetalerticonAr {
+        margin-right: 12px;
+    }
+    /*************Registrar U****************/
+    .section > .element-a > .element-b {
+        height: 580px;
+        top: 35px;
+        padding: 10px 15px;
+    }
+
+    .sec {
+        left: 10%;
+        height: 530px;
+    }
+
+    .section > .element-a > .element-b > h5 {
+        margin: 10px 0;
+    }
+
+    .section > .element-a > .element-b > .elemento-c > input {
+        margin-bottom: 8px;
+    }
+
+    .section > .element-a > .element-b > .elemento-f > .combbt1 > select, .section > .element-a > .element-b > .elemento-f > .combbt2 > select {
+        margin-bottom: 8px;
+    }
+
+    .section > .element-a > .element-b > .elemento-d > input {
+        margin: 10px 0;
+    }
+    /****************************************/
+    @media only screen and (min-height: 811px) and (max-height: 900px) {
+        .section.one > .section.two {
+            top: 140px;
+        }
+
+        .section.controller {
+            top: 140px;
+        }
+
+        .area > .element-a > .element-b {
+            top: 152px;
+        }
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 767px) {
+    .register {
+        width: 350px;
+        height: 500px;
+        top: 70px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password],
+    .forms > .frm > .section-insert > button {
+        margin-top: 10px;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        font-size: 15px;
+        left: 10%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        font-size: 15px;
+        left: 20%;
+    }
+    /************Register A*******************/
+    .section .controller {
+        right: 9.8px;
+        width: 90px;
+        height: 550px;
+        top: 100px;
+    }
+
+    .section.one > .section.two {
+        top: 100px;
+    }
+
+        .section.one > .section.two > .section.tree {
+            height: 550px;
+            padding: 0 1%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > button {
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        z-index: 1;
+    }
+
+    .section.options > button {
+        margin-bottom: 15px;
+        margin-top: 20px;
+    }
+
+    .section.total > button {
+        margin-top: 15px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+        width: 80%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+            width: 95%;
+        }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+        margin-top: 10px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+        font-size: 10px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .swetalert-popAr {
+        width: 70% !important;
+        right: 70px;
+    }
+
+    .swetalerticonAr {
+        margin-right: 20px;
+        font-size: 15px;
+    }
+
+    .swetalert-contAr {
+        bottom: -10px !important;
+    }
+
+    .sewtalerttextAr {
+        font-size: 18px !important;
+    }
+    /********Registrar U*******/
+    .area > .element-a > .element-b {
+        width: 350px;
+        height: 690px;
+        padding: 15px 15px;
+        top: 70px;
+    }
+
+        .area > .element-a > .element-b > h4 {
+            font-size: 22px;
+        }
+
+        .area > .element-a > .element-b > h5 {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > input {
+            height: 35px;
+            font-size: 18px;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > button {
+            margin: 10px 0;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > label {
+            width: 90%;
+            height: 40px;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > button {
+            height: 35px;
+        }
+
+        .area > .element-a > .element-b > .elemento-d > input {
+            height: 35px;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .area > .element-a > .element-b > .elemento-d > button {
+            height: 35px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > h5 {
+            font-size: 15px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > .combbt1 > select,
+        .area > .element-a > .element-b > .elemento-f > .combbt2 > select {
+            margin: 10px 0;
+            height: 40px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > button {
+            height: 35px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > .combbt1::before,
+        .area > .element-a > .element-b > .elemento-f > .combbt2::before {
+            height: 50px;
+            width: 35px;
+            font-size: 22px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > .combbt1 > select {
+            font-size: 15px;
+        }
+
+        .area > .element-a > .element-b > .elemento-f > .combbt2 > select {
+            font-size: 12px;
+        }
+
+    .sec {
+        width: 350px;
+        height: 650px;
+        left: 8%;
+    }
+
+        .sec > #autocomplete {
+            width: 310px;
+            font-size: 12px;
+            height: 25px;
+        }
+
+        .sec > button {
+            margin-top: 35px;
+            height: 35px;
+        }
+
+    /*************************/
+    @media only screen and (min-height: 700px) and (max-height: 800px) {
+        .area > .element-a > .element-b {
+            top: 25px;
+        }
+    }
+
+    @media only screen and (min-height: 896px) and (max-height: 900px) {
+        .section.one > .section.two {
+            top: 150px;
+        }
+
+        .section .controller {
+            top: 150px;
+        }
+    }
+
+    @media only screen and (min-height: 901px) and (max-height: 999px) {
+        .section.one > .section.two > .section.tree {
+            width: 270px;
+            right: 32px;
+            left: initial;
+            top: 50px;
+        }
+
+        .section .controller {
+            top: 150px;
+        }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 138%;
+        }
+
+        .section.options select {
+            width: 132%;
+        }
+
+        .swetalert-popAr {
+            width: 80% !important;
+            right: 70px;
+        }
+
+        .sewtalerttextAr {
+            font-size: 22px !important;
+        }
+    }
+    /******/
+    .swetalert-errorA {
+        width: 400px !important;
+    }
+}
+
+@media only screen and (min-width: 767px) and (max-width: 960px) {
+    .content {
+        bottom: 20%;
+    }
+
+    .register {
+        width: 400px;
+        height: 650px;
+        top: 200px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 120%;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password],
+    .forms > .frm > .section-insert > button {
+        margin-top: 30px;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 60px;
+        height: 40%;
+    }
+
+    .register > .groupbtn {
+        width: 75%;
+    }
+
+
+        .register > .groupbtn > .toggle-btn1 {
+            left: 10%;
+            bottom: 5%;
+            font-size: 18px;
+            width: 30%;
+        }
+
+        .register > .groupbtn > .toggle-btn2 {
+            left: 25%;
+            bottom: 5%;
+            font-size: 18px;
+            width: 30%;
+        }
+    /**********Register A*******************/
+    .section.one > .section.two {
+        top: 200px;
+        width: 400px;
+        height: 650px;
+    }
+
+        .section.one > .section.two > .section.tree {
+            left: 0;
+        }
+
+    .section .controller {
+        top: 200px;
+        right: 40px;
+        width: 120px;
+        height: 650px;
+    }
+
+        .section .controller > .tabs > li {
+            font-size: 14px;
+        }
+
+            .section .controller > .tabs > li:hover {
+                padding: 3px 3px;
+            }
+
+        .section .controller > .tabs > .active {
+            padding: 3px 3px;
+        }
+
+    .section.one > .section.two > .section.tree > .section.B > h1 {
+        font-size: 40px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > h2 {
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+
+    .section.options {
+        margin-top: 20px;
+    }
+
+    .section.one > .section.two > .section.tree {
+        height: 100%;
+    }
+
+    .combobox {
+        margin-bottom: 20px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm > label {
+        height: 35px;
+        width: 60%;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+        font-size: 80%;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm > button {
+        width: 55%;
+        height: 50%;
+        margin-top: 15px;
+    }
+
+    .combobox {
+        width: 70%;
+    }
+
+    .section.options select {
+        width: 115%;
+        font-size: 15px;
+    }
+
+    .combobox:before {
+        right: 9%;
+        width: 12%;
+        height: 40px;
+        font-size: 150%;
+    }
+
+    .section.total {
+        margin-top: 25px;
+    }
+
+    .section.segunda {
+        margin-bottom: 20px;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 75%;
+    }
+
+        .section.primera > .primercombobtn::before {
+            width: 37px;
+            height: 50px;
+            right: 5%;
+            font-size: 150%;
+        }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 120%;
+            font-size: 16px;
+            height: 50px;
+        }
+
+    .section.primera {
+        margin-bottom: 30px
+    }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .section.segunda > .segundocombobtn::before {
+        width: 40px;
+        height: 50px;
+        font-size: 150%;
+    }
+    /*************Datos obligatorios******************/
+    .section.one > .section.two > .section.tree > .section.A > h1 {
+        font-size: 45px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > h2 {
+        font-size: 15px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+        margin-bottom: 20px;
+        width: 95%;
+        font-size: 20px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+        width: 100%;
+        height: 100px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+            font-size: 20px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+            height: 50%;
+            font-size: 20px;
+            width: 90%;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > span,
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > span {
+            font-size: 15px;
+        }
+
+    .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+        margin-top: 20px;
+    }
+
+    .swetalert-popAr {
+        width: 55% !important;
+        right: 200px;
+        height: 70px;
+    }
+
+    .swetalerticonAr {
+        margin-right: 22px;
+    }
+
+    .sewtalerttextAr {
+        font-size: 20px !important;
+    }
+
+    .swetalert-contAr {
+        bottom: -10px !important;
+    }
+    /*****************registrar U*******************/
+    .area > .element-a > .element-b {
+        width: 500px;
+        height: 800px;
+        top: 120px;
+        padding: 2% 5%;
+    }
+
+        .area > .element-a > .element-b > h4 {
+            font-size: 30px;
+        }
+
+        .area > .element-a > .element-b > h5 {
+            font-size: 15px;
+            margin: 15px 0;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > input {
+            margin-bottom: 20px;
+            width: 90%;
+            height: 35px;
+            font-size: 18px;
+        }
+
+        .area > .element-a > .element-b > .elemento-c > button {
+            height: 40px;
+            font-size: 18px
+        }
+    /************************************************/
+    @media only screen and (min-height: 1280px) and (max-height: 1500px) {
+        .section.one > .section.two > .section.tree {
+            top: 120px;
+        }
+
+        .section .controller {
+            top: 320px;
+        }
+
+        .swetalerticonAr {
+            margin-right: 22px;
+        }
+
+        .sewtalerttextAr {
+            font-size: 20px !important;
+        }
+    }
+    /****/
+    .swetalert-errorA {
+        width: 500px !important;
+    }
+}
+
+@media only screen and (min-width: 961px) and (max-width: 1023px) {
+    .register {
+        top: 100px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password],
+    .forms > .frm > .section-insert > button {
+        margin-top: 20px;
+    }
+
+    .forms > .frm > .section-insert > span {
+        font-size: 90%;
+    }
+}
+
+@media only screen and (min-width: 1023px) and (max-width: 1279px) {
+    .register {
+        top: 120px;
+        width: 300px;
+        height: 450px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password],
+    .forms > .frm > .section-insert > button {
+        margin-top: 20px;
+    }
+
+    .forms > .frm > .section-insert > span {
+        font-size: 90%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 50px;
+        height: 50%;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        left: 10%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        left: 25%;
+    }
+    /*********RegistrarA*************/
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            order: 2;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 450px;
+        min-height: 50px;
+        border-radius: 12px 12px 0 0;
+    }
+
+        .section .controller > .tabs {
+            border: none;
+            border-bottom: 1px solid black;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 0;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 15px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 5px 12px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 5px 12px;
+            }
+    /********************/
+    .section.one > .section.two > .section.tree {
+        border-radius: 0 0 12px 12px;
+        width: 450px;
+        left: -111px;
+        height: 600px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B > h1 {
+            font-size: 30px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.B > h2 {
+            font-size: 12px;
+            margin: 15px 0
+        }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > label {
+            width: 70%;
+            height: 40px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > button {
+            width: 50%;
+            height: 35px;
+            font-size: 15px;
+            margin: 15px 0;
+        }
+
+    .combobox {
+        width: 80%;
+    }
+
+    .section.options select {
+        width: 100%;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .combobox:before {
+        right: 60px;
+        height: 40px;
+    }
+
+    .section.options > button {
+        margin: 15px 0;
+        width: 50%;
+        height: 35px;
+        font-size: 15px;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 80%;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 100%;
+            height: 45px;
+            font-size: 15px;
+        }
+
+        .section.primera > .primercombobtn::before {
+            right: 45px;
+            height: 45px;
+            width: 50px;
+            font-size: 20px;
+        }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        width: 100%;
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .section.segunda > .segundocombobtn {
+        width: 80%;
+    }
+
+        .section.segunda > .segundocombobtn::before {
+            right: 45px;
+            height: 45px;
+            width: 40px;
+        }
+
+    .section.total > button {
+        margin-top: 15px;
+        width: 50%;
+        height: 35px;
+        font-size: 15px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 5%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 40px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            font-size: 15px;
+            margin: 10px 0;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 60%;
+                height: 40px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            margin-top: 20px;
+            width: 60%;
+            height: 30px;
+        }
+
+    @media only screen and (min-height: 1200px) and (max-height: 1500px) {
+        .section .controller {
+            min-height: 100px;
+            top: 230px;
+        }
+
+        .section.one > .section.two > .section.tree {
+            top: 160px;
+        }
+
+        .section .controller > .tabs > .active {
+            padding: 10px 20px;
+        }
+
+        .section .controller > .tabs > li:hover {
+            padding: 10px 20px;
+        }
+
+        .swetalert-popAr {
+            width: 50% !important;
+            right: 315px;
+            height: 60px;
+        }
+
+        .swetalerticonAr {
+            margin-right: 22px;
+            font-size: 18px;
+        }
+
+        .sewtalerttextAr {
+            font-size: 22px !important;
+        }
+    }
+    /****/
+    .swetalert-errorA {
+        width: 500px !important;
+    }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1365px) {
+    .register {
+        top: 70px;
+        width: 350px;
+        height: 500px;
+    }
+
+    .forms > .frm > .radio-check > .label-text {
+        font-size: 15px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 120%;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        font-size: 15px;
+        left: 10%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        font-size: 15px;
+        left: 20%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 50px;
+        height: 40%;
+    }
+    /*******Register A***********/
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            order: 2;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 350px;
+        min-height: 60px;
+        border-radius: 12px 12px 0 0;
+    }
+
+        .section .controller > .tabs {
+            border: none;
+            border-bottom: 1px solid black;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 0;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 16px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 8px 16px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 8px 16px;
+            }
+    /********************************************/
+    .section.one > .section.two > .section.tree > .section.B > h1 {
+        font-size: 32px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > h2 {
+        font-size: 13px;
+    }
+
+    .section.one > .section.two > .section.tree > .section.B > #frm > label {
+        width: 65%;
+        height: 35px;
+        font-size: 15px;
+    }
+
+    .section.one > .section.two > .section.tree {
+        border-radius: 0 0 12px 12px;
+        left: -60px;
+        width: 350px;
+        height: 550px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+            font-size: 80%;
+        }
+
+        .section.one > .section.two > .section.tree > .section.B > #frm > button {
+            margin: 5px 0 15px 0;
+            width: 160px;
+            height: 35px;
+        }
+
+    .section.options > .combobox {
+        width: 75%;
+    }
+
+    .section.options select {
+        right: 30px;
+        height: 50px;
+        font-size: 22px;
+    }
+
+    .combobox::before {
+        height: 50px;
+        width: 45px;
+        font-size: 35px;
+        right: 6%;
+    }
+
+    .section.options > button {
+        margin: 12px 0 12px 0;
+        height: 35px;
+        width: 160px;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 80%;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 120%;
+            position: relative;
+            height: 50px;
+            font-size: 16px;
+        }
+
+        .section.primera > .primercombobtn::before {
+            height: 50px;
+            width: 40px;
+            font-size: 35px;
+        }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .section.segunda > .segundocombobtn::before {
+        height: 50px;
+        width: 40px;
+        font-size: 35px;
+    }
+
+    .section.total > button {
+        margin-top: 20px;
+        min-height: 35px;
+        width: 132px;
+    }
+    /*****Datos obligatorios*******/
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 2%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 40px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            font-size: 14px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            width: 95%;
+            height: 50px;
+            font-size: 26px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+            height: 50px;
+            align-items: center;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 80%;
+                height: 80%;
+                margin: 0;
+                font-size: 20px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+                font-size: 20px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            margin-top: 20px;
+            height: 50px;
+            width: 70%;
+            border-radius: 20px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > span,
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > span {
+            font-size: 15px;
+        }
+
+    .swetalert-popAr {
+        width: 40% !important;
+        right: 388px;
+        height: 90px;
+    }
+
+    .swetalert-contAr {
+        bottom: -10px !important;
+    }
+
+    .swetalerticonAr {
+        margin-right: 22px;
+        font-size: 22px;
+    }
+
+    .sewtalerttextAr {
+        font-size: 26px !important;
+    }
+
+    @media only screen and (min-height: 900px) and (max-height: 1000px) {
+        .section.one > .section.two > .section.tree {
+            top: 40px;
+            height: 600px;
+        }
+
+        .section .controller {
+            top: 110px;
+        }
+    }
+
+    @media only screen and (min-height: 800px) and (max-height: 900px) {
+        .section.one > .section.two > .section.tree {
+            top: 10px;
+        }
+
+        .section .controller {
+            top: 80px;
+        }
+    }
+    /******/
+    .swetalert-errorA {
+        width: 500px !important;
+    }
+}
+
+@media only screen and (min-width: 1366px) and (max-width:1919px) {
+    .register {
+        top: 70px;
+        width: 350px;
+        height: 500px;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 120%;
+    }
+
+    .register > .groupbtn > .toggle-btn1, .register > .groupbtn > .toggle-btn2 {
+        font-size: 12px;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        left: 10%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        left: 30%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 60px;
+        height: 45%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type="radio"]::before {
+        width: 40%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input:checked[type=radio]:before {
+        left: 60%;
+    }
+
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            order: 2;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 500px;
+        min-height: 70px;
+        border-radius: 12px 12px 0 0;
+    }
+
+        .section .controller > .tabs {
+            border: none;
+            border-bottom: 1px solid black;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 0;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 18px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 10px 24px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 10px 24px;
+            }
+    /*******************************/
+    .section.one > .section.two > .section.tree {
+        border-radius: 0px 0 12px 12px;
+        width: 500px;
+        left: -136px;
+        height: 630px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B {
+            padding: 0 5%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > h1 {
+                font-size: 40px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > h2 {
+                margin: 20px 0;
+                font-size: 15px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > label {
+                width: 70%;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > button {
+                margin: 15px 0;
+                width: 50%;
+                height: 35px;
+                font-size: 18px;
+            }
+
+
+    .section.options select {
+        width: 100%;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .combobox {
+        width: 90%;
+    }
+
+        .combobox::before {
+            right: 64px;
+            height: 50px;
+            font-size: 25px;
+        }
+
+    .section.options > button {
+        margin: 15px 0;
+        width: 50%;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 90%;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 100%;
+            height: 50px;
+            font-size: 18px;
+        }
+
+        .section.primera > .primercombobtn::before {
+            right: 48px;
+            height: 50px;
+            width: 50px;
+            font-size: 25px;
+        }
+
+    .section.segunda > .segundocombobtn {
+        width: 80%;
+    }
+
+        .section.segunda > .segundocombobtn::before {
+            right: 75px;
+            height: 50px;
+            width: 45px;
+            font-size: 24px;
+        }
+
+        .section.segunda > .segundocombobtn > .segundocombo {
+            height: 50px;
+            font-size: 14px;
+        }
+
+    .section.total > button {
+        width: 50%;
+        height: 35px;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    /*************/
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 5%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            width: 100%;
+            margin-bottom: 15px;
+            height: 50px;
+            font-size: 25px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 60%;
+                height: 50px;
+                font-size: 20px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            margin-top: 15px;
+            width: 60%;
+            height: 40px;
+            font-size: 20px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+            font-size: 20px;
+        }
+
+    @media only screen and (min-height: 890px) and (max-height: 910px) {
+        .swetalert-popAr {
+            width: 35% !important;
+            right: 475px;
+            height: 75px;
+        }
+
+        .swetalert-contAr {
+            bottom: -10px !important;
+        }
+
+        .swetalerticonAr {
+            margin-right: 22px;
+        }
+
+        .sewtalerttextAr {
+            font-size: 25px !important;
+        }
+    }
+    /********/
+    .swetalert-errorA {
+        width: 500px !important;
+    }
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 2559px) {
+    .content {
+        bottom: 10%;
+    }
+
+    .register {
+        top: 30px;
+        width: 450px;
+        height: 600px;
+    }
+
+        /*.register > .groupbtn {
+            height: 40px;
+        }*/
+
+        .register > .groupbtn > .toggle-btn1 {
+            font-size: 20px;
+            left: 8%;
+        }
+
+        .register > .groupbtn > .toggle-btn2 {
+            font-size: 20px;
+            left: 20%;
+        }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 70px;
+        height: 45%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type="radio"]::before {
+        width: 40%;
+    }
+
+
+    .forms > .frm > .radio-check > .section-radio > input:checked[type=radio]:before {
+        left: 60%;
+    }
+
+    .forms > .frm > .radio-check > .label-text > label {
+        font-size: 20px;
+        position: relative;
+        bottom: 15px;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 70px;
+        height: 45%;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 120%;
+        margin-bottom: 30px;
+    }
+
+    .forms > .frm > .section-insert > button {
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .forms > .frm > .section-insert > span {
+        font-size: 20px;
+    }
+    /***********Register A***************/
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            top: 45px;
+            order: 2;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 650px;
+        min-height: 100px;
+        border-radius: 12px 12px 0 0;
+        top: 45px;
+    }
+
+        .section .controller > .tabs {
+            margin: 0;
+            border: none;
+            border-bottom: 1px solid black;
+            flex-direction: row;
+            width: 100%;
+            height: 100px;
+            justify-content: space-around;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 25px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 10px 25px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 10px 25px;
+            }
+    /*****************************/
+    .section.one > .section.two > .section.tree {
+        width: 650px;
+        left: -210px;
+        border-radius: 0 0 12px 12px;
+        height: 800px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B {
+            padding: 0 5%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > h1 {
+                font-size: 40px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > h2 {
+                margin-top: 20px;
+                font-size: 25px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > label {
+                width: 55%;
+                height: 60px;
+                margin-top: 20px;
+                font-size: 25px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+                font-size: 20px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > button {
+                font-size: 25px;
+                width: 70%;
+                margin: 20px 0;
+            }
+
+    .combobox {
+        width: 100%;
+    }
+
+    .section.options select {
+        width: 90%;
+        left: 30px;
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .combobox::before {
+        height: 60px;
+        font-size: 40px;
+        right: 60px;
+    }
+
+    .section.options > button {
+        font-size: 25px;
+        width: 60%;
+        margin: 20px 0;
+        height: 50px;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 100%;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 90%;
+            height: 60px;
+            font-size: 22px;
+            z-index: 1;
+        }
+
+        .section.primera > .primercombobtn::before {
+            height: 60px;
+            width: 55px;
+            font-size: 40px;
+            right: 60px;
+        }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        width: 95%;
+        height: 60px;
+        z-index: 1;
+        font-size: 22px;
+    }
+
+    .section.segunda > .segundocombobtn::before {
+        width: 50px;
+        height: 60px;
+        right: 45px;
+        font-size: 40px;
+    }
+
+    .section.total > button {
+        font-size: 25px;
+        width: 60%;
+        margin: 20px 0;
+        height: 50px;
+    }
+    /******Datos obligatorios*********/
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 6%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 60px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            font-size: 25px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            height: 50px;
+            margin: 20px 0;
+            font-size: 30px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 55%;
+                height: 60px;
+                font-size: 25px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+                font-size: 20px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            font-size: 30px;
+            width: 80%;
+            height: 60px;
+            margin-top: 20px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > span,
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > span {
+            font-size: 25px;
+        }
+
+    .swetalert-popAr {
+        width: 45% !important;
+        justify-content: center !important;
+        height: 80px;
+        right: 535px;
+    }
+
+    .swetalert-contAr {
+        width: 100%;
+    }
+
+    .swetalerticonAr {
+        margin-right: 20px;
+        font-size: 25px;
+    }
+
+    .sewtalerttextAr {
+        font-size: 40px !important;
+    }
+    /*******************/
+    .swetalert-errorA {
+        width: 600px !important;
+        height: 600px;
+    }
+
+    .swetalert-iconA {
+        font-size: 30px;
+    }
+
+    .swetalert-artitleA {
+        font-size: 50px !important;
+    }
+
+    .swetalert-arheadA {
+        font-size: 30px !important;
+    }
+
+    .rojo {
+        font-size: 30px !important;
+    }
+}
+
+@media only screen and (min-width: 2560px) and (max-width: 3839px) {
+    .register {
+        top: 100px;
+        width: 600px;
+        height: 850px;
+    }
+
+    .forms {
+        height: 90%;
+    }
+
+    .register > .groupbtn > .toggle-btn1 {
+        font-size: 20px;
+        left: 10%;
+    }
+
+    .register > .groupbtn > .toggle-btn2 {
+        font-size: 20px;
+        left: 30%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 80px;
+        height: 40%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input:checked[type=radio]:before {
+        left: 60%;
+    }
+
+    .forms > .frm > .radio-check > .label-text > label {
+        font-size: 25px;
+        position: relative;
+        bottom: 25px;
+    }
+
+    .forms > .frm.post > h1 {
+        font-size: 300%;
+    }
+
+    .forms > .frm.get > h1 {
+        font-size: 300%;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 35px;
+    }
+
+    .forms > .frm > .section-insert > button {
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .forms > .frm > .section-insert > span {
+        font-size: 30px;
+    }
+    /***********Register A***************/
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            order: 2;
+            top: 0px;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 1000px;
+        min-height: 150px;
+        border-radius: 12px 12px 0 0;
+        top: 0px;
+    }
+
+        .section .controller > .tabs {
+            margin: 0;
+            border: none;
+            border-bottom: 1px solid black;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            justify-content: space-around;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 35px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 15px 30px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 15px 30px;
+            }
+
+    .section.one > .section.two > .section.tree {
+        width: 1000px;
+        left: -386px;
+        border-radius: 0 0 12px 12px;
+        height: 1140px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B {
+            padding: 0 5%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > h1 {
+                font-size: 80px;
+                margin-bottom: 20px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > label {
+                height: 70px;
+                width: 60%;
+                font-size: 40px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+                font-size: 25px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > button {
+                margin: 30px 0;
+                font-size: 35px;
+                width: 65%;
+                height: 70px;
+            }
+
+    .combobox {
+        width: 100%;
+    }
+
+    .section.options select {
+        width: 80%;
+        left: 130px;
+        height: 70px;
+        font-size: 40px;
+    }
+
+    .combobox::before {
+        height: 70px;
+        width: 70px;
+        font-size: 50px;
+    }
+
+    .section.options > button {
+        margin: 30px 0;
+        height: 50px;
+        font-size: 35px;
+        height: 70px;
+        width: 50%;
+    }
+
+    .section.primera > .primercombobtn {
+        width: 100%;
+    }
+
+        .section.primera > .primercombobtn > .primercombo {
+            min-width: 100%;
+            height: 70px;
+            z-index: 1;
+            font-size: 45px;
+        }
+
+        .section.primera > .primercombobtn::before {
+            height: 70px;
+            right: 5%;
+            width: 70px;
+            font-size: 50px;
+        }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        height: 70px;
+        font-size: 38px;
+    }
+
+    .section.segunda > .segundocombobtn::before {
+        height: 70px;
+        right: 5%;
+        width: 70px;
+        font-size: 50px;
+    }
+
+    .section.total > button {
+        margin-top: 30px;
+        width: 50%;
+        height: 70px;
+        font-size: 35px;
+    }
+    /******************/
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 5%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 85px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            font-size: 35px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            height: 100px;
+            width: 100%;
+            font-size: 65px;
+            margin: 30px 0;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 60%;
+                height: 70px;
+                font-size: 45px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+                font-size: 24px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            margin-top: 30px;
+            height: 70px;
+            width: 60%;
+            font-size: 40px;
+        }
+
+    .swetalert-popAr {
+        width: 45% !important;
+        right: 710px;
+        height: 110px;
+    }
+
+    .swetalerticonAr {
+        font-size: 40px;
+        margin-right: 50px;
+    }
+
+    .sewtalerttextAr {
+        font-size: 60px !important;
+    }
+    /**********/
+    .swetalert-errorA {
+        width: 800px !important;
+        height: 800px;
+    }
+
+    .swetalert-iconA {
+        font-size: 40px;
+    }
+
+    .swetalert-artitleA {
+        font-size: 60px !important;
+    }
+
+    .swetalert-arheadA {
+        font-size: 45px !important;
+    }
+
+    .rojo {
+        font-size: 40px !important;
+    }
+    /*******/
+    .swetalert-succA {
+        width: 800px !important;
+        height: 500px !important;
+    }
+
+    .swetalert-succiconA {
+        font-size: 30px;
+    }
+
+    .swetalert-succtitleA {
+        font-size: 40px !important;
+    }
+}
+
+@media only screen and (min-width: 3840px) {
+    .register {
+        width: 800px;
+        height: 1200px;
+        top: 200px;
+    }
+
+    .forms {
+        height: 90%;
+    }
+
+    .register > .groupbtn {
+        width: 60%;
+        height: 6%
+    }
+
+        .register > .groupbtn > .toggle-btn1 {
+            font-size: 25px;
+            left: 10%;
+        }
+
+        .register > .groupbtn > .toggle-btn2 {
+            font-size: 25px;
+            left: 25%;
+        }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio] {
+        width: 100px;
+        height: 30%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input:checked[type=radio]:before {
+        left: 60%;
+    }
+
+    .forms > .frm > .radio-check > .section-radio > input[type=radio]:before {
+        width: 40%;
+        height: 95%;
+        bottom: 2px;
+    }
+
+    .forms > .frm > .radio-check > .label-text > label {
+        font-size: 30px;
+        position: relative;
+        bottom: 35px;
+        left: 10px;
+    }
+
+    .forms > .frm.post > h1 {
+        font-size: 300%;
+    }
+
+    .forms > .frm.get > h1 {
+        font-size: 300%;
+    }
+
+    .forms > .frm > .section-insert > input[type=text],
+    .forms > .frm > .section-insert > input[type=password] {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .forms > .frm > .section-insert > button {
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .forms > .frm > .section-insert > span {
+        font-size: 30px;
+    }
+    /***********Registrar A**************/
+    .section.one {
+        height: 50%;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+        .section.one > .section.two {
+            order: 2;
+            top: -150px;
+        }
+
+    .section .controller {
+        order: 1;
+        width: 1570px;
+        min-height: 270px;
+        border-radius: 12px 12px 0 0;
+        top: -150px;
+    }
+
+        .section .controller > .tabs {
+            margin: 0;
+            border: none;
+            border-bottom: 1px solid black;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            justify-content: space-around;
+        }
+
+            .section .controller > .tabs > li {
+                font-size: 50px;
+            }
+
+            .section .controller > .tabs > .active {
+                padding: 30px 60px;
+            }
+
+            .section .controller > .tabs > li:hover {
+                padding: 30px 60px;
+            }
+
+    .section.one > .section.two > .section.tree {
+        width: 1570px;
+        left: -670px;
+        border-radius: 0 0 12px 12px;
+        height: 1750px;
+    }
+
+        .section.one > .section.two > .section.tree > .section.B {
+            padding: 0 10%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.B > h1 {
+                font-size: 120px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > h2 {
+                font-size: 50px;
+                margin: 50px 0;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > label {
+                width: 80%;
+                height: 150px;
+                font-size: 50px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > .fileactive {
+                font-size: 45px;
+            }
+
+            .section.one > .section.two > .section.tree > .section.B > #frm > button {
+                font-size: 50px;
+                width: 50%;
+                height: 100px;
+                margin: 50px 0;
+            }
+
+    .combobox {
+        width: 100%;
+    }
+
+    .section.options select {
+        width: 100%;
+        height: 150px;
+        font-size: 75px;
+    }
+
+    .combobox::before {
+        height: 150px;
+        right: 170px;
+        width: 120px;
+        font-size: 70px;
+    }
+
+    .section.options > button {
+        margin: 50px 0;
+        width: 50%;
+        height: 100px;
+        font-size: 50px;
+    }
+
+    .section.primera {
+        margin-bottom: 50px;
+    }
+
+        .section.primera > .primercombobtn {
+            width: 100%;
+        }
+
+            .section.primera > .primercombobtn > .primercombo {
+                min-width: 100%;
+                height: 150px;
+                font-size: 70px;
+            }
+
+            .section.primera > .primercombobtn::before {
+                right: 155px;
+                height: 150px;
+                width: 130px;
+                font-size: 70px;
+            }
+
+    .section.segunda > .segundocombobtn > .segundocombo {
+        width: 100%;
+        height: 150px;
+        font-size: 65px;
+    }
+
+    .section.segunda > .segundocombobtn::before {
+        right: 150px;
+        height: 150px;
+        width: 130px;
+        font-size: 70px;
+    }
+
+    .section.total > button {
+        margin-top: 50px;
+        height: 100px;
+        width: 45%;
+        font-size: 50px;
+    }
+    /************************************/
+    .section.one > .section.two > .section.tree > .section.A {
+        padding: 0 5%;
+    }
+
+        .section.one > .section.two > .section.tree > .section.A > h1 {
+            font-size: 150px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > h2 {
+            font-size: 60px;
+            margin: 50px 0;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
+            width: 100%;
+            height: 150px;
+            font-size: 100px;
+            margin-bottom: 50px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
+            width: 100%;
+        }
+
+            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
+                width: 60%;
+                height: 120px;
+                font-size: 60px;
+            }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
+            margin-top: 50px;
+            height: 100px;
+            width: 60%;
+            font-size: 60px;
+        }
+
+        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+            font-size: 45px;
+        }
+    /**********/
+    .swetalert-popAr {
+        width: 40% !important;
+        height: 130px;
+        right: 1160px;
+    }
+
+    .swetalerticonAr {
+        margin-right: 40px;
+        font-size: 40px;
+    }
+
+    .sewtalerttextAr {
+        font-size: 50px !important;
+    }
+    /*******/
+    .swetalert-errorA {
+        width: 1100px !important;
+        height: 1100px;
+    }
+
+    .swetalert-iconA {
+        font-size: 55px;
+    }
+
+    .swetalert-artitleA {
+        font-size: 80px !important;
+    }
+
+    .swetalert-arheadA {
+        font-size: 55px !important;
+    }
+
+    .rojo {
+        font-size: 50px !important;
+    }
+}
+/************************************************************************/

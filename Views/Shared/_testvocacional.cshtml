@@ -1,0 +1,122 @@
+﻿@model Tuple<string, string>
+@if (Model != null)
+{
+    <div class="vistaparcial">
+        <div class="cabezera">
+            <h1>@Model.Item1.-</h1>
+            <p>@Model.Item2</p>
+        </div>
+        <div class="cuerpo">
+            <div id="op1">
+                <input type="radio" name="seleccion" id="1" value="@valores.Lo_detesto" checked />
+                <label for="1">@valores.Lo_detesto.ToString().Replace("_", " ")</label>
+            </div>
+            <div id="op2">
+                <input type="radio" name="seleccion" id="2" value="@valores.No_me_gusta" />
+                <label for="2">@valores.No_me_gusta.ToString().Replace("_", " ")</label>
+
+            </div>
+            <div id="op3">
+                <input type="radio" name="seleccion" id="3" value="@valores.No_me_facina_hacerlo" />
+                <label for="3">@valores.No_me_facina_hacerlo.ToString().Replace("_", " ")</label>
+
+            </div>
+            <div id="op4">
+                <input type="radio" name="seleccion" id="4" value="@valores.Me_gusta_hacerlo" />
+                <label for="4">@valores.Me_gusta_hacerlo.ToString().Replace("_", " ")</label>
+
+            </div>
+            <div id="op5">
+                <input type="radio" name="seleccion" id="5" value="@valores.Me_gusta_mucho" />
+                <label for="5">@valores.Me_gusta_mucho.ToString().Replace("_", " ")</label>
+
+            </div>
+            <div id="op6">
+                <input type="radio" name="seleccion" id="6" value="@valores.Me_encanta" />
+                <label for="6">@valores.Me_encanta.ToString().Replace("_", " ")</label>
+            </div>
+        </div>
+        <button onclick="lanzarAjax2()">Siguiente pregunta</button>
+    </div>
+}
+else
+{
+    <h1>Son todas esas preguntas</h1>
+    <script>
+        (function () {
+            let timerInterval
+            Swal.fire({
+                position: 'center',
+                html: 'La paguina se va reiniciar en: <b></b> milliseconds.',
+                timer: 2000,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                timerProgressBar: true,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                            }
+                        }
+                    }, 100)
+                },
+                onClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    location.reload();
+                    document.getElementById('vp').setAttribute('hidden', '');
+                }
+            })
+        })();
+    </script>
+}
+<script>
+    function lanzarAjax2() {
+        event.preventDefault();
+        var i = $('input[name="seleccion"]:checked').val();
+        var url = '@Url.Action("_testvocacional","Principal")';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: { i: i },
+            success: function (succ) {
+                $('#D').html('');
+                $('#D').append(succ);
+            }
+            , error: function (err) { alert(err); }
+        });
+    }
+</script>
+@if (Model == null)
+{
+    <script type="text/javascript">
+        (function () {
+            document.getElementById('btnt').removeAttribute('disabled');
+            document.getElementById('btnc').removeAttribute('disabled');
+            document.getElementById('btnr').removeAttribute('disabled');
+            document.getElementById('presoname').removeAttribute('disabled');
+        })();
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        (function () {
+            var i = @Model.Item1;
+            if (i > 1) {
+                document.getElementById('btnt').setAttribute('disabled', true);
+                document.getElementById('btnc').setAttribute('disabled', true);
+                document.getElementById('btnr').setAttribute('disabled', true);
+                document.getElementById('presoname').setAttribute('disabled', true);
+            }
+        })();
+    </script>
+}

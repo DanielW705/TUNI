@@ -1,0 +1,100 @@
+﻿@model TRITUPLE
+<div class="most">
+    <h5>Informacion del usuario</h5>
+    <p><span>ID:</span>@Model.model1.idA</p>
+    <p><span>Nombre del usuario:</span>@Model.model1.usuario</p>
+    <p><span>Nombre:</span>@Model.model1.nombre</p>
+    <p><span>Apellido Paterno:</span>@Model.model1.ap</p>
+    <p><span>Apellido Materno:</span>@Model.model1.am</p>
+    <embed class="pdfac" src="@Model.model1.ruta" type="application/pdf" />
+    <p class="archname"><span>Nombre del archivo:</span>@Model.model1.arch</p>
+</div>
+<div class="mostinfod">
+    <h5>Reconocimientos subidos por el usuario</h5>
+    @if (Model.model2 == null)
+    {
+        <p class="faltainfo">No hay datos</p>
+    }
+    else
+    {
+        @foreach (var datos in Model.model2)
+        {
+            <embed src="@datos.ruta" />
+            <p><span>Nombre del archivo: </span> @datos.namerecon</p>
+        }
+    }
+</div>
+<div class="mostarTal">
+    <h5>Carreras tecnicas subidas por el usuario</h5>
+    @if (Model.model3 == null)
+    {
+        <p class="faltainfo">No hay informacion</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var datos in Model.model3)
+            {
+                <li><span>Carrera Tecnica seleccionada:</span>  @datos.carreratecsel</li>
+            }
+        </ul>
+    }
+</div>
+<div class="carrd">
+    <h5>Carreras Deseadas por el usuario</h5>
+    @if (Model.model4 == null)
+    {
+        <p class="faltainfo">No hay informacion</p>
+    }
+    else
+    {
+        for (int i = 0; i < Model.modelcom4.Count(); i++)
+        {
+            <p>@Model.modelcom4[i].area :</p>
+            <ul>
+                @for (int j = 0; j < Model.model4.Count(); j++)
+                {
+                    if (Model.modelcom4[i].idarea == Model.model4[j].idare)
+                    {
+                        <li><span>@Model.model4[j].carrera</span></li>
+                    }
+                }
+            </ul>
+        }
+    }
+</div>
+<div class="descarga">
+    @if (Model.modelcom5 > 0)
+    {
+        <form method="post">
+            <input type="hidden" id="xid" name="id" value="@Model.model1.idA" />
+            <button type="submit" asp-action="testvoca" asp-controller="Principal" id="anclaje">Descargar el test vocacional</button>
+        </form>
+    }
+    else
+    {
+        <p class="faltainfo">El usuario no a hecho el test vocacional</p>
+    }
+</div>
+<script>
+
+    /* var idx = document.getElementById('xid').value;
+     document.getElementById('anclaje').addEventListener('click', function () {
+         $.ajax({
+             url: 'Url.Action("testvoca", "Principal")',
+             type: 'post',
+             data: { id: idx },
+             async: true,
+             timeout: 0,
+             success: function (succ) {
+                 if (succ == false) {
+                     alert(succ);
+                 }
+                 else {
+                     window.location = '/Reports/Download?file=' + succ;
+                 }
+             },
+             error: function (err) { console.log(err); }
+         });
+     });*/
+</script>

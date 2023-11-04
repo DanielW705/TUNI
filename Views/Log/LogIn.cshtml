@@ -1,0 +1,83 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<ReCAPTCHASSettings> GoogleREcap
+@model UserRegister
+<div class="cuerpo">
+    <div class="groupbtn">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn1" onclick="login()">Ingresar</button>
+        <button type="button" class="toggle-btn2" onclick="register()">Registrarte</button>
+    </div>
+    <form method="post" class="frm">
+        <div id="login">
+            <div class="radio-check">
+                <input type="radio" name="tipo" value="Universidad" id="uni" checked />
+                <label for="uni">Universidad</label>
+                <input type="radio" name="tipo" value="Alumno" id="al" />
+                <label for="al">Alumno</label>
+            </div>
+            <h2>Bienvenido a TUNI</h2>
+            <div class="group">
+                <input type="text" name="name" class="inputus" placeholder="Ingresa tu nombre de usuario" />
+            </div>
+            <div class="group">
+                <input type="password" name="pas" class="inputus" placeholder="Ingresa tu contraseña" />
+            </div>
+            <button type="submit" asp-action="LogIn" asp-controller="Log">Ingresar</button>
+            <input type="hidden" id="tokeningre" name="token" />
+        </div>
+    </form>
+    <form method="get" class="frm2">
+        <div id="register">
+            <div class="radio-check">
+                <input type="radio" name="tipo" value="U" checked /><label for="uni">Universidad</label>
+                <input type="radio" name="tipo" value="A" /> <label for="al">Alumno</label>
+            </div>
+            <h2>Registrate a TUNI</h2>
+            <div class="group">
+                <input type="text" asp-for="username" class="inputus" placeholder="Registra tu nombre de Usuario" />
+                <div>
+                    <span asp-validation-for="username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="group">
+                <input type="password" asp-for="pasword" class="inputus" placeholder="Registra tu contraseña" />
+                <div>
+                    <span asp-validation-for="pasword" class="text-danger"></span>
+                </div>
+                <input type="password" asp-for="pasword2" class="inputus" placeholder="Valide su contraseña" />
+                <div>
+                    <span asp-validation-for="pasword2" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" asp-action="Iniciodelregistro" asp-controller="Log">Registrarte</button>
+            <input type="hidden" id="tokenregis" name="token" />
+        </div>
+    </form>
+</div>
+<script>
+
+    var z = document.getElementById('btn');
+    var y = document.getElementById('login');
+    var x = document.getElementById('register');
+    function register() {
+        z.style.left = "150px";
+        y.style.right = "700px";
+        x.style.left = "0px";
+    }
+    function login() {
+        z.style.left = "0px";
+        y.style.right = "0px";
+        x.style.left = "700px";
+    }
+</script>
+@section Scripts{
+    <script src="https://www.google.com/recaptcha/api.js?render=@GoogleREcap.Value.ReCAPTCHA_Site_Key"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute("@GoogleREcap.Value.ReCAPTCHA_Site_Key", { action: 'homepage' }).then(function (token) {
+                document.getElementById('tokenregis').value = token;
+                document.getElementById('tokeningre').value = token;
+            });
+});
+    </script>
+}

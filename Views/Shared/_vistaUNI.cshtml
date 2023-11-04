@@ -1,0 +1,51 @@
+﻿@model Trutupleu
+<div class="vistax">
+    <p class="titulo">@Model.model2.nombredelaInst</p>
+    <p>@Model.model2.direccion</p>
+    @for (int i = 0; i < Model.commodel3.Count(); i++)
+    {
+        <p>@Model.commodel3[i].area</p>
+        <ul>
+            @for (int j = 0; j < Model.model3.Count(); j++)
+            {
+                if (Model.commodel3[i].idarea == Model.model3[j].idarea)
+                {
+                    <li>@Model.model3[j].carrera</li>
+                }
+            }
+        </ul>
+    }
+    <embed src="@Model.model4.rut" />
+    <p>@Model.model4.name</p>
+    <embed src="@Model.model5.rut" />
+    <p>@Model.model5.name</p>
+    <button class="Enviar" btm value="@Model.model1.idusuario">Enviar solicitud</button>
+</div>
+<script>
+    document.querySelectorAll('[btm]').forEach(item => {
+        item.addEventListener('click', function () {
+            $.ajax({
+                url: '@Url.Action("realizarlasolicitud","Principal")',
+                type: 'post',
+                data: { id: item.value },
+                success: (succ) => {
+                    if (succ == 3) {
+                        alert('Ya le enviaste solicitud');
+                        document.getElementById('inf').innerHTML = '';
+                    }
+                    else if (succ == 1) {
+                        alert('Solicitud enviada');
+                        document.getElementById('inf').innerHTML = '';
+                    }
+                    else if (succ == 0) {
+                        alert('sucedio un error desconocido');
+                    }
+                    else {
+                        alert('El usuario por el momento no esta interesado');
+                    }
+                },
+                error: (err) => { console.log(err); }
+            });
+        });
+    });
+</script>

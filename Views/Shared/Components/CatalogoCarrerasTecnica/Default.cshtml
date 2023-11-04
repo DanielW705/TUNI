@@ -1,0 +1,122 @@
+﻿@model IEnumerable<catalogoCarrerasTecnicas>
+<div class=" section options">
+    <div class="combobox fas fa-angle-double-down">
+        <select id="opcion">
+            <option value="0" class="selected" selected disabled>Seleccione una opcion</option>
+            @foreach (var datos in Model)
+            {
+                <option value="@datos.carreTecnicaId">@datos.carreraTecnica</option>
+            }
+        </select>
+    </div>
+    <button id="btnc" type="submit" onclick="activarFetch()">Subir datos</button>
+</div>
+<script type="text/javascript">
+    function activarFetch() {
+        event.preventDefault();
+        var combo = document.getElementById('opcion');
+        if (combo.value == 0) {
+            Swal.fire({
+                title: 'Faltan datos',
+                text: 'Es necesario seleccionar una opcion',
+                icon: 'warning',
+                position: 'fixed',
+                footer: '<span class="rojo">Esta informacion es importante!</span>',
+                background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                backdrop: true,
+                timer:2000,
+                timerProgressBar: true,
+                toast: false,
+                position: 'center',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                stopKeydownPropagation: false,
+                showConfirmButton: false,
+                customClass:
+                {
+                    popup: 'swetalert-errorA',
+                    icon: 'swetalert-iconA',
+                    title: 'swetalert-artitleA',
+                    content: 'swetalert-arheadA'
+                },
+                showClass: {
+                    popup: 'animate__animated animate__zoomIn'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__bounceOutDown'
+                }
+            });
+        }
+        else {
+        var _url = '@Url.Action("prueba2", "Log")';
+        $.ajax({
+            url: _url,
+            type: 'post',
+            async: false,
+            timeout:300,
+            data: { i: combo.value }
+            , success: function (suces) {
+                if (suces == true) {
+                    Swal.fire({
+                        html: `<span> Carrera subida con exito </span>`,
+                        icon: 'success',
+                        padding: '1rem',
+                        backdrop: true,
+                        toast: true,
+                        position: 'bottom',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass:
+                        {
+                            container: 'swetalert-contAr',
+                            popup: 'swetalert-popAr',
+                            header: 'swetalerticonAr',
+                            content: 'sewtalerttextAr'
+                        },
+                        showClass: {
+                            popup: 'animate__animated animate__backInRight'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__bounceOutRight'
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        html: `<span> Ya tienes esa carrera </span>`,
+                        icon: 'warning',
+                        padding: '1rem',
+                        backdrop: true,
+                        toast: true,
+                        position: 'bottom',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass:
+                        {
+                            container: 'swetalert-contAr',
+                            popup: 'swetalert-popAr',
+                            header: 'swetalerticonAr',
+                            content: 'sewtalerttextAr'
+                        },
+                        showClass: {
+                            popup: 'animate__animated animate__backInRight'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__bounceOutRight'
+                        }
+                    });
+                }
+                combo.selectedIndex = '0';
+            }
+            , error: function (ex) { console.log(ex); }
+        });
+        }
+    }
+</script>

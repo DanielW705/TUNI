@@ -1,0 +1,229 @@
+﻿@model TUNIWEB.ClassValidation.Universidadvalidation
+<div class="area">
+    <div class="element-a">
+        <div class="element-b">
+            <h4>Sige con tu registro en TUNI.</h4>
+            <h5> Todos estos datos deben de estar llenos</h5>
+            <form method="post" asp-controller="Log" asp-action="subirdatosUniversidad" class="elemento-c" enctype="multipart/form-data" id="frml">
+                <input asp-for="nombredelainstitucion" type="text" placeholder="Escribe el nombre de la institucion" />
+                <span class="errors" asp-validation-for="nombredelainstitucion"></span>
+                <input asp-for="direccion" type="text" id="ubicacion" />
+                <span class="errors" asp-validation-for="direccion"></span>
+                <button id="buscar">Buscar ubicacion</button>
+                <input hidden asp-for="metodoi" type="file" accept=".pdf" id="ingre" />
+                <label for="ingre" id="lbl1">Subir archivo</label>
+                <span class="errors" asp-validation-for="metodoi"></span>
+                <input hidden asp-for="metodoe" type="file" accept=".pdf" id="egre" />
+                <span class="errors" asp-validation-for="metodoe"></span>
+                <label id="lbl2" for="egre">Subir archivo</label>
+                <button type="submit">Subir Datos</button>
+            </form>
+            <div class="elemento-d">
+                <input type="text" id="cont" placeholder="Correo electronico" />
+                <span id="error"> </span>
+                <button id="subcont" error="true">Subir contactos</button>
+            </div>
+            <div class="elemento-f">
+                <vc:carreras-yareas-para-impartir></vc:carreras-yareas-para-impartir>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sec" id="sec">
+    <div class="controll">
+        <span id="close">X</span>
+    </div>
+    <input type="text" id="autocomplete" name="locacion" />
+    <div id="map"></div>
+    <button id="obtener">Subir ubicacion</button>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxlYjQFiwT0sy97Sq4BcIW43lWq852ujQ&libraries=places">
+</script>
+<script>
+    var file = document.getElementById('ingre');
+    var file2 = document.getElementById('egre');
+    var span2 = document.getElementById('validacionfinal');
+    var close = document.getElementById('close');
+    var input1 = document.getElementById('autocomplete');
+    var botonsito = document.getElementById('obtener');
+    var input2 = document.getElementById('ubicacion');
+    var form = document.getElementById('frml');
+    var urlz = '@Url.Action("validacionfinal","Log")';
+    var button = document.getElementById('buscar');
+    var div = document.getElementById('sec');
+    var map = document.getElementById('map');
+    var autocomplete = document.getElementById('autocomplete');
+    var botonsito2 = document.getElementById('subcont');
+    var urlx = '@Url.Action("validacion", "Log")';
+    var urly = '@Url.Action("subircontacto","Log")';
+    var cont = document.getElementById('cont');
+    var span = document.getElementById('error');
+    button.addEventListener('click', () => {
+        event.preventDefault();
+        div.style.cssText = 'bottom: 90%;';
+    });
+    class Localization {
+        constructor(callback) {
+            if (navigator.geolocation) {
+                //Obtenemos ubicacion
+                navigator.geolocation.getCurrentPosition((position) => {
+                    this.latitude = position.coords.latitude;
+                    this.longitude = position.coords.longitude;
+                    callback();
+                });
+            }
+            else {
+                alert('Tu navegador no soporta localizacion');
+            }
+        }
+    }
+    google.maps.event.addDomListener(window, "load", function () {
+        const ubicacion = new Localization(() => {
+            const myLatLing = { lat: ubicacion.latitude, lng: ubicacion.longitude };
+            const options = {
+                center: myLatLing,
+                zoom: 14
+            }
+            const mapa = new google.maps.Map(map, options);
+            const marcador = new google.maps.Marker({
+                position: myLatLing,
+                map: mapa,
+            });
+            var informacion = new google.maps.InfoWindow();
+            marcador.addListener('click', function () {
+                informacion.open(mapa, marcador);
+            });
+            const search = new google.maps.places.Autocomplete(autocomplete);
+            search.bindTo("bounds", mapa);
+            search.addListener('place_change', function () {
+                informacion.close();
+                marcador.setVisible(false);
+                var place = search.getPlace();
+            });
+        });
+    });
+
+    botonsito.addEventListener('click', () => {
+        input2.value = input1.value;
+        div.style.cssText = 'display:none';
+    });
+    close.addEventListener('click', () => {
+        div.style.cssText = 'bottom: -90%';
+    });
+    cont.addEventListener('keyup', () => {
+        event.preventDefault();
+        $.ajax({
+            url: urlx,
+            type: 'get',
+            data: { contacto: cont.value },
+            async: true,
+            cache: false,
+            timeout: 300,
+            success: (succ) => {
+                if (succ == true) {
+                    span.innerHTML = '';
+                    botonsito2.removeAttribute('error');
+                }
+                else {
+                    succ.forEach(data => {
+                        span.innerHTML = data.errorMessage;
+                    });
+                    botonsito2.setAttribute('error', true);
+                }
+            },
+            error: (err) => { console.log(err); }
+        });
+    });
+    botonsito2.addEventListener('click', () => {
+        if (cont.value == '') {
+            Swal.fire({
+                background: 'linear-gradient(217deg, rgba(6,243,243,.8), rgba(0,128,128,.8) 100%), linear-gradient(127deg, rgba(49,145,126,.8), rgba(95,225,199,.8) 100%), linear-gradient(336deg, rgba(140,51,238,.8), rgba(119,57,187,.8) 100%)',
+                title: 'LLena la informacion que se te pide',
+                icon: 'error',
+                timer: 2000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                allowEscapeKey: true,
+                allowEnterKey: false,
+                stopKeydownPropagation: true,
+                showConfirmButton: false
+            });   
+        }
+        else {
+        if (!botonsito2.hasAttribute('error')) {
+            $.ajax({
+                url: urly,
+                type: 'post',
+                data: { contacto: cont.value },
+                async: false,
+                cache: false,
+                timeout: 0,
+                success: (succ) => {
+                    cont.value = '';
+                    span.innerHTML = '';
+                    console.log(succ);
+                },
+                error: (err) => { console.log(err); }
+            });
+        }
+        }
+    });
+    window.onload = function () {
+        cont.value = '';
+        span.innerHTML = '';
+    };
+    form.addEventListener('submit', () => {
+        $.ajax({
+            url: urlz,
+            type: 'get',
+            async: false,
+            cache: false,
+            timeout: 20,
+            success: (succ) => {
+                if (succ == true) {
+                    event.preventDefault();
+                    Swal.fire({
+                        html: `<span> Debe subir al menos un contacto y tener una carrera </span>`,
+                        icon: 'warning',
+                        backdrop: true,
+                        toast: true,
+                        position: 'bottom',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        showConfirmButton: false,
+                        timer: 2000,
+                        customClass:
+                        {
+                            container: 'swetalert-contAr',
+                            popup: 'swetalert-popAr',
+                        },
+                        showClass: {
+                            popup: 'animate__animated animate__backInRight'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__bounceOutRight'
+                        }
+                    });
+                }
+            },
+            error: (err) => { console.log(err); }
+        });
+    })
+    var loader = function (e) {
+        let filer = e.target.files;
+        var lblfil = document.getElementById('lbl1');
+        lblfil.innerHTML = `Selected File: ${filer[0].name}`;
+        lblfil.className = 'fileactive';
+    };
+    file.addEventListener('change', loader);
+    var loader2 = function (e) {
+        let filer = e.target.files;
+        var lblfil2 = document.getElementById('lbl2');
+        lblfil2.innerHTML = `Selected File: ${filer[0].name}`;
+        lblfil2.className = 'fileactive';
+    };
+    file2.addEventListener('change', loader2);
+</script>
+<!--<script src="~/js/localizacion.js"></script>-->
+<!--<script src="~/js/main.js"></script>-->

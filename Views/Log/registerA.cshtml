@@ -1,0 +1,65 @@
+﻿@model TUNIWEB.ClassValidation.DatosObligatorios
+<div class="section one">
+    <div class="section two">
+        <div class="section tree">
+            <div class="section B" id="B" data-tab-content>
+                <h1>Inicia tu registro a TUNI</h1>
+                <h2>
+                    Estos datos no son obligatorios
+                    pero si nos ayudan para encontrarte tu universidad de tus sueños
+                </h2>
+                <vc:subirreconocimento-view-componment></vc:subirreconocimento-view-componment>
+                <vc:catalogo-carreras-tecnica></vc:catalogo-carreras-tecnica>
+                <vc:areasy-carreras-view-compoment></vc:areasy-carreras-view-compoment>
+            </div>
+            <form method="post" enctype="multipart/form-data" id="A" class="section A" data-tab-content hidden>
+                <h1>Inicia tu registro</h1>
+                <h2>Estos datos son necesarios para seguir con tu inscripcion</h2>
+                <div class="inputs">
+                    <input type="text" asp-for="Nombre" placeholder="Escribe tu nombre" />
+                    <span asp-validation-for="Nombre"></span>
+                    <input type="text" asp-for="Ap" placeholder="Escribe tu Apellido Paterno" />
+                    <span asp-validation-for="Ap"></span>
+                    <input type="text" asp-for="Am" placeholder="Escribe tu Apellido Materno" />
+                    <span asp-validation-for="Am"></span>
+                    <div class="rowfile">
+                        <input id="file" type="file" asp-for="boleta" accept=".pdf" hidden />
+                        <label for="file" id="selector"> Subir archivo</label>
+                        <span asp-validation-for="boleta"></span>
+                    </div>
+                    <button id="btnt" type="submit" asp-controller="Log" asp-action="subirA">Subir Datos</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <aside class="section controller">
+        <ul class="tabs">
+            <li data-tab-target="#B" class="active">Datos opcionales</li>
+            <li data-tab-target="#A">Datos obligatorios</li>
+        </ul>
+    </aside>
+</div>
+<script type="text/javascript">
+    const areaa = document.getElementById('alertas');
+    var loader = function (e) {
+        let filer = e.target.files;
+        let output = document.getElementById("selector");
+        output.innerHTML = `Selected File: ${filer[0].name}`;
+        output.className = 'fileactive';
+    };
+    let fileInput = document.getElementById('file');
+    fileInput.addEventListener('change', loader);
+</script>
+<script>
+    const tabs = document.querySelectorAll('[data-tab-target]');
+    const content = document.querySelectorAll('[data-tab-content]');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = document.querySelector(tab.dataset.tabTarget);
+            content.forEach(con => con.setAttribute('hidden', true));
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tab.classList.add('active');
+            target.removeAttribute('hidden');
+        });
+    });
+</script>

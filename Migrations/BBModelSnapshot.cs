@@ -8,7 +8,7 @@ using TUNIWEB.Models;
 
 namespace TUNIWEB.Migrations
 {
-    [DbContext(typeof(BB))]
+    [DbContext(typeof(TUNIDbContext))]
     partial class BBModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

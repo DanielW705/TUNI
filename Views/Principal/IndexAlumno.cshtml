@@ -10,28 +10,10 @@
 </nav>
 <div class="cuerpodelapag">
     <div class="vp" id="vp" hidden>
-        <div id="D"></div>
+        <div id="body_page"></div>
     </div>
-    @if (Model.model4 == null)
-    {
-        <script>
-            (function () {
-                var url = '@Url.Action("_testvocacional","Principal")';
-                $.ajax({
-                    url: url,
-                    type: 'get',
-                    success: function (succ) {
-                        $('#D').append(succ);
-                        document.getElementById('vp').removeAttribute('hidden');
-                    }
-                    , error: function (err) { console.log(err); }
-                });
-            })();
-        </script>
-    }
     <div class="scs">
         <div class="list2">
-
             @if (Model.model6 != null)
             {
                 <div class="tabl">
@@ -71,114 +53,15 @@
             else
             {
                 <button id="invokar">Hacer test vocacional</button>
-                <script>
-                    document.getElementById('invokar').addEventListener('click', function () {
-                        var url = '@Url.Action("_testvocacional","Principal")';
-                        $.ajax({
-                            url: url,
-                            type: 'get',
-                            success: function (succ) {
-                                console.log(succ);
-                                $('#D').append(succ);
-                                document.getElementById('vp').removeAttribute('hidden');
-                            }
-                            , error: function (err) { console.log(err); }
-                        });
-                    });
-                </script>
             }
         </div>
     </div>
     <div id="inf"></div>
 </div>
 <div id="messages"></div>
+<script type="text/javascript">
+    let model4 = @(Model.model4 != null && Model.model4.Any() ? "true" : "false");
+</script>
+<script type="text/javascript" src="~/js/realizar_test_vocacional.js"></script>
 <script src="~/js/dist/browser/signalr.js"></script>
 <script src="~/js/configuration.js"></script>
-<script>
-    var id = document.querySelectorAll('[btns]');
-    id.forEach(ids => {
-        ids.addEventListener('click', function () {
-            var urlo = '@Url.Action("_vistaUNI", "Principal")'
-            $.ajax({
-                url: urlo,
-                type: 'get',
-                timeout: 5000,
-                async: false,
-                data: { id: ids.value },
-                success: (succ) => {
-                    document.getElementById('inf').innerHTML='';
-                    $('#inf').append(succ);
-                },
-                error: (err) => { console.log(err); }
-            });
-        });
-    })
-    document.getElementById('resulte').addEventListener('click', function () {
-        $.ajax({
-            url: '@Url.Action("resultados", "Principal")',
-            type: 'post',
-            async: false,
-            timeout:0,
-            success: function (succ) {
-                console.log(succ);
-                document.getElementById('resulte').remove();
-                var div = document.createElement('div');
-                div.className='divtablitare';
-                var t = document.createElement('table');
-                t.className='tablitare'; 
-                var thead = document.createElement('thead');
-                var tr = document.createElement('tr');
-                var tbody = document.createElement('tbody');
-                for (var i = 0; i < 2; i++) {
-                    var th = document.createElement('th');
-                    if (i == 0) {
-                        th.textContent = 'Area';
-                    }
-                    if (i == 1) {
-                        th.textContent = 'Valor';
-                    }
-                    tr.appendChild(th);
-                    thead.appendChild(tr);
-                }
-                succ.forEach(function (resultado) {
-                    var tr = document.createElement('tr');
-                    var td1 = document.createElement('td');
-                    var td2 = document.createElement('td');
-                    td1.textContent = resultado.area;
-                    td2.textContent = resultado.total;
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    tbody.appendChild(tr);
-                });
-                t.appendChild(thead);
-                t.appendChild(tbody);
-                div.appendChild(t);
-                document.getElementById('mostarr').appendChild(div);
-            },
-            error: function (err) { console.log(err); }
-        });
-    });
-</script>
-/*                document.getElementById('resulte').remove();
-                var div = document.createElement('div');
-                var t = document.createElement('table');
-                var thead = document.createElement('thead');
-                var tr = document.createElement('tr');
-                var td = document.createElement('td');
-                td.textContent = 'Area';
-                tr.appendChild(td);
-                td.textContent = 'Valor';
-                tr.appendChild(td);
-                thead.appendChild(tr)
-                var tbody = document.createElement('tbody');
-              /*  succ.forEach(function (elemento) {
-                    td.textContent = elemento.area;
-                    tr.appendChild(td);
-                    td.textContent = elemento.total;
-                    tr.appendChild(td);
-                    tbody.appendChild(tr);
-                });*/
-                t.appendChild(thead);
-                t.appendChild(tbody);
-                div.appendChild(t);
-                document.getElementById('mostarr').appendChild(div);*/

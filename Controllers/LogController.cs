@@ -25,13 +25,11 @@ namespace TUNIWEB.Controllers
 {
     public class LogController : Controller
     {
-        private readonly GooglereCaptchaService _googlereCaptchaServie;
-        private readonly BB _bd;
+        private readonly TUNIDbContext _bd;
 
 
-        public LogController(GooglereCaptchaService googlereCaptchaService, BB bd)
+        public LogController(TUNIDbContext bd)
         {
-            _googlereCaptchaServie = googlereCaptchaService;
             _bd = bd;
         }
         public IActionResult nvoLogIn()
@@ -71,12 +69,7 @@ namespace TUNIWEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> Iniciodelregistro(TupleClass nvouser, string tipo, string token)
         {
-            var _googleCapthcha = await _googlereCaptchaServie.recVer(token);
-            if (!_googleCapthcha.success && _googleCapthcha.score <= 0.5)
-            {
-                ModelState.AddModelError("", "Eres un robot");
-                return View("nvoLogIn", nvouser);
-            }
+
             if (ModelState.IsValid)
             {
                 if (tipo == "A")
@@ -174,14 +167,8 @@ namespace TUNIWEB.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Ingresar(TupleClass ingre, string token, string tipo1)
+        public async Task<IActionResult> Ingresar(TupleClass ingre, string tipo1)
         {
-            var _googleCapthcha = await _googlereCaptchaServie.recVer(token);
-            if (!_googleCapthcha.success && _googleCapthcha.score <= 0.5)
-            {
-                ModelState.AddModelError("", "Eres un robot");
-                return View("nvoLogIn", ingre);
-            }
             if (ModelState.IsValid)
             {
                 Guid id = Guid.Empty;
@@ -202,7 +189,7 @@ namespace TUNIWEB.Controllers
                     else
                     {
                         ModelState.AddModelError("", "No existe este usuario");
-                        return View("nvoLogIn", ingre);
+                        return View("LogIn", ingre);
                     }
                 }
                 else if (tipo1 == "U")
@@ -222,12 +209,12 @@ namespace TUNIWEB.Controllers
                     else
                     {
                         ModelState.AddModelError("", "No existe este usuario");
-                        return View("nvoLogIn", ingre);
+                        return View("LogIn", ingre);
                     }
                 }
             }
 
-            return View("nvoLogIn", ingre);
+            return View("LogIn", ingre);
 
         }
         [HttpGet]

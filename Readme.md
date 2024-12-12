@@ -1,2 +1,2 @@
 ﻿# TUNI
-Proyecto aula del equipo "Macrosoft" 
+Proyecto TUNI

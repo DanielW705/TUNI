@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using TUNIWEB.ClassValidation;
 using TUNIWEB.Hubs;
 using TUNIWEB.Models;
@@ -29,6 +25,7 @@ namespace TUNIWEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string cadenaDeConexion = Configuration.GetConnectionString("TUNIConnectionString") ?? throw new InvalidOperationException("No existe una manera de conectarse a la base de datos");
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -41,25 +38,15 @@ namespace TUNIWEB
                     options.LoginPath = "/Log/nvoLogIn";
                     options.Cookie.Name = "validado";
                 });
-            services.AddDbContext<BB>(options =>
-             {
-                 options.UseSqlServer(Configuration.GetConnectionString("BB"));
-             });
-            services.Configure<ReCAPTCHASSettings>(Configuration.GetSection("GooglereCAPTCHA"));
-            services.AddTransient<GooglereCaptchaService>();
+
+
+            services.AddDbContext<TUNIDbContext>(options => options.UseSqlServer(cadenaDeConexion));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            /*  services.AddIdentity<UsuarioAlumno, IdentityRole>(options =>
-              {
-                  options.Password.RequiredLength = 10;
-                  options.Password.RequiredUniqueChars = 3;
-                  options.Password.RequireLowercase = true;
-                  options.Password.RequireDigit = true;
-                  options.Password.RequireNonAlphanumeric = false;
-              }).AddEntityFrameworkStores<BB>();*/
             services.AddSignalR();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BB bd)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TUNIDbContext bd)
         {
             if (env.IsProduction())
             {
@@ -68,6 +55,11 @@ namespace TUNIWEB
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+            }
+            using(IServiceScope scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                TUNIDbContext context = scope.ServiceProvider.GetRequiredService<TUNIDbContext>();
+                context.Database.Migrate();
             }
             app.UseStaticFiles();
             app.UseCookiePolicy(new CookiePolicyOptions
@@ -81,7 +73,7 @@ namespace TUNIWEB
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Log}/{action=nvoLogIn}/{id?}");
+                    template: "{controller=Log}/{action=LogIn}/{id?}");
             });
             Operaciones.inicializar(bd);
         }

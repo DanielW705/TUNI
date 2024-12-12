@@ -9,7 +9,7 @@ using TUNIWEB.Models;
 
 namespace TUNIWEB.Migrations
 {
-    [DbContext(typeof(BB))]
+    [DbContext(typeof(TUNIDbContext))]
     [Migration("20200610195426_1")]
     partial class _1
     {

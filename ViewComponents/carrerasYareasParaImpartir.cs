@@ -9,9 +9,9 @@ namespace TUNIWEB.ViewComponents
 {
     public class carrerasYareasParaImpartir : ViewComponent
     {
-        private readonly BB _bd;
+        private readonly TUNIDbContext _bd;
 
-        public carrerasYareasParaImpartir(BB bd)
+        public carrerasYareasParaImpartir(TUNIDbContext bd)
         {
             _bd = bd;
         }

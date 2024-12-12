@@ -29,7 +29,7 @@ namespace TUNIWEB.ClassValidation
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             string username = (string)value;
-            BB bd = new BB();
+            TUNIDbContext bd = new TUNIDbContext();
 
             if (!(bd.alumnosUsuarios.Where(d=>d.usuario == username && d.contraseña == _OtherAtribute).Any()))
             {

@@ -19,10 +19,10 @@ namespace TUNIWEB.Controllers
 {
     public class PrincipalController : Controller
     {
-        private readonly BB _bd;
+        private readonly TUNIDbContext _bd;
         private readonly IHostingEnvironment _host;
 
-        public PrincipalController(BB bd, IHostingEnvironment host)
+        public PrincipalController(TUNIDbContext bd, IHostingEnvironment host)
         {
             _bd = bd;
             _host = host;
@@ -95,7 +95,7 @@ namespace TUNIWEB.Controllers
         {
             HttpContext.SignOutAsync();
             Operaciones.IdSing = Guid.Empty;
-            return RedirectToAction("nvoLogin", "Log");
+            return RedirectToAction("Login", "Log");
         }
         [HttpGet]
         public IActionResult _testvocacional()
@@ -104,7 +104,7 @@ namespace TUNIWEB.Controllers
             return PartialView(Operaciones.retutup());
         }
         [HttpPost]
-        public IActionResult _testvocacional(valores i)
+        public IActionResult _testvocacional([FromForm]valores i)
         {
             Operaciones.darvalores(i);
             if (Operaciones.retutup() == null)
@@ -118,8 +118,8 @@ namespace TUNIWEB.Controllers
             }
             return PartialView(Operaciones.retutup());
         }
-        [HttpGet]
-        public IActionResult _vistaUNI(string id)
+        [HttpPost]
+        public IActionResult _vistaUNI([FromForm]string id)
         {
             Trutupleu trutuple = new Trutupleu
             {
@@ -204,7 +204,7 @@ namespace TUNIWEB.Controllers
             int i = _bd.SaveChanges();
             return Json(i);
         }
-        [HttpPost]
+        [HttpGet]
         public IActionResult resultados()
         {
             return Json(Operaciones.resul(_bd, Operaciones.IdSing.ToString()));

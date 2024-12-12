@@ -2,6 +2,9 @@ bin
 .vs
 .config
 *.pdf
-files
+\files
 *.jpg
 !TUNI.jpg
+appsetings.json
+/obj/
+/Properties/

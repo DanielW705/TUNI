@@ -36,8 +36,50 @@
                 <label for="6">@valores.Me_encanta.ToString().Replace("_", " ")</label>
             </div>
         </div>
-        <button onclick="lanzarAjax2()">Siguiente pregunta</button>
+        <button id="btnPregunta">Siguiente pregunta</button>
     </div>
+    <script>
+        const url_test_post = '/Principal/_testvocacional';
+        const btn_sig_pre = document.getElementById('btnPregunta');
+        let i = 1;
+        btn_sig_pre.addEventListener('click', () => {
+            i = document.querySelectorAll('input[name="seleccion"]:checked').values();
+            let formData = new FormData();
+            formData.append('i', i);
+            fetch(url_test_post,
+                {
+                    method: 'POST', body: formData
+                })
+                .then(async (response) => {
+                    response = await response.text();
+                    let D = document.getElementById('D');
+                    D.innerHTML = response;
+                }).
+                catch(error => console.error(error));
+        });
+        if (i > 1) {
+            document.getElementById('btnt').setAttribute('disabled', true);
+            document.getElementById('btnc').setAttribute('disabled', true);
+            document.getElementById('btnr').setAttribute('disabled', true);
+            document.getElementById('presoname').setAttribute('disabled', true);
+        }
+
+       @*  function lanzarAjax2() {
+            event.preventDefault();
+            var i = $('input[name="seleccion"]:checked').val();
+            var url = '@Url.Action("_testvocacional", "Principal")';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: { i: i },
+                success: function (succ) {
+                    $('#D').html('');
+                    $('#D').append(succ);
+                }
+                , error: function (err) { alert(err); }
+            });
+        } *@
+    </script>
 }
 else
 {
@@ -74,49 +116,11 @@ else
                     location.reload();
                     document.getElementById('vp').setAttribute('hidden', '');
                 }
-            })
-        })();
-    </script>
-}
-<script>
-    function lanzarAjax2() {
-        event.preventDefault();
-        var i = $('input[name="seleccion"]:checked').val();
-        var url = '@Url.Action("_testvocacional","Principal")';
-        $.ajax({
-            url: url,
-            type: 'post',
-            data: { i: i },
-            success: function (succ) {
-                $('#D').html('');
-                $('#D').append(succ);
-            }
-            , error: function (err) { alert(err); }
-        });
-    }
-</script>
-@if (Model == null)
-{
-    <script type="text/javascript">
-        (function () {
+            });
             document.getElementById('btnt').removeAttribute('disabled');
             document.getElementById('btnc').removeAttribute('disabled');
             document.getElementById('btnr').removeAttribute('disabled');
             document.getElementById('presoname').removeAttribute('disabled');
-        })();
-    </script>
-}
-else
-{
-    <script type="text/javascript">
-        (function () {
-            var i = @Model.Item1;
-            if (i > 1) {
-                document.getElementById('btnt').setAttribute('disabled', true);
-                document.getElementById('btnc').setAttribute('disabled', true);
-                document.getElementById('btnr').setAttribute('disabled', true);
-                document.getElementById('presoname').setAttribute('disabled', true);
-            }
         })();
     </script>
 }

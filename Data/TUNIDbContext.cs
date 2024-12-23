@@ -1,20 +1,6 @@
 ﻿using System;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.AspNetCore.Mvc;
-using static TUNIWEB.ClassValidation.Operaciones;
-using TUNIWEB.ClassValidation;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Security.AccessControl;
 
 namespace TUNIWEB.Models
 {
@@ -30,15 +16,14 @@ namespace TUNIWEB.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Data Source=.;Initial Catalog=TUNIWEB;Integrated Security=True")
-                .EnableSensitiveDataLogging(true)
+            builder.EnableSensitiveDataLogging(true)
                 .UseLoggerFactory(new LoggerFactory().AddConsole((category, level)
                 => level == LogLevel.Information
                 && category == DbLoggerCategory.Database.Command.Name, true));
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-          string procedure = @"
+            string procedure = @"
 ---=======================================
 --Author:		Daniel Gonzalez Martinez
 -- Create date: 25 / 05 / 2020
@@ -556,8 +541,9 @@ END";
             {
                 entity.HasKey(d => d.noderechazo);
             });
-            builder.Entity<historialdeaceptados>(entity=> {
-                entity.HasKey(d=>d.nodeaceptado);
+            builder.Entity<historialdeaceptados>(entity =>
+            {
+                entity.HasKey(d => d.nodeaceptado);
             });
             //this.Database.ExecuteSqlCommand(procedure);
         }

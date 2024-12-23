@@ -1,23 +1,4 @@
 ﻿@model Tuple<IEnumerable<UsuarioAlumno>, IEnumerable<UsuarioUniversidad>>
-    <nav class="navi">
-        <ul>
-            <li>
-                <form asp-action="cerrarsecion" asp-controller="Principal" method="get">
-                    <button type="submit">Cerrar sesion</button>
-                </form>
-            </li>
-        </ul>
-    </nav>
-    <div class="sections">
-        <div class="nabar">
-            <nav>
-                <ul>
-                    <li id="sel"></li>
-                    <li id="alecc" class="sel1">Alumno</li>
-                    <li id="alecc2" class="sel2">Universidad</li>
-                </ul>
-            </nav>
-        </div>
         <div class="containe">
             <div id="tbl1" class="table1cont">
 
@@ -102,7 +83,7 @@
     var mostrador2 = document.getElementById('partial2');
     var elemento2 = document.getElementById('sec2');
     id.forEach(detalle => {
-        detalle.addEventListener('click', () => {
+        detalle.addEventListener('click', (event) => {
             event.preventDefault();
             progresbar.removeAttribute('hidden');
             divp1.setAttribute('hidden','hidden');
@@ -184,3 +165,4 @@
         });
     });
     </script>
+<script type="text/javascript" src="~/js/addNavButtons.js"></script>

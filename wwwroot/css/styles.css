@@ -58,6 +58,9 @@ html, body {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .section {
@@ -68,13 +71,18 @@ html, body {
 .menu {
     background-color: rgba(102, 51, 153, 0.7);
     height: 65px;
-    display: flex;
-    gap: 50%;
 }
+
+    .menu ul {
+        display: flex;
+        gap: 50%;
+        height: 100%;
+        padding: 0 15px;
+        list-style: none;
+    }
     /*icono*/
     .menu .icon {
         width: 25%;
-        padding: 5px 5px;
     }
         /*icono de tuni*/
         .menu .icon .TUNI-icon {
@@ -83,15 +91,42 @@ html, body {
             content: url('../images/TUNI.svg');
         }
 
+            .menu .icon .TUNI-icon::marker {
+                display: none;
+            }
+
     .menu .login-options {
         width: 25%;
+        max-height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-items: center;
     }
+
+        .menu .login-options a {
+            width: 35%;
+            height: 50%;
+            filter: invert(77%) sepia(17%) saturate(1501%) hue-rotate(122deg) brightness(81%) contrast(85%);
+            transition: 0.5s;
+        }
+
+            .menu .login-options a:hover {
+                transform: scale(1.2);
+                filter: invert(42%) sepia(13%) saturate(1983%) hue-rotate(216deg) brightness(115%) contrast(92%);
+            }
+
+.logout_icon {
+    content: url('../images/LogOutIcon.svg');
+}
+
+.profile_icon {
+    content: url('../images/ViewPerfilIcon.svg');
+}
 
 .content {
     display: flex;
     justify-content: center;
-    position: relative;
-    bottom: 15%;
 }
 
 .register {
@@ -99,7 +134,6 @@ html, body {
     height: 400px;
     width: 250px;
     position: relative;
-    top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -409,91 +443,102 @@ ul {
         background-color: red;
     }
 
-.section.one > .section.two > .section.tree > .section.A {
-    height: 100%;
-    min-width: 100%;
-    position: relative;
-    transition: 1s;
-    top: 30px;
-    padding-left: 2%;
+.section.A {
+    height: 70%;
+    width: 95%;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: grid;
+    grid-template-rows: 15% 5% 75%;
+    border-radius: 15px;
 }
 
-    .section.one > .section.two > .section.tree > .section.A > h1 {
-        font-size: 30px;
+    .section.A h1 {
+        font-size: 35px;
         text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .section.one > .section.two > .section.tree > .section.A > h2 {
-        text-align: center;
-        font-size: 12px;
-        color: red;
-    }
-
-    .section.one > .section.two > .section.tree > .section.A > .inputs {
         display: flex;
-        flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
 
-        .section.one > .section.two > .section.tree > .section.A > .inputs > input {
-            font-size: 20px;
+    .section.A h2 {
+        text-align: center;
+        font-size: 15px;
+        color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section.A .inputs {
+        display: grid;
+        grid-template-rows: repeat(15%,3) 35% 20%;
+        padding: 0 30px;
+        justify-items: center;
+    }
+
+        .section.A .inputs input[type=text] {
             border: none;
             border-bottom: 1px solid black;
-            margin-bottom: 10px;
             background-color: transparent;
-            width: 90%;
-            font-size: 18px;
+            width: 50%;
+            font-size: 25px;
         }
 
-        .section.one > .section.two > .section.tree > .section.A > .inputs > span,
-        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > span {
+        .section.A .inputs span,
+        .section.A .inputs .rowfile span {
             color: red;
             font-size: 13px;
             padding-left: 20px;
         }
 
-        .section.one > .section.two > .section.tree > .section.A > .inputs > button {
-            width: 90%;
-            background-color: #f0f0f0;
-            border-radius: 5px;
+        .section.A .inputs input[type=submit] {
+            width: 20%;
+            background-color: rgba(59, 186, 175,0.4);
+            border-radius: 10px;
             border: none;
             cursor: pointer;
-            height: 12%;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            transition: 0.9s;
         }
 
-        .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile {
-            display: flex;
-            justify-content: center;
-            width: 60%;
-            flex-direction: column;
-            align-items: center;
-        }
-
-            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label {
-                margin: 0;
-                cursor: pointer;
-                padding: 2px 6px;
-                border: 3px solid #1bdbd5;
-                border-radius: 48px;
-                color: white;
-                margin-bottom: 15px;
-                text-align: center;
-                font-size: 15px;
+            .section.A .inputs input[type=submit]:hover {
+                transform: scale(1.05);
             }
 
-                .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > label:hover {
-                    transform: scale(1.04);
-                    background-color: #1bdbd5;
-                    color: white;
-                }
+    .section.A > .inputs > .rowfile {
+        display: flex;
+        justify-content: center;
+        width: 60%;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 0;
+    }
 
-            .section.one > .section.two > .section.tree > .section.A > .inputs > .rowfile > .fileactive {
+        .section.A > .inputs > .rowfile > label {
+            margin: 0;
+            cursor: pointer;
+            border: 2px solid #1bdbd5;
+            border-radius: 40px;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            width: 60%;
+            height: 90%;
+            transition: 0.75s;
+        }
+
+            .section.A > .inputs > .rowfile > label:hover {
+                transform: scale(1.1);
                 background-color: #1bdbd5;
                 color: white;
-                padding: 3px 12px;
-                font-size: 60%;
             }
+
+        .section.A > .inputs > .rowfile > .fileactive {
+            background-color: #1bdbd5;
+            color: white;
+            padding: 3px 12px;
+        }
 
 
 .section.one > .section.two > .section.tree > .section.B {
@@ -3340,7 +3385,6 @@ select .selected {
 
 @media only screen and (min-width: 1366px) and (max-width:1919px) {
     .register {
-        top: 70px;
         width: 350px;
         height: 500px;
     }

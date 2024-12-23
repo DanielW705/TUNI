@@ -3,7 +3,6 @@ bin
 .config
 *.pdf
 \files
-*.jpg
 !TUNI.jpg
 appsetings.json
 /obj/

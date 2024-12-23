@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,9 @@ using System;
 using TUNIWEB.ClassValidation;
 using TUNIWEB.Hubs;
 using TUNIWEB.Models;
+using TUNIWEB.Models.UserCase;
+using TUNIWEB.Models.UsersCase;
+using TUNIWEB.Utilities;
 
 namespace TUNIWEB
 {
@@ -40,7 +44,25 @@ namespace TUNIWEB
                 });
 
 
+            
+
             services.AddDbContext<TUNIDbContext>(options => options.UseSqlServer(cadenaDeConexion));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            //Agregamos inyeccion de dependencias para las cookies
+            services.AddScoped<SignInCookieUseCase>();
+            //Agregamos inyeccion de dependencia para asegurar la uthorizacion del usuario
+            services.AddScoped<UserAuthenticationCase>();
+            //Agregamos inyeccion de dependencia para asegurar que las contraseñas no se repitan
+            services.AddScoped<PasswordIsInUseCase>();
+            //Agregamos inyeccion de dependencia para login de usuario
+            services.AddScoped<LoginUserCase>();
+            //Agregamos inyeccion de dependencia para agregar un usuario
+            services.AddScoped<AddUserCase>();
+            //Agregamos inyeccion de dependencia para agregar los datos obligatorios del Alumno
+            services.AddScoped<AddDatosObligatoriosUserCase>();
+            //Agregamos inyeccion de dependencia para ver el perfil del alumno
+            services.AddScoped<GetUserProfileCase>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
 
@@ -56,6 +78,7 @@ namespace TUNIWEB
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            CreateTemporalFiles._hostingEnvironment = env;
             using(IServiceScope scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 TUNIDbContext context = scope.ServiceProvider.GetRequiredService<TUNIDbContext>();

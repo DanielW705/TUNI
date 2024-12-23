@@ -1,5 +1,5 @@
 ﻿@using Microsoft.Extensions.Options
-@model TUNIWEB.ClassValidation.TupleClass
+@model TUNIWEB.Models.ViewModel.RegisterLoginViewModel
 <div class="section content">
     <div class="section register">
         <div class="groupbtn">
@@ -12,8 +12,8 @@
             <form method="post" class="frm post" id="login" asp-action="Ingresar" asp-controller="Log">
                 <div class="radio-check">
                     <div class="section-radio">
-                        <input type="radio" name="tipo1" value="A" id="al" checked />
-                        <input type="radio" name="tipo1" value="U" id="uni" />
+                        <input type="radio" asp-for="LoginUserClass.tipo_usuario" value="0" id="al" checked />
+                        <input type="radio" asp-for="LoginUserClass.tipo_usuario" value="1" id="uni" />
                     </div>
                     <div class="label-text">
                         <label for="al">Alumno</label>
@@ -22,19 +22,19 @@
                 </div>
                 <h1>Bienvenido de nuevo a TUNI</h1>
                 <div class="section-insert">
-                    <input asp-for="model2.userName" type="text" placeholder="Escribe el nombre de tu usuario" />
-                    <span asp-validation-for="model2.userName"></span>
-                    <input asp-for="model2.pasword" type="password" placeholder="Escribe tu contraseña" />
-                    <span asp-validation-for="model2.pasword"></span>
+                    <input asp-for="LoginUserClass.username" type="text" placeholder="Escribe el nombre de tu usuario" />
+                    <span asp-validation-for="LoginUserClass.username"></span>
+                    <input asp-for="LoginUserClass.contraseña" type="password" placeholder="Escribe tu contraseña" />
+                    <span asp-validation-for="LoginUserClass.contraseña"></span>
                     <button type="submit">Ingresar</button>
                     <input type="hidden" id="tokeningre" name="token" />
                 </div>
             </form>
-            <form method="get" class="frm get" id="register" asp-action="Iniciodelregistro" asp-controller="Log">
+            <form method="post" class="frm get" id="register" asp-action="Registro" asp-controller="Log">
                 <div class="radio-check">
                     <div class="section-radio">
-                        <input type="radio" name="tipo" value="A" id="al2" checked />
-                        <input type="radio" name="tipo" value="U" id="uni2" />
+                        <input type="radio" asp-for="RegisterUserClass.tipo_usuario" value="0" id="al2" checked />
+                        <input type="radio" asp-for="RegisterUserClass.tipo_usuario" value="1" id="uni2" />
                     </div>
                     <div class="label-text">
                         <label for="al2">Alumno</label>
@@ -43,19 +43,18 @@
                 </div>
                 <h1>Registrate a TUNI</h1>
                 <div class="section-insert">
-                    <input asp-for="model1.username" type="text" placeholder="Escribe el nombre de tu usuario" />
-                    <span asp-validation-for="model1.username"></span>
-                    <input asp-for="model1.pasword" type="password" placeholder="Escribe tu contraseña" />
-                    <span asp-validation-for="model1.pasword"></span>
-                    <input asp-for="model1.pasword2" type="password" placeholder="Repita su contraseña" />
-                    <span asp-validation-for="model1.pasword2"></span>
+                    <input asp-for="RegisterUserClass.username" type="text" placeholder="Escribe el nombre de tu usuario" />
+                    <span asp-validation-for="RegisterUserClass.username"></span>
+                    <input asp-for="RegisterUserClass.pasword" type="password" placeholder="Escribe tu contraseña" />
+                    <span asp-validation-for="RegisterUserClass.pasword"></span>
+                    <input asp-for="RegisterUserClass.confirmPassword" type="password" placeholder="Repita su contraseña" />
+                    <span asp-validation-for="RegisterUserClass.confirmPassword"></span>
                     <button type="submit">Registrate</button>
-                    <input type="hidden" id="tokenregis" name="token" />
                 </div>
             </form>
         </div>
     </div>
 </div>
 <footer class="section footer"></footer>
-<script src="~/js/log_in.js" type="text/javascript"></script>
+<script src="~/js/logIn.js" type="text/javascript"></script>
         

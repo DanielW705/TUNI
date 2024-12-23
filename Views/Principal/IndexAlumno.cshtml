@@ -1,13 +1,4 @@
 ﻿@model TRITUPLE
-<nav class="navi">
-    <ul>
-        <li>
-            <form asp-action="cerrarsecion" asp-controller="Principal" method="get">
-                <button type="submit">Cerrar sesion</button>
-            </form>
-        </li>
-    </ul>
-</nav>
 <div class="cuerpodelapag">
     <div class="vp" id="vp" hidden>
         <div id="body_page"></div>
@@ -62,6 +53,6 @@
 <script type="text/javascript">
     let model4 = @(Model.model4 != null && Model.model4.Any() ? "true" : "false");
 </script>
-<script type="text/javascript" src="~/js/realizar_test_vocacional.js"></script>
+<script type="text/javascript" src="~/js/addNavButtons.js"></script>
 <script src="~/js/dist/browser/signalr.js"></script>
 <script src="~/js/configuration.js"></script>

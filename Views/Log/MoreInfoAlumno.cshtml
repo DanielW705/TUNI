@@ -1,0 +1,20 @@
+﻿@model TUNIWEB.Models.ViewModel.DatosObligatoriosViewModel
+<form asp-controller="Log" asp-action="SubirAlumno" method="post" enctype="multipart/form-data" id="A" class="section A" data-tab-content>
+    <h1>Inicia tu registro</h1>
+    <h2>Estos datos son necesarios para seguir tu registro</h2>
+    <div class="inputs">
+        <input type="text" asp-for="Nombre" placeholder="Escribe tu nombre" />
+        <span asp-validation-for="Nombre"></span>
+        <input type="text" asp-for="Apellido_paterno" placeholder="Escribe tu Apellido Paterno" />
+        <span asp-validation-for="Apellido_paterno"></span>
+        <input type="text" asp-for="Apellido_maternos" placeholder="Escribe tu Apellido Materno" />
+        <span asp-validation-for="Apellido_maternos"></span>
+        <div class="rowfile">
+            <input id="file" type="file" asp-for="boleta" accept=".pdf" hidden />
+            <label for="file" id="selector"> Subir archivo</label>
+            <span asp-validation-for="boleta"></span>
+        </div>
+        <input type="submit" value="Subir datos obligatorios" />
+    </div>
+</form>
+<script src="~/js/moreInfoAlumno.js" type="text/javascript"></script>

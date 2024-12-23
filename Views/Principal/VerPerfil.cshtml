@@ -1,0 +1,66 @@
+﻿@using TUNIWEB.Models.ClassValidation
+@using TUNIWEB.Models.ViewModel
+@model PerfilViewModel
+<form asp-action="Edit" asp-controller="Principal" method="post">
+    <input id="tipoUsuario" type="hidden" value="@Model.UserRol">
+    @if (Model.UserRol.Equals(TUNIWEB.Models.Enums.UserRolEnum.Alumno))
+    {
+        <div class="inputText">
+            <label for="" class="title">Nombre de Usuario</label>
+            <input class="textBox" type="text" id="UserName" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.usuario">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Contraseña</label>
+            <input class="textBox" type="text" id="UserPassword" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Repita Contraseña</label>
+            <input class="textBox" type="text" id="UserRepetedPassword" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Nombre del alumno</label>
+            <input type="text" id="Nombre" disable="true" value="@Model.PerfilDelAlumno.Alumno.nombre">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Apellido Paterno</label>
+            <input type="text" id="ApellidoPaterno" disable="true" value="@Model.PerfilDelAlumno.Alumno.apPaterno">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Apellido Materno</label>
+            <input type="text" id="ApellidoMaterno" disable="true" value="@Model.PerfilDelAlumno.Alumno.apPaterno">
+        </div>
+        <div class="InformacionAlumnoFiles">
+            <h3 class="title">Los reconocimientos con los que cuenta</h3>
+            @if (Model.PerfilDelAlumno.InformacionAlumno is null)
+            {
+                <p>No cuneta con ningun archivo, si tiene alguno aqui puede subirlo</p>
+                <input id="file" type="file" accept=".pdf" hidden />
+                <label for="file" id="selector" disable="true"> Subir archivo</label>
+            }
+            else
+            {
+                foreach (FileClass archivo in Model.PerfilDelAlumno.InformacionAlumno)
+                {
+                    <embed src="@archivo.Route" alt="@archivo.FileName">
+                }
+            }
+        </div>
+        <div class="carrerasTecnicas">
+            <h3 class="title">Las carreras Tecnicas con las que cuenta son:</h3>
+            <ul class="listadoDeCarreras">
+                @foreach (catalogoCarrerasTecnicas carreraTecnica in @Model.PerfilDelAlumno.CarreraTecnicaDelAlumno)
+                {
+                    <li class="carreraTecnica">@carreraTecnica.carreraTecnica</li>
+                }
+            </ul>
+        </div>
+        <div class="BoletaGlobal">
+            <h3 class="title">Esta esta su boleta global</h3>
+            <embed src="@Model.PerfilDelAlumno.DatosAcademicosAlumno.Route" alt="@Model.PerfilDelAlumno.DatosAcademicosAlumno.FileName">
+        </div>
+    }
+    else
+    {
+
+    }
+</form>

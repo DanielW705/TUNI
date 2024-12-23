@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.UI.Pages.Internal.Account.Manage;
-using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ROP;
 using TUNIWEB.ClassValidation;
 using TUNIWEB.Models;
+using TUNIWEB.Models.UsersCase;
+using TUNIWEB.Models.ViewModel;
 
 namespace TUNIWEB.Controllers
 {
@@ -21,11 +18,13 @@ namespace TUNIWEB.Controllers
     {
         private readonly TUNIDbContext _bd;
         private readonly IHostingEnvironment _host;
+        private readonly GetUserProfileCase _getUserProfileCase;
 
-        public PrincipalController(TUNIDbContext bd, IHostingEnvironment host)
+        public PrincipalController(TUNIDbContext bd, IHostingEnvironment host, GetUserProfileCase getUserProfileCase)
         {
             _bd = bd;
             _host = host;
+            _getUserProfileCase = getUserProfileCase;
         }
         [Authorize(Roles = "Administrador")]
         public IActionResult IndexAdministrador()
@@ -34,6 +33,11 @@ namespace TUNIWEB.Controllers
             var lista = new Tuple<IEnumerable<UsuarioAlumno>, IEnumerable<UsuarioUniversidad>>
                 (item1: _bd.alumnosUsuarios, item2: _bd.universidadesUsuario);
             return View(lista);
+        }
+        public async Task<ActionResult> VerPerfil()
+        {
+            Result<PerfilViewModel> perfilDelUsuario = await _getUserProfileCase.Execute();
+            return View(perfilDelUsuario.Value);    
         }
         [Authorize(Roles = "Alumno")]
         public IActionResult IndexAlumno()
@@ -91,7 +95,7 @@ namespace TUNIWEB.Controllers
             return PartialView("_InfoU", trutuple);
         }
         [HttpGet]
-        public IActionResult cerrarsecion()
+        public IActionResult cerrarsesion()
         {
             HttpContext.SignOutAsync();
             Operaciones.IdSing = Guid.Empty;

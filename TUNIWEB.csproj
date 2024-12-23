@@ -145,13 +145,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Imagen1.jpg">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EPPlus" Version="4.5.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
@@ -162,6 +155,7 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Netmentor.ROP" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

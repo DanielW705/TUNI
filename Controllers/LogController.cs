@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Pages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
+using ROP;
 using TUNIWEB.ClassValidation;
 using TUNIWEB.Models;
+using TUNIWEB.Models.UserCase;
+using TUNIWEB.Models.UsersCase;
+using TUNIWEB.Models.ViewModel;
 
 namespace TUNIWEB.Controllers
 {
@@ -27,63 +19,74 @@ namespace TUNIWEB.Controllers
     {
         private readonly TUNIDbContext _bd;
 
+        private readonly LoginUserCase _loginUser;
 
-        public LogController(TUNIDbContext bd)
+        private readonly AddUserCase _addUser;
+
+        private readonly UserAuthenticationCase _userAuthentication;
+
+        private readonly AddDatosObligatoriosUserCase _addDatosObligatoriosUser;
+        public LogController(TUNIDbContext bd, LoginUserCase loginUser, AddUserCase addUserCase, UserAuthenticationCase userAuthentication, AddDatosObligatoriosUserCase addDatosObligatoriosUser)
         {
             _bd = bd;
-        }
-        public IActionResult nvoLogIn()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Alumno"))
-                {
-                    return RedirectToAction("IndexAlumno", "Principal");
-                }
-                if (User.IsInRole("Universidad"))
-                {
-                    return RedirectToAction("IndexUniversidad", "Principal");
-                }
-                else
-                {
-                    return RedirectToAction("IndexAdministrador", "Principal");
-                }
-            }
-            else
-            {
-                return View();
-            }
+            _loginUser = loginUser;
+            _addUser = addUserCase;
+            _userAuthentication = userAuthentication;
+            _addDatosObligatoriosUser = addDatosObligatoriosUser;
         }
         public IActionResult LogIn()
         {
-            return View();
+            string route = _userAuthentication.AuthenticateUser();
+            if (route is null)
+                return View();
+            else
+                return RedirectToAction(route, "Principal");
         }
-        public IActionResult registerA()
+        [HttpPost]
+        public async Task<IActionResult> Ingresar(RegisterLoginViewModel registerLoginViewModel)
         {
-            return View();
-        }
-        public IActionResult registerU()
-        {
-            return View();
-        }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> Iniciodelregistro(TupleClass nvouser, string tipo, string token)
-        {
-
             if (ModelState.IsValid)
             {
-                if (tipo == "A")
+                Result<bool> isLogin = await _loginUser.Execute(registerLoginViewModel.LoginUserClass);
+                if (isLogin.Success)
+                    return RedirectToAction(
+                        registerLoginViewModel.LoginUserClass.tipo_usuario == Models.Enums.UserRolEnum.Alumno ?
+                        "IndexAlumno" : "IndexUniversidad", "Principal");
+                else
                 {
-                    Operaciones.Setnvousuario(nvouser.model1);
-                    return RedirectToAction("registerA", "Log");
-                }
-                else if (tipo == "U")
-                {
-                    Operaciones.Set_nvousuarioUNI(nvouser.model1);
-                    return RedirectToAction("registerU", "Log");
+                    ModelState.AddModelError("User error", isLogin.Errors.First().ToString());
+                    return View("LogIn", registerLoginViewModel);
                 }
             }
-            return View("LogIn", nvouser);
+            else
+                return View("LogIn", registerLoginViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Registro(RegisterLoginViewModel registerLoginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Result<bool> isAdded = await _addUser.Execute(registerLoginViewModel.RegisterUserClass);
+                if (isAdded.Success)
+                    return RedirectToAction(
+                        registerLoginViewModel.RegisterUserClass.tipo_usuario == Models.Enums.UserRolEnum.Alumno ?
+                        "MoreInfoAlumno" : "MoreInfoUniversidad", "Log");
+                else
+                {
+                    ModelState.AddModelError("User error", isAdded.Errors.First().ToString());
+                    return View("LogIn", registerLoginViewModel);
+                }
+            }
+            else
+                return View("LogIn", registerLoginViewModel);
+        }
+        public IActionResult MoreInfoAlumno()
+        {
+            return View();
+        }
+        public IActionResult MoreInfoUniversidad()
+        {
+            return View();
         }
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> IsPaswordInuse(TupleClass pasword)
@@ -111,23 +114,21 @@ namespace TUNIWEB.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> subirA(DatosObligatorios data)
+        public async Task<IActionResult> SubirAlumno(DatosObligatoriosViewModel data)
         {
             if (ModelState.IsValid)
             {
-                Operaciones.Setnvoalumno(data);
-                Operaciones.SetdatosAcademicos(data);
-                var nvoperfil = Operaciones.GetperfilA();
-                await _bd.alumnosUsuarios.AddAsync(nvoperfil);
-                Operaciones.IdSing = nvoperfil.idAlumno;
-                _bd.SaveChanges();
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, Operaciones.Authentificarlo("Alumno"), new AuthenticationProperties { IsPersistent = false, ExpiresUtc = DateTime.Now.AddHours(1) });
-                return RedirectToAction("IndexAlumno", "Principal");
+                Result<bool> isAdded = await _addDatosObligatoriosUser.Execute(data);
+                if (isAdded.Success)
+                    return RedirectToAction("IndexAlumno", "Principal");
+                else
+                {
+                    ModelState.AddModelError("User error", isAdded.Errors.First().ToString());
+                    return View("MoreInfoAlumno", data);
+                }
             }
             else
-            {
-                return View("registerA", data);
-            }
+                return View("MoreInfoAlumno", data);
         }
         [HttpPost]
         public IActionResult subirrecon(reconocimiento rec)
@@ -165,57 +166,6 @@ namespace TUNIWEB.Controllers
             {
                 return Json(false);
             }
-        }
-        [HttpPost]
-        public async Task<IActionResult> Ingresar(TupleClass ingre, string tipo1)
-        {
-            if (ModelState.IsValid)
-            {
-                Guid id = Guid.Empty;
-                if (tipo1 == "A")
-                {
-                    if ((id = Operaciones.existenciaA(ingre.model2, _bd)) != Guid.Empty)
-                    {
-                        Operaciones.IdSing = id;
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, Operaciones.Authentificarlo("Alumno"), new AuthenticationProperties { IsPersistent = false, ExpiresUtc = DateTime.Now.AddHours(1) });
-                        return RedirectToAction("IndexAlumno", "Principal");
-                    }
-                    else if (((id = Operaciones.existenciaADMON(ingre.model2, _bd)) != Guid.Empty))
-                    {
-                        Operaciones.IdSing = id;
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, Operaciones.Authentificarlo("Administrador"), new AuthenticationProperties { IsPersistent = false, ExpiresUtc = DateTime.Now.AddHours(1) });
-                        return RedirectToAction("IndexAdministrador", "Principal");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "No existe este usuario");
-                        return View("LogIn", ingre);
-                    }
-                }
-                else if (tipo1 == "U")
-                {
-                    if ((id = Operaciones.existenciaU(ingre.model2, _bd)) != Guid.Empty)
-                    {
-                        Operaciones.IdSing = id;
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, Operaciones.Authentificarlo("Universidad"), new AuthenticationProperties { IsPersistent = false });
-                        return RedirectToAction("IndexUniversidad", "Principal");
-                    }
-                    else if ((id = Operaciones.existenciaADMON(ingre.model2, _bd)) != Guid.Empty)
-                    {
-                        Operaciones.IdSing = id;
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, Operaciones.Authentificarlo("Administrador"), new AuthenticationProperties { IsPersistent = false });
-                        return RedirectToAction("IndexAdministrador", "Principal");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "No existe este usuario");
-                        return View("LogIn", ingre);
-                    }
-                }
-            }
-
-            return View("LogIn", ingre);
-
         }
         [HttpGet]
         public IActionResult _vercarreras(int id)

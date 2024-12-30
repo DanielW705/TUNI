@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TUNIWEB.Migrations
 {
-    public partial class _1 : Migration
+    public partial class TUNIWEBDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -524,11 +524,11 @@ namespace TUNIWEB.Migrations
                 columns: new[] { "idAmon", "contraseña", "username" },
                 values: new object[,]
                 {
-                    { new Guid("712304d3-691b-4650-a978-42ef3d070a51"), "123aEFGJnfsa", "ADMINISTRADOR 1" },
-                    { new Guid("1bfbfc54-f670-4257-83dc-be4e84689f4f"), "aggvkKBQ5hp", "ADMINISTRADOR 2" },
-                    { new Guid("ad84fb9d-a17d-4475-b9bc-8e1c5cc97bc5"), "HzmJlaLKU1f", "ADMINISTRADOR 3" },
-                    { new Guid("af35d7d3-773c-4fc6-81ad-a197f4b27fbb"), "Xmxg82RTiuQV", "ADMINISTRADOR 4" },
-                    { new Guid("e409d6ae-cc4d-4450-a907-42a09b3aa9a9"), "bgTR1apIK1ye", "ADMINISTRADOR 5" }
+                    { new Guid("8fd447a6-217d-4986-9591-68c2bc73750a"), "123aEFGJnfsa", "ADMINISTRADOR 1" },
+                    { new Guid("291e0f2c-5aeb-4545-8661-99a80d6fc784"), "aggvkKBQ5hp", "ADMINISTRADOR 2" },
+                    { new Guid("a7a457ce-04e1-440c-9fba-e8a82bcf7163"), "HzmJlaLKU1f", "ADMINISTRADOR 3" },
+                    { new Guid("65b3ad47-4977-407f-97e5-20548d5f962a"), "Xmxg82RTiuQV", "ADMINISTRADOR 4" },
+                    { new Guid("4d74685a-b0b3-455c-aa5c-8110517df0a3"), "bgTR1apIK1ye", "ADMINISTRADOR 5" }
                 });
 
             migrationBuilder.InsertData(
@@ -897,66 +897,6 @@ namespace TUNIWEB.Migrations
                 name: "IX_valorPreguntas_idPregunta",
                 table: "valorPreguntas",
                 column: "idPregunta");
-            string procedure = @"
----=======================================
---Author:		Daniel Gonzalez Martinez
--- Create date: 25 / 05 / 2020
--- Description: select* from alumnosUsuarios
---select* from carrerasDeseadas
---select* from Relaciones
---delete from alumnosUsuarios
---  Este store procedure realiza la accion de buscar el test del alumno que se necesita
--- =============================================
-CREATE PROCEDURE Realizarcalculodeltest
-@idalumno uniqueidentifier
-AS
-BEGIN
-/**********/
-declare @query table(i int)
-/**********************/
-            /****Selecciona las areas que salio mejor calculado de la base de datos *****/
-insert into @query select Top 3 areasTestID as total from valorPreguntas where idAlumno = @idalumno group by areasTestID order by Sum(valor) desc
- /***************Inserta en carreras deseadas las carreras que salio mejor **************************/
- insert into carrerasDeseadas select @idalumno, c.idCarrera from @query q inner join catCarreras c on q.i = c.areasTestId order by q.i
- /*********Realiza la relacion con las carreras deseadas**************/
- insert into Relaciones select distinct carde.idAlumno, cari.usuarioUniversidad from carrerasDeseadas carde inner join carrerasImpartadas cari on carde.idCarrera = cari.catCarrerasId where idAlumno = @idalumno
-END
-GO
-CREATE PROCEDURE Realizarlarelacion
-@idalumno uniqueidentifier
-AS
-BEGIN
-declare @query table(idA uniqueidentifier , idu uniqueidentifier )
-declare @query2 table(idA uniqueidentifier , idu uniqueidentifier )
-insert into @query  select distinct car.idAlumno, ci.usuarioUniversidad from carrerasDeseadas car join carrerasImpartadas ci on car.idCarrera = ci.catCarrerasId where car.idAlumno = @idalumno
-if((select COUNT(re.idAlumno) from @query cu , rechazos re where (cu.ida = re.idAlumno) and (cu.idu = re.idUniversidad) ) > 0)
-Begin
-/*******/
-insert into @query2 select cu.ida, cu.idu from @query cu , rechazos re where (cu.ida != re.idAlumno) and (cu.idu != re.idUniversidad)
-/*******/
-END
-else IF((select COUNT(ac.idalumno) from @query cu , aceptados ac where (cu.ida = ac.idAlumno) and (cu.idu = ac.iduniversidad) )>0)
-Begin
-/*********/
-insert into @query2 select cu.ida, cu.idu from @query cu , aceptados ac where (cu.ida != ac.idAlumno) and (cu.idu != ac.iduniversidad)
-/******/
-end
-else IF((select COUNT(cu.idA)from @query cu, solicitar sol where (cu.idA = sol.idAlumno) and (cu.idu = sol.idUniversidad))>0)
-BEGIN
-insert into @query2 select cu.idA, cu.idu from @query cu, solicitar sol where (cu.idA != sol.idAlumno) and (cu.idu != sol.idUniversidad)
-end
-/***Sino se cumple****/
-else
-begin
-/**********/
-insert into @query2 select* from @query 
-/**********/
-end
-insert into Relaciones   select*from  @query2
-return 1
-END
-GO";
-            migrationBuilder.Sql(procedure);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

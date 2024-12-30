@@ -1,6 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Data.Common;
 
 namespace TUNIWEB.Models
 {
@@ -13,7 +14,86 @@ namespace TUNIWEB.Models
         public TUNIDbContext()
         {
         }
+        private void InitializeProcedures()
+        {
+            string drop_procedure = @"IF OBJECT_ID('Realizarcalculodeltest','P') is not null
+                                        BEGIN
+	                                        DROP PROCEDURE Realizarcalculodeltest; 
+                                        END;
+                                    IF OBJECT_ID('Realizarlarelacion','P') is not null
+                                        BEGIN
+	                                        DROP PROCEDURE Realizarlarelacion; 
+                                        END;";
+            string Realizarcalculodeltest = @"CREATE PROCEDURE Realizarcalculodeltest(@idalumno uniqueidentifier)
+		    AS
+		        BEGIN
+			        /**********/
+			        declare @query table(i int)
+			        /**********************/
+			        /****Selecciona las areas que salio mejor calculado de la base de datos *****/
+			        insert into @query select Top 3 areasTestID as total from valorPreguntas where idAlumno = @idalumno group by areasTestID order by Sum(valor) desc
+			        /***************Inserta en carreras deseadas las carreras que salio mejor **************************/
+			        insert into carrerasDeseadas select @idalumno, c.idCarrera from @query q inner join catCarreras c on q.i = c.areasTestId order by q.i
+			        /*********Realiza la relacion con las carreras deseadas**************/
+			        insert into Relaciones select distinct carde.idAlumno, cari.usuarioUniversidad from carrerasDeseadas carde inner join carrerasImpartadas cari on carde.idCarrera = cari.catCarrerasId where idAlumno = @idalumno
+		        END;";
+            string Realizarlarelacion =
+            @"CREATE PROCEDURE Realizarlarelacion(@idalumno uniqueidentifier)
+                AS
+                    BEGIN
+                        declare @query table(idA uniqueidentifier , idu uniqueidentifier )
+                        declare @query2 table(idA uniqueidentifier , idu uniqueidentifier )
+                        insert into @query  select distinct car.idAlumno, ci.usuarioUniversidad from carrerasDeseadas car join carrerasImpartadas ci on car.idCarrera = ci.catCarrerasId where car.idAlumno = @idalumno
+                        if((select COUNT(re.idAlumno) from @query cu , rechazos re where (cu.ida = re.idAlumno) and (cu.idu = re.idUniversidad) ) > 0)
+                            Begin
+                                /*******/
+                                insert into @query2 select cu.ida, cu.idu from @query cu , rechazos re where (cu.ida != re.idAlumno) and (cu.idu != re.idUniversidad)
+                                /*******/
+                            END
+                        else IF((select COUNT(ac.idalumno) from @query cu , aceptados ac where (cu.ida = ac.idAlumno) and (cu.idu = ac.iduniversidad) )>0)
+                                Begin
+                                    /*********/
+                                    insert into @query2 select cu.ida, cu.idu from @query cu , aceptados ac where (cu.ida != ac.idAlumno) and (cu.idu != ac.iduniversidad)
+                                    /******/
+                                end
+                        else IF((select COUNT(cu.idA)from @query cu, solicitar sol where (cu.idA = sol.idAlumno) and (cu.idu = sol.idUniversidad))>0)
+                                BEGIN
+                                    insert into @query2 select cu.idA, cu.idu from @query cu, solicitar sol where (cu.idA != sol.idAlumno) and (cu.idu != sol.idUniversidad)
+                                end
+                        /***Sino se cumple****/
+                        else
+                            begin
+                                /**********/
+                                insert into @query2 select* from @query 
+                                /**********/
+                            end
+                        insert into Relaciones   select*from  @query2
+                        return 1
+                        END;";
+            using (DbCommand command = Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = drop_procedure;
+                command.CommandType = System.Data.CommandType.Text;
+                Database.OpenConnection();
+                command.ExecuteNonQuery();
+                Database.CloseConnection();
 
+
+
+                command.CommandText = Realizarcalculodeltest;
+                command.CommandType = System.Data.CommandType.Text;
+                Database.OpenConnection();
+                command.ExecuteNonQuery();
+                Database.CloseConnection();
+
+
+                command.CommandText = Realizarlarelacion;
+                command.CommandType = System.Data.CommandType.Text;
+                Database.OpenConnection();
+                command.ExecuteNonQuery();
+                Database.CloseConnection();
+            }
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.EnableSensitiveDataLogging(true)
@@ -23,63 +103,6 @@ namespace TUNIWEB.Models
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            string procedure = @"
----=======================================
---Author:		Daniel Gonzalez Martinez
--- Create date: 25 / 05 / 2020
--- Description: select* from alumnosUsuarios
---select* from carrerasDeseadas
---select* from Relaciones
---delete from alumnosUsuarios
---  Este store procedure realiza la accion de buscar el test del alumno que se necesita
--- =============================================
-CREATE PROCEDURE Realizarcalculodeltest
-@idalumno uniqueidentifier
-AS
-BEGIN
-/**********/
-declare @query table(i int)
-/**********************/
-            /****Selecciona las areas que salio mejor calculado de la base de datos *****/
-insert into @query select Top 3 areasTestID as total from valorPreguntas where idAlumno = @idalumno group by areasTestID order by Sum(valor) desc
- /***************Inserta en carreras deseadas las carreras que salio mejor **************************/
- insert into carrerasDeseadas select @idalumno, c.idCarrera from @query q inner join catCarreras c on q.i = c.areasTestId order by q.i
- /*********Realiza la relacion con las carreras deseadas**************/
- insert into Relaciones select distinct carde.idAlumno, cari.usuarioUniversidad from carrerasDeseadas carde inner join carrerasImpartadas cari on carde.idCarrera = cari.catCarrerasId where idAlumno = @idalumno
-END
-CREATE PROCEDURE Realizarlarelacion
-@idalumno uniqueidentifier
-AS
-BEGIN
-declare @query table(idA uniqueidentifier , idu uniqueidentifier )
-declare @query2 table(idA uniqueidentifier , idu uniqueidentifier )
-insert into @query  select distinct car.idAlumno, ci.usuarioUniversidad from carrerasDeseadas car join carrerasImpartadas ci on car.idCarrera = ci.catCarrerasId where car.idAlumno = @idalumno
-if((select COUNT(re.idAlumno) from @query cu , rechazos re where (cu.ida = re.idAlumno) and (cu.idu = re.idUniversidad) ) > 0)
-Begin
-/*******/
-insert into @query2 select cu.ida, cu.idu from @query cu , rechazos re where (cu.ida != re.idAlumno) and (cu.idu != re.idUniversidad)
-/*******/
-END
-else IF((select COUNT(ac.idalumno) from @query cu , aceptados ac where (cu.ida = ac.idAlumno) and (cu.idu = ac.iduniversidad) )>0)
-Begin
-/*********/
-insert into @query2 select cu.ida, cu.idu from @query cu , aceptados ac where (cu.ida != ac.idAlumno) and (cu.idu != ac.iduniversidad)
-/******/
-end
-else IF((select COUNT(cu.idA)from @query cu, solicitar sol where (cu.idA = sol.idAlumno) and (cu.idu = sol.idUniversidad))>0)
-BEGIN
-insert into @query2 select cu.idA, cu.idu from @query cu, solicitar sol where (cu.idA != sol.idAlumno) and (cu.idu != sol.idUniversidad)
-end
-/***Sino se cumple****/
-else
-begin
-/**********/
-insert into @query2 select* from @query 
-/**********/
-end
-insert into Relaciones   select*from  @query2
-return 1
-END";
             base.OnModelCreating(builder);
             builder.Entity<UsuarioAlumno>(entity =>
             {
@@ -545,7 +568,7 @@ END";
             {
                 entity.HasKey(d => d.nodeaceptado);
             });
-            //this.Database.ExecuteSqlCommand(procedure);
+            InitializeProcedures();
         }
         public DbSet<UsuarioAlumno> alumnosUsuarios { get; set; }
         public DbSet<Alumno> alumnos { get; set; }

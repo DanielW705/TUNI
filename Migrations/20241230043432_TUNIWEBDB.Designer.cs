@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TUNIWEB.Models;
 
 namespace TUNIWEB.Migrations
 {
     [DbContext(typeof(TUNIDbContext))]
-    partial class BBModelSnapshot : ModelSnapshot
+    [Migration("20241230043432_TUNIWEBDB")]
+    partial class TUNIWEBDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,11 +37,11 @@ namespace TUNIWEB.Migrations
                     b.ToTable("Administradores");
 
                     b.HasData(
-                        new { idAmon = new Guid("712304d3-691b-4650-a978-42ef3d070a51"), contraseña = "123aEFGJnfsa", username = "ADMINISTRADOR 1" },
-                        new { idAmon = new Guid("1bfbfc54-f670-4257-83dc-be4e84689f4f"), contraseña = "aggvkKBQ5hp", username = "ADMINISTRADOR 2" },
-                        new { idAmon = new Guid("ad84fb9d-a17d-4475-b9bc-8e1c5cc97bc5"), contraseña = "HzmJlaLKU1f", username = "ADMINISTRADOR 3" },
-                        new { idAmon = new Guid("af35d7d3-773c-4fc6-81ad-a197f4b27fbb"), contraseña = "Xmxg82RTiuQV", username = "ADMINISTRADOR 4" },
-                        new { idAmon = new Guid("e409d6ae-cc4d-4450-a907-42a09b3aa9a9"), contraseña = "bgTR1apIK1ye", username = "ADMINISTRADOR 5" }
+                        new { idAmon = new Guid("8fd447a6-217d-4986-9591-68c2bc73750a"), contraseña = "123aEFGJnfsa", username = "ADMINISTRADOR 1" },
+                        new { idAmon = new Guid("291e0f2c-5aeb-4545-8661-99a80d6fc784"), contraseña = "aggvkKBQ5hp", username = "ADMINISTRADOR 2" },
+                        new { idAmon = new Guid("a7a457ce-04e1-440c-9fba-e8a82bcf7163"), contraseña = "HzmJlaLKU1f", username = "ADMINISTRADOR 3" },
+                        new { idAmon = new Guid("65b3ad47-4977-407f-97e5-20548d5f962a"), contraseña = "Xmxg82RTiuQV", username = "ADMINISTRADOR 4" },
+                        new { idAmon = new Guid("4d74685a-b0b3-455c-aa5c-8110517df0a3"), contraseña = "bgTR1apIK1ye", username = "ADMINISTRADOR 5" }
                     );
                 });
 

@@ -7,60 +7,137 @@
     {
         <div class="inputText">
             <label for="" class="title">Nombre de Usuario</label>
-            <input class="textBox" type="text" id="UserName" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.usuario">
+            <input asp-for="@Model.PerfilDelAlumno.UsuarioAlumno.usuario" class="textBox" type="text" id="UserName" disabled placeholder="@Model.PerfilDelAlumno.UsuarioAlumno.usuario">
         </div>
         <div class="inputText">
             <label for="" class="title">Contraseña</label>
-            <input class="textBox" type="text" id="UserPassword" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+            <input asp-for=@Model.PerfilDelAlumno.UsuarioAlumno.contraseña class="textBox" type="password" id="UserPassword" disabled placeholder="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Repita Contraseña</label>
-            <input class="textBox" type="text" id="UserRepetedPassword" disable="true" value="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+            <input asp-for="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Nombre del alumno</label>
-            <input type="text" id="Nombre" disable="true" value="@Model.PerfilDelAlumno.Alumno.nombre">
+            <input asp-for="@Model.PerfilDelAlumno.Alumno.nombre" type="text" id="Nombre" disabled placeholder="@Model.PerfilDelAlumno.Alumno.nombre">
         </div>
         <div class="inputText">
             <label for="" class="title">Apellido Paterno</label>
-            <input type="text" id="ApellidoPaterno" disable="true" value="@Model.PerfilDelAlumno.Alumno.apPaterno">
+            <input asp-for="@Model.PerfilDelAlumno.Alumno.apPaterno" type="text" id="ApellidoPaterno" disabled placeholder="@Model.PerfilDelAlumno.Alumno.apPaterno">
         </div>
         <div class="inputText">
             <label for="" class="title">Apellido Materno</label>
-            <input type="text" id="ApellidoMaterno" disable="true" value="@Model.PerfilDelAlumno.Alumno.apPaterno">
+            <input asp-for="@Model.PerfilDelAlumno.Alumno.apMaterno" type="text" id="ApellidoMaterno" disabled placeholder="@Model.PerfilDelAlumno.Alumno.apPaterno">
         </div>
         <div class="InformacionAlumnoFiles">
             <h3 class="title">Los reconocimientos con los que cuenta</h3>
             @if (Model.PerfilDelAlumno.InformacionAlumno is null)
             {
                 <p>No cuneta con ningun archivo, si tiene alguno aqui puede subirlo</p>
-                <input id="file" type="file" accept=".pdf" hidden />
-                <label for="file" id="selector" disable="true"> Subir archivo</label>
+                <input asp-for="@Model.PerfilDelAlumno.InformacionAlumno" id="file" type="file" accept=".pdf" hidden />
+                <label for="file" id="selector" disabled>Subir archivo</label>
             }
             else
             {
                 foreach (FileClass archivo in Model.PerfilDelAlumno.InformacionAlumno)
                 {
-                    <embed src="@archivo.Route" alt="@archivo.FileName">
+                    <embed src="@archivo.Route" alt="@archivo.FileName" type="application/pdf">
                 }
             }
         </div>
         <div class="carrerasTecnicas">
             <h3 class="title">Las carreras Tecnicas con las que cuenta son:</h3>
             <ul class="listadoDeCarreras">
-                @foreach (catalogoCarrerasTecnicas carreraTecnica in @Model.PerfilDelAlumno.CarreraTecnicaDelAlumno)
+                @if (Model.PerfilDelAlumno.CarreraTecnicaDelAlumno is null)
                 {
-                    <li class="carreraTecnica">@carreraTecnica.carreraTecnica</li>
+                    <p class="noMensaje">No cuenta con carreras tecnicas </p>
                 }
+                else
+                    @foreach (catalogoCarrerasTecnicas carreraTecnica in @Model.PerfilDelAlumno.CarreraTecnicaDelAlumno)
+                    {
+                        <li class="carreraTecnica">@carreraTecnica.carreraTecnica</li>
+                    }
             </ul>
         </div>
         <div class="BoletaGlobal">
             <h3 class="title">Esta esta su boleta global</h3>
-            <embed src="@Model.PerfilDelAlumno.DatosAcademicosAlumno.Route" alt="@Model.PerfilDelAlumno.DatosAcademicosAlumno.FileName">
+            <embed src="@Model.PerfilDelAlumno.DatosAcademicosAlumno.Route" alt="@Model.PerfilDelAlumno.DatosAcademicosAlumno.FileName" type="application/pdf">
         </div>
     }
     else
     {
+        <div class="inputText">
+            <label for="" class="title">Nombre de Usuario</label>
+            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.usuario" class="textBox" type="text" id="UserName" disabled placeholder="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.usuario">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Contraseña</label>
+            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserPassword" disabled placeholder="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Repita Contraseña</label>
+            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Nombre de la institucion</label>
+            <input asp-for="@Model.PerfilDeLaUniversidad.universidad.nombre" type="text" id="Nombre" disabled placeholder="@Model.PerfilDeLaUniversidad.universidad.nombre">
+        </div>
+        <div class="inputText">
+            <label for="" class="title">Direccion</label>
+            <input asp-for="@Model.PerfilDeLaUniversidad.universidad.direccion" type="text" id="Nombre" disabled placeholder="@Model.PerfilDeLaUniversidad.universidad.direccion">
+        </div>
+        <div class="map"></div>
+        <div class="carreras">
+            <ul class="listado_carreras">
+                @foreach (catCarreras carreras in Model.PerfilDeLaUniversidad.CarrerasImpartidasPorLaUniversidad)
+                {
+                    <li class="carrera">carreras.Carrera</li>
+                }
+            </ul>
+        </div>
+        <div class="MetdoDeIngresoFile">
+            <h3 class="title">Este este el metodo de ingreso </h3>
+            <embed src="@Model.PerfilDeLaUniversidad.MetodoDeIngreso.Route" alt="@Model.PerfilDeLaUniversidad.MetodoDeIngreso.FileName" type="application/pdf">
+        </div>
+        <div class="contactosSection">
+            <h3 class="title">Estos son los contacto</h3>
+            <ul class="contactos_list">
+                @if (Model.PerfilDeLaUniversidad.Contactos is null)
+                {
+                    <p class="noMensaje">No cuenta con contactos </p>
+                }
+                else
+                    @foreach (contactos contacto in Model.PerfilDeLaUniversidad.Contactos)
+                    {
+                        <li class="contacto">contacto.contacto</li>
+                    }
+            </ul>
+        </div>
 
+        <div class="EmpresasAsociadasSection">
+            <h3 class="title">Estos son las empresas asociadas</h3>
+            <ul class="empresas_list">
+                @if (Model.PerfilDeLaUniversidad.EmpresaAsociadas is null)
+                {
+                    <p class="noMensaje">No cuenta con empresas asociadas</p>
+                }
+                @foreach (empresaAsociadas empresa in Model.PerfilDeLaUniversidad.EmpresaAsociadas)
+                {
+                    <li class="contacto">empresa.empresaAsociada</li>
+                }
+            </ul>
+        </div>
+        <div class="MapasCurricularesSection">
+            <h3 class="title">Estas son los mapas curriculares por carrear</h3>
+            <ul class="mapas_list">
+                @foreach (MapaCurricularClass mapaCurricular in Model.PerfilDeLaUniversidad.CatalogoDeMapasCurriculares)
+                {
+                    <li class="mapaCurricular">
+                        <h2 class="carrera"> mapaCurricular.Carrera</h2>
+                        <embed src="" type="application / pdf" src=@mapaCurricular.Route alt=@mapaCurricular.FileName>
+                    </li>
+                }
+            </ul>
+        </div>
     }
 </form>

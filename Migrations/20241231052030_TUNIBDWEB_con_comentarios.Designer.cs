@@ -10,8 +10,8 @@ using TUNIWEB.Models;
 namespace TUNIWEB.Migrations
 {
     [DbContext(typeof(TUNIDbContext))]
-    [Migration("20241230043432_TUNIWEBDB")]
-    partial class TUNIWEBDB
+    [Migration("20241231052030_TUNIBDWEB_con_comentarios")]
+    partial class TUNIBDWEB_con_comentarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,11 +37,11 @@ namespace TUNIWEB.Migrations
                     b.ToTable("Administradores");
 
                     b.HasData(
-                        new { idAmon = new Guid("8fd447a6-217d-4986-9591-68c2bc73750a"), contraseña = "123aEFGJnfsa", username = "ADMINISTRADOR 1" },
-                        new { idAmon = new Guid("291e0f2c-5aeb-4545-8661-99a80d6fc784"), contraseña = "aggvkKBQ5hp", username = "ADMINISTRADOR 2" },
-                        new { idAmon = new Guid("a7a457ce-04e1-440c-9fba-e8a82bcf7163"), contraseña = "HzmJlaLKU1f", username = "ADMINISTRADOR 3" },
-                        new { idAmon = new Guid("65b3ad47-4977-407f-97e5-20548d5f962a"), contraseña = "Xmxg82RTiuQV", username = "ADMINISTRADOR 4" },
-                        new { idAmon = new Guid("4d74685a-b0b3-455c-aa5c-8110517df0a3"), contraseña = "bgTR1apIK1ye", username = "ADMINISTRADOR 5" }
+                        new { idAmon = new Guid("b4e34e4b-7d44-410d-a188-77aa9c8cee73"), contraseña = "123aEFGJnfsa", username = "ADMINISTRADOR 1" },
+                        new { idAmon = new Guid("5854c2c8-8165-41f4-b78b-467611636988"), contraseña = "aggvkKBQ5hp", username = "ADMINISTRADOR 2" },
+                        new { idAmon = new Guid("17bc9a5b-e5e0-4a42-8df0-a68295d9ba36"), contraseña = "HzmJlaLKU1f", username = "ADMINISTRADOR 3" },
+                        new { idAmon = new Guid("062f002f-2072-4f29-8157-340b629547b6"), contraseña = "Xmxg82RTiuQV", username = "ADMINISTRADOR 4" },
+                        new { idAmon = new Guid("b8ea4352-8397-4184-9834-b4ed45ea08cd"), contraseña = "bgTR1apIK1ye", username = "ADMINISTRADOR 5" }
                     );
                 });
 
@@ -414,6 +414,27 @@ namespace TUNIWEB.Migrations
                     );
                 });
 
+            modelBuilder.Entity("TUNIWEB.Models.Comentarios", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("IdPublicacion");
+
+                    b.Property<Guid>("IdUsuario");
+
+                    b.Property<string>("comentario")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("commentarios");
+                });
+
             modelBuilder.Entity("TUNIWEB.Models.contactos", b =>
                 {
                     b.Property<int>("noDeContacto")
@@ -600,6 +621,30 @@ namespace TUNIWEB.Migrations
                         new { PregunataId = 49, pregunta = "Autoridad en la construccion de ciertas estructuras arquitectonocas" },
                         new { PregunataId = 50, pregunta = "Encargado de la ampliacion de la red carretera del pais" }
                     );
+                });
+
+            modelBuilder.Entity("TUNIWEB.Models.Publicaciones", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("doc");
+
+                    b.Property<DateTime>("fechaPublicacion");
+
+                    b.Property<Guid>("idUsuario");
+
+                    b.Property<string>("texto")
+                        .IsRequired()
+                        .HasMaxLength(300);
+
+                    b.Property<int>("visitas");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUsuario");
+
+                    b.ToTable("publicaciones");
                 });
 
             modelBuilder.Entity("TUNIWEB.Models.Relacion", b =>
@@ -797,6 +842,27 @@ namespace TUNIWEB.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("TUNIWEB.Models.Comentarios", b =>
+                {
+                    b.HasOne("TUNIWEB.Models.Publicaciones", "relCom_Pub")
+                        .WithMany("relPub_Com")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("RelacionComentarioPublicacion")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TUNIWEB.Models.UsuarioAlumno", "relCom_USA")
+                        .WithMany("relUSA_COM")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("RelacionComentarioUsuarioAlumno")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("TUNIWEB.Models.UsuarioUniversidad", "relCom_USU")
+                        .WithMany("relUSU_COM")
+                        .HasForeignKey("IdUsuario")
+                        .HasConstraintName("RelacionComentarioUsuarioUniversidad")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("TUNIWEB.Models.contactos", b =>
                 {
                     b.HasOne("TUNIWEB.Models.UsuarioUniversidad", "relC_USU")
@@ -847,6 +913,21 @@ namespace TUNIWEB.Migrations
                         .HasForeignKey("TUNIWEB.Models.ingreso", "idUniversidad")
                         .HasConstraintName("Relacion_usuario_ingreso")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TUNIWEB.Models.Publicaciones", b =>
+                {
+                    b.HasOne("TUNIWEB.Models.UsuarioAlumno", "relPub_USA")
+                        .WithMany("relUsa_Pu")
+                        .HasForeignKey("idUsuario")
+                        .HasConstraintName("RelacionPublicacionAlumno")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("TUNIWEB.Models.UsuarioUniversidad", "relPub_USU")
+                        .WithMany("relUSU_PU")
+                        .HasForeignKey("idUsuario")
+                        .HasConstraintName("RelacionPublicacionUniversidad")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TUNIWEB.Models.Relacion", b =>

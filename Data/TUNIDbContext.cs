@@ -132,6 +132,12 @@ namespace TUNIWEB.Models
                 .HasConstraintName("Relacion_usuario_relacion");
                 entity.Property(d => d.usuario).IsRequired();
                 entity.Property(d => d.contraseña).IsRequired();
+                entity.HasMany(a => a.relUsa_Pu)
+                       .WithOne(p => p.relPub_USA)
+                       .HasForeignKey(p => p.idUsuario);
+                entity.HasMany(a => a.relUSA_COM)
+                               .WithOne(p => p.relCom_USA)
+                               .HasForeignKey(p => p.IdUsuario);
             });
             builder.Entity<Alumno>(entity =>
             {
@@ -204,6 +210,12 @@ namespace TUNIWEB.Models
                 .WithOne(b => b.relrel_USU)
                 .HasForeignKey(d => d.idUniversidad)
                 .HasConstraintName("Relacion_Usuario_universidad_rel");
+                entity.HasMany(a => a.relUSU_PU)
+                      .WithOne(p => p.relPub_USU)
+                      .HasForeignKey(p => p.idUsuario);
+                entity.HasMany(a => a.relUSU_COM)
+                      .WithOne(p => p.relCom_USU)
+                      .HasForeignKey(p => p.IdUsuario);
             });
             builder.Entity<universidad>(entity =>
             {
@@ -568,6 +580,50 @@ namespace TUNIWEB.Models
             {
                 entity.HasKey(d => d.nodeaceptado);
             });
+            builder.Entity<Publicaciones>(entity =>
+            {
+                entity.HasKey(p => p.Id);
+                entity.HasOne(a => a.relPub_USA)
+                .WithMany(p => p.relUsa_Pu)
+                .HasForeignKey(p => p.idUsuario)
+                .HasConstraintName("RelacionPublicacionAlumno")
+                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(a => a.relPub_USU)
+                .WithMany(p => p.relUSU_PU)
+                .HasForeignKey(p => p.idUsuario)
+                .HasConstraintName("RelacionPublicacionUniversidad")
+                .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasMany(c => c.relPub_Com)
+                .WithOne(p => p.relCom_Pub)
+                .HasConstraintName("RelacionPublicacionComentarios");
+
+                entity.Property(c => c.texto)
+                                .IsRequired()
+                                .HasMaxLength(300);
+            });
+            builder.Entity<Comentarios>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.HasOne(c => c.relCom_USA)
+                .WithMany(a => a.relUSA_COM)
+                .HasForeignKey(c => c.IdUsuario)
+                .HasConstraintName("RelacionComentarioUsuarioAlumno")
+                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(c => c.relCom_USU)
+                .WithMany(a => a.relUSU_COM)
+                .HasForeignKey(c => c.IdUsuario)
+                .HasConstraintName("RelacionComentarioUsuarioUniversidad")
+                .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(c => c.relCom_Pub)
+               .WithMany(a => a.relPub_Com)
+               .HasForeignKey(c => c.IdUsuario)
+               .HasConstraintName("RelacionComentarioPublicacion");
+                entity.Property(c => c.comentario)
+                                .IsRequired()
+                                .HasMaxLength(100);
+            });
+
             InitializeProcedures();
         }
         public DbSet<UsuarioAlumno> alumnosUsuarios { get; set; }
@@ -596,5 +652,9 @@ namespace TUNIWEB.Models
         public DbSet<solicitudes> solicitar { get; set; }
         public DbSet<historialrechazos> rechazos { get; set; }
         public DbSet<historialdeaceptados> aceptados { get; set; }
+
+        public DbSet<Publicaciones> publicaciones { get; set; }
+
+        public DbSet<Comentarios> commentarios { get; set; }
     }
 }

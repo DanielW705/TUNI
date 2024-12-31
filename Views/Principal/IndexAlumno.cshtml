@@ -1,58 +1,6 @@
-﻿@model TRITUPLE
-<div class="cuerpodelapag">
-    <div class="vp" id="vp" hidden>
-        <div id="body_page"></div>
-    </div>
-    <div class="scs">
-        <div class="list2">
-            @if (Model.model6 != null)
-            {
-                <div class="tabl">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Universidades</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var datos in Model.model6)
-                            {
-                                <tr>
-                                    <td>@datos.universidad <button btns value="@datos.idUn">Ver datos</button></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            }
-            else
-            {
-                <p>No se pudo ligar con alguna universidad</p>
-            }
-        </div>
-        <div class="descargas">
-            @if (Model.modelcom5 > 0)
-            {
-                <form method="post" class="descar">
-                    <input type="hidden" id="xid" name="id" value="@Model.model1.idA" />
-                    <button class="BotonDescargar" type="submit" asp-action="testvoca" asp-controller="Principal" id="anclaje"><i class="fas fa-download"></i> Descargar el test vocacional</button>
-                </form>
-                <div class="resultados" id="mostarr">
-                    <div class="figurita" id="resulte"><button> Ver mis resultados del test vocacional </button></div>
-                </div>
-            }
-            else
-            {
-                <button id="invokar">Hacer test vocacional</button>
-            }
-        </div>
-    </div>
-    <div id="inf"></div>
-</div>
-<div id="messages"></div>
-<script type="text/javascript">
-    let model4 = @(Model.model4 != null && Model.model4.Any() ? "true" : "false");
-</script>
+﻿@using ROP;
+@using TUNIWEB.Models.ViewModel;
+@model Result<UsersIndexViewModel>
+
 <script type="text/javascript" src="~/js/addNavButtons.js"></script>
 <script src="~/js/dist/browser/signalr.js"></script>
-<script src="~/js/configuration.js"></script>

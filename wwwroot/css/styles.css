@@ -118,10 +118,15 @@ html, body {
 
 .logout_icon {
     content: url('../images/LogOutIcon.svg');
+    order: 999;
 }
 
 .profile_icon {
     content: url('../images/ViewPerfilIcon.svg');
+}
+
+.home_icon {
+    content: url('../images/HomeIcon.svg');
 }
 
 .content {

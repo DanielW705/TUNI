@@ -63,6 +63,8 @@ namespace TUNIWEB
             services.AddScoped<AddDatosObligatoriosUserCase>();
             //Agregamos inyeccion de dependencia para ver el perfil del alumno
             services.AddScoped<GetUserProfileCase>();
+            //Agregamos inyeccion de dependencias para ver las publicaciones
+            services.AddScoped<GetUserPublicationsCase>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
 

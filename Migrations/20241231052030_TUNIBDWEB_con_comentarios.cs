@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TUNIWEB.Migrations
 {
-    public partial class TUNIWEBDB : Migration
+    public partial class TUNIBDWEB_con_comentarios : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -377,6 +377,34 @@ namespace TUNIWEB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "publicaciones",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    idUsuario = table.Column<Guid>(nullable: false),
+                    fechaPublicacion = table.Column<DateTime>(nullable: false),
+                    visitas = table.Column<int>(nullable: false),
+                    texto = table.Column<string>(maxLength: 300, nullable: false),
+                    doc = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_publicaciones", x => x.Id);
+                    table.ForeignKey(
+                        name: "RelacionPublicacionAlumno",
+                        column: x => x.idUsuario,
+                        principalTable: "alumnosUsuarios",
+                        principalColumn: "idAlumno",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "RelacionPublicacionUniversidad",
+                        column: x => x.idUsuario,
+                        principalTable: "universidadesUsuario",
+                        principalColumn: "idUniversidad",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Relaciones",
                 columns: table => new
                 {
@@ -519,16 +547,49 @@ namespace TUNIWEB.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "commentarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdPublicacion = table.Column<Guid>(nullable: false),
+                    IdUsuario = table.Column<Guid>(nullable: false),
+                    comentario = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_commentarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "RelacionComentarioPublicacion",
+                        column: x => x.IdUsuario,
+                        principalTable: "publicaciones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "RelacionComentarioUsuarioAlumno",
+                        column: x => x.IdUsuario,
+                        principalTable: "alumnosUsuarios",
+                        principalColumn: "idAlumno",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "RelacionComentarioUsuarioUniversidad",
+                        column: x => x.IdUsuario,
+                        principalTable: "universidadesUsuario",
+                        principalColumn: "idUniversidad",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Administradores",
                 columns: new[] { "idAmon", "contraseña", "username" },
                 values: new object[,]
                 {
-                    { new Guid("8fd447a6-217d-4986-9591-68c2bc73750a"), "123aEFGJnfsa", "ADMINISTRADOR 1" },
-                    { new Guid("291e0f2c-5aeb-4545-8661-99a80d6fc784"), "aggvkKBQ5hp", "ADMINISTRADOR 2" },
-                    { new Guid("a7a457ce-04e1-440c-9fba-e8a82bcf7163"), "HzmJlaLKU1f", "ADMINISTRADOR 3" },
-                    { new Guid("65b3ad47-4977-407f-97e5-20548d5f962a"), "Xmxg82RTiuQV", "ADMINISTRADOR 4" },
-                    { new Guid("4d74685a-b0b3-455c-aa5c-8110517df0a3"), "bgTR1apIK1ye", "ADMINISTRADOR 5" }
+                    { new Guid("b4e34e4b-7d44-410d-a188-77aa9c8cee73"), "123aEFGJnfsa", "ADMINISTRADOR 1" },
+                    { new Guid("5854c2c8-8165-41f4-b78b-467611636988"), "aggvkKBQ5hp", "ADMINISTRADOR 2" },
+                    { new Guid("17bc9a5b-e5e0-4a42-8df0-a68295d9ba36"), "HzmJlaLKU1f", "ADMINISTRADOR 3" },
+                    { new Guid("062f002f-2072-4f29-8157-340b629547b6"), "Xmxg82RTiuQV", "ADMINISTRADOR 4" },
+                    { new Guid("b8ea4352-8397-4184-9834-b4ed45ea08cd"), "bgTR1apIK1ye", "ADMINISTRADOR 5" }
                 });
 
             migrationBuilder.InsertData(
@@ -847,6 +908,11 @@ namespace TUNIWEB.Migrations
                 column: "areasTestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_commentarios_IdUsuario",
+                table: "commentarios",
+                column: "IdUsuario");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_contactos_idUniversidad",
                 table: "contactos",
                 column: "idUniversidad");
@@ -860,6 +926,11 @@ namespace TUNIWEB.Migrations
                 name: "IX_informaciones_idAlumno",
                 table: "informaciones",
                 column: "idAlumno");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_publicaciones_idUsuario",
+                table: "publicaciones",
+                column: "idUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Relaciones_idAlumno",
@@ -926,6 +997,9 @@ namespace TUNIWEB.Migrations
                 name: "catalogoDeMapasCuarriculares");
 
             migrationBuilder.DropTable(
+                name: "commentarios");
+
+            migrationBuilder.DropTable(
                 name: "contactos");
 
             migrationBuilder.DropTable(
@@ -965,7 +1039,7 @@ namespace TUNIWEB.Migrations
                 name: "carreraTecnicas");
 
             migrationBuilder.DropTable(
-                name: "universidadesUsuario");
+                name: "publicaciones");
 
             migrationBuilder.DropTable(
                 name: "preguntasDelTestVocacional");
@@ -978,6 +1052,9 @@ namespace TUNIWEB.Migrations
 
             migrationBuilder.DropTable(
                 name: "alumnosUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "universidadesUsuario");
         }
     }
 }

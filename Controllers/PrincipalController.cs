@@ -19,12 +19,14 @@ namespace TUNIWEB.Controllers
         private readonly TUNIDbContext _bd;
         private readonly IHostingEnvironment _host;
         private readonly GetUserProfileCase _getUserProfileCase;
+        private readonly GetUserPublicationsCase _getUserPublicationsCase;
 
-        public PrincipalController(TUNIDbContext bd, IHostingEnvironment host, GetUserProfileCase getUserProfileCase)
+        public PrincipalController(TUNIDbContext bd, IHostingEnvironment host, GetUserProfileCase getUserProfileCase, GetUserPublicationsCase getUserPublicationsCase)
         {
             _bd = bd;
             _host = host;
             _getUserProfileCase = getUserProfileCase;
+            _getUserPublicationsCase = getUserPublicationsCase;
         }
         [Authorize(Roles = "Administrador")]
         public IActionResult IndexAdministrador()
@@ -42,23 +44,14 @@ namespace TUNIWEB.Controllers
         [Authorize(Roles = "Alumno")]
         public IActionResult IndexAlumno()
         {
-            Operaciones.trye(Operaciones.IdSing.ToString(), _bd);
-            TRITUPLE trutupla = new TRITUPLE
-            {
-                model1 = Operaciones.retudet(Operaciones.IdSing.ToString(), _bd, _host),
-                model2 = Operaciones.retornarrutas(Operaciones.IdSing.ToString(), _host, Operaciones.retarreglo(_bd, Operaciones.IdSing.ToString())),
-                model3 = Operaciones.returncarrt(Operaciones.IdSing.ToString(), _bd),
-                model4 = Operaciones.retucarrd(_bd, Operaciones.IdSing.ToString()),
-                modelcom4 = Operaciones.returnareas(_bd, Operaciones.IdSing.ToString()),
-                modelcom5 = Operaciones.returncont(_bd, Operaciones.IdSing.ToString()),
-                model6 = Operaciones.rel(Operaciones.IdSing.ToString(), _bd)
-            };
-            return View(trutupla);
+            Result<UsersIndexViewModel> userIndex = _getUserPublicationsCase.Execute();
+            return View(userIndex);
         }
         [Authorize(Roles = "Universidad")]
         public IActionResult IndexUniversidad()
         {
-            return View();
+            Result<UsersIndexViewModel> userIndex = _getUserPublicationsCase.Execute();
+            return View(userIndex);
         }
         [HttpPost]
         public IActionResult InfoA(string id)

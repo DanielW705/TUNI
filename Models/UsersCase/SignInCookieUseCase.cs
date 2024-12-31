@@ -39,10 +39,11 @@ namespace TUNIWEB.Models.UsersCase
         {
             await _HttpContext.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 ConstructClaims(tipo_usuario.ToString()),
-                new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTime.Now.AddHours(24) });
+                new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTime.Now.AddHours(24) })
+                ;
 
             UserDataClass data = new UserDataClass(idUser.ToString(), tipo_usuario.ToString());
-            _HttpContext.HttpContext.Response.Cookies.Append("DataUser", JsonConvert.SerializeObject(data), new CookieOptions { Expires = DateTime.Now.AddHours(24) });
+            _HttpContext.HttpContext.Response.Cookies.Append("DataUser", JsonConvert.SerializeObject(data), new CookieOptions { HttpOnly = false, Expires = DateTime.Now.AddHours(24) });
 
 
             return Result.Unit;

@@ -53,10 +53,12 @@
                     <p class="noMensaje">No cuenta con carreras tecnicas </p>
                 }
                 else
+               {   
                     @foreach (catalogoCarrerasTecnicas carreraTecnica in @Model.PerfilDelAlumno.CarreraTecnicaDelAlumno)
                     {
                         <li class="carreraTecnica">@carreraTecnica.carreraTecnica</li>
                     }
+                }
             </ul>
         </div>
         <div class="BoletaGlobal">
@@ -107,10 +109,12 @@
                     <p class="noMensaje">No cuenta con contactos </p>
                 }
                 else
+                {   
                     @foreach (contactos contacto in Model.PerfilDeLaUniversidad.Contactos)
                     {
                         <li class="contacto">contacto.contacto</li>
                     }
+                }
             </ul>
         </div>
 
@@ -121,9 +125,12 @@
                 {
                     <p class="noMensaje">No cuenta con empresas asociadas</p>
                 }
-                @foreach (empresaAsociadas empresa in Model.PerfilDeLaUniversidad.EmpresaAsociadas)
-                {
-                    <li class="contacto">empresa.empresaAsociada</li>
+                else
+                {   
+                    @foreach (empresaAsociadas empresa in Model.PerfilDeLaUniversidad.EmpresaAsociadas)
+                    {
+                        <li class="contacto">empresa.empresaAsociada</li>
+                    }
                 }
             </ul>
         </div>
@@ -141,3 +148,5 @@
         </div>
     }
 </form>
+<script type="text/javascript" src="~/js/addNavButtons.js"></script>
+<script type="text/javascript" src="~/js/addNavButtonsInPerfil.js"></script>

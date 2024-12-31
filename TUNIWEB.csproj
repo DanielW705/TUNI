@@ -144,6 +144,10 @@
     <Compile Remove="Migrations\20200610033504_1.Designer.cs" />
     <Compile Remove="Migrations\20241230035421_TUNIWEB-DATABASE.cs" />
     <Compile Remove="Migrations\20241230035421_TUNIWEB-DATABASE.Designer.cs" />
+    <Compile Remove="Migrations\20241230043432_TUNIWEBDB.cs" />
+    <Compile Remove="Migrations\20241230043432_TUNIWEBDB.Designer.cs" />
+    <Compile Remove="Migrations\20241231051201_TUNIBD_con_comentarios.cs" />
+    <Compile Remove="Migrations\20241231051201_TUNIBD_con_comentarios.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

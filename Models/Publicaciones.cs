@@ -17,11 +17,6 @@ namespace TUNIWEB.Models
 
         public byte[] doc {  get; set; }
 
-
-        public UsuarioAlumno relPub_USA {  get; set; }
-
-        public UsuarioUniversidad relPub_USU {  get; set; }
-
         public ICollection<Comentarios> relPub_Com {  get; set; }
     }
 }

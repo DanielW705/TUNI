@@ -11,11 +11,11 @@
         </div>
         <div class="inputText">
             <label for="" class="title">Contraseña</label>
-            <input asp-for=@Model.PerfilDelAlumno.UsuarioAlumno.contraseña class="textBox" type="password" id="UserPassword" disabled placeholder="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+            <input asp-for=@Model.PerfilDelAlumno.UsuarioAlumno.contraseña class="textBox" type="password" id="UserPassword" disabled placeholder="Inserte nueva contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Repita Contraseña</label>
-            <input asp-for="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña">
+            <input asp-for="@Model.PerfilDelAlumno.UsuarioAlumno.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="Repita contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Nombre del alumno</label>
@@ -33,7 +33,7 @@
             <h3 class="title">Los reconocimientos con los que cuenta</h3>
             @if (Model.PerfilDelAlumno.InformacionAlumno is null)
             {
-                <p>No cuneta con ningun archivo, si tiene alguno aqui puede subirlo</p>
+                <p>No cuenta con ningun archivo, si tiene alguno aqui puede subirlo</p>
                 <input asp-for="@Model.PerfilDelAlumno.InformacionAlumno" id="file" type="file" accept=".pdf" hidden />
                 <label for="file" id="selector" disabled>Subir archivo</label>
             }
@@ -74,11 +74,11 @@
         </div>
         <div class="inputText">
             <label for="" class="title">Contraseña</label>
-            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserPassword" disabled placeholder="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña">
+            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserPassword" disabled placeholder="Inserte nueva contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Repita Contraseña</label>
-            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña">
+            <input asp-for="@Model.PerfilDeLaUniversidad.UsuarioUniversidad.contraseña" class="textBox" type="password" id="UserRepetedPassword" disabled placeholder="Repita contraseña">
         </div>
         <div class="inputText">
             <label for="" class="title">Nombre de la institucion</label>

@@ -17,9 +17,6 @@ namespace TUNIWEB.Models
         public ICollection<contactos> relUSU_CON { get; set; }
         public ICollection<carrerasimpartidas> relusu_carri { get; set; }
         public ICollection<Relacion> relUSU_REL { get; set; }
-
-        public ICollection<Publicaciones> relUSU_PU { get; set; }
-        public ICollection<Comentarios> relUSU_COM { get; set; }
         public solicitudes relUS { get; set; }
 
     }

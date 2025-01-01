@@ -100,7 +100,6 @@ namespace TUNIWEB
                     name: "default",
                     template: "{controller=Log}/{action=LogIn}/{id?}");
             });
-            Operaciones.inicializar(bd);
         }
     }
 }

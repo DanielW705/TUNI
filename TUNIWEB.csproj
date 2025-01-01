@@ -148,6 +148,18 @@
     <Compile Remove="Migrations\20241230043432_TUNIWEBDB.Designer.cs" />
     <Compile Remove="Migrations\20241231051201_TUNIBD_con_comentarios.cs" />
     <Compile Remove="Migrations\20241231051201_TUNIBD_con_comentarios.Designer.cs" />
+    <Compile Remove="Migrations\20241231161119_TUNIWEB_withComentarios.cs" />
+    <Compile Remove="Migrations\20241231161119_TUNIWEB_withComentarios.Designer.cs" />
+    <Compile Remove="Migrations\20241231172432_TUNIWEB_Database_withData.cs" />
+    <Compile Remove="Migrations\20241231172432_TUNIWEB_Database_withData.Designer.cs" />
+    <Compile Remove="Migrations\20241231172643_TUNIWEB_Database_withData.cs" />
+    <Compile Remove="Migrations\20241231172643_TUNIWEB_Database_withData.Designer.cs" />
+    <Compile Remove="Migrations\20241231200928_TUNIDB_WITH_DATA.cs" />
+    <Compile Remove="Migrations\20241231200928_TUNIDB_WITH_DATA.Designer.cs" />
+    <Compile Remove="Migrations\20241231200955_TUNIDB_WITH_DATA.cs" />
+    <Compile Remove="Migrations\20241231200955_TUNIDB_WITH_DATA.Designer.cs" />
+    <Compile Remove="Migrations\20241231215312_TUNIDB_WITH_DATA.cs" />
+    <Compile Remove="Migrations\20241231215312_TUNIDB_WITH_DATA.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

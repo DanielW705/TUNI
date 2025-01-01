@@ -15,11 +15,6 @@ namespace TUNIWEB.Models
         public ICollection<carrerasDeseadas> relAL_CARRD { get; set; }
         public ICollection<ValorPregunta> relUSA_VALP { get; set; }
         public ICollection<Relacion> relUSA_REL { get; set; }
-
-        public ICollection<Publicaciones> relUsa_Pu { get; set; }
-
-        public ICollection<Comentarios> relUSA_COM { get; set; }
-
         public solicitudes relAs { get; set; }
     }
 }

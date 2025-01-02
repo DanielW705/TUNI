@@ -1,17 +1,5 @@
-﻿(async () => {
-
-    const get_all_info_user = async () => {
-        const cookie = await cookieStore.get('DataUser');
-
-
-        const decodeString = decodeURIComponent(cookie.value);
-
-        return JSON.parse(decodeString);
-    }
-
-    const info_user = await get_all_info_user();
-
-    const get_home_url = () => info_user.UserType === 'Alumno' ? '/Principal/IndexAlumno' : '/Principal/IndexUniversidad';
+﻿import { get_home_url, info_user } from './User_information.js';
+(async () => {
 
     const divNavOp = document.querySelector('.menu .login-options');
 
@@ -19,7 +7,7 @@
 
     perfil_icon.remove();
 
-    ancle_home = document.createElement('a');
+    const ancle_home = document.createElement('a');
 
     ancle_home.classList.add('home_icon');
 

@@ -90,13 +90,13 @@ namespace TUNIWEB.Models
                 new DatosAcademicos
                 {
                     idAlumno = Guid.Parse(ids.Item1),
-                    boletaGlobal = "documento_prueba",
+                    boletaGlobal = "documento_prueba.pdf",
                     doc = bindoc,
                 },
                 new DatosAcademicos
                 {
                     idAlumno = Guid.Parse(ids.Item2),
-                    boletaGlobal = "documento_prueba",
+                    boletaGlobal = "documento_prueba.pdf",
                     doc = bindoc,
                 },
             };
@@ -588,6 +588,7 @@ namespace TUNIWEB.Models
                         fechaPublicacion = DateTime.Now,
                         visitas = 0,
                         texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tempus dolor, nec congue justo. Vestibulum mollis a enim finibus suscipit. Morbi efficitur a erat ut pharetra. Fusce felis urna.",
+                        nombre_archivo = (i & 1) == 1 ? "archivo de prueba.jpg" : null,
                         doc = (i & 1) == 1 ? bindoc : null
                     }
                     ).ToArray();
@@ -2448,7 +2449,6 @@ namespace TUNIWEB.Models
             builder.Entity<Comentarios>(entity =>
             {
                 entity.HasKey(c => c.Id);
-             
                 entity.Property(c => c.IdUsuario).IsRequired();
                 entity.Property(c => c.comentario).IsRequired().HasMaxLength(100);
 

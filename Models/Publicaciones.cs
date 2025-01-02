@@ -15,6 +15,8 @@ namespace TUNIWEB.Models
 
         public string texto { get; set; }
 
+        public string nombre_archivo { get; set; }
+
         public byte[] doc {  get; set; }
 
         public ICollection<Comentarios> relPub_Com {  get; set; }

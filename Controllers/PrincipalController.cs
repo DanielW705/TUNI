@@ -39,18 +39,18 @@ namespace TUNIWEB.Controllers
         public async Task<ActionResult> VerPerfil()
         {
             Result<PerfilViewModel> perfilDelUsuario = await _getUserProfileCase.Execute();
-            return View(perfilDelUsuario.Value);    
+            return View(perfilDelUsuario.Value);
         }
         [Authorize(Roles = "Alumno")]
-        public IActionResult IndexAlumno()
+        public async Task<IActionResult> IndexAlumno()
         {
-            Result<UsersIndexViewModel> userIndex = _getUserPublicationsCase.Execute();
+            UsersIndexViewModel userIndex = await _getUserPublicationsCase.Execute();
             return View(userIndex);
         }
         [Authorize(Roles = "Universidad")]
-        public IActionResult IndexUniversidad()
+        public async Task<ActionResult> IndexUniversidad()
         {
-            Result<UsersIndexViewModel> userIndex = _getUserPublicationsCase.Execute();
+            UsersIndexViewModel userIndex = await _getUserPublicationsCase.Execute();
             return View(userIndex);
         }
         [HttpPost]
@@ -101,7 +101,7 @@ namespace TUNIWEB.Controllers
             return PartialView(Operaciones.retutup());
         }
         [HttpPost]
-        public IActionResult _testvocacional([FromForm]valores i)
+        public IActionResult _testvocacional([FromForm] valores i)
         {
             Operaciones.darvalores(i);
             if (Operaciones.retutup() == null)
@@ -116,7 +116,7 @@ namespace TUNIWEB.Controllers
             return PartialView(Operaciones.retutup());
         }
         [HttpPost]
-        public IActionResult _vistaUNI([FromForm]string id)
+        public IActionResult _vistaUNI([FromForm] string id)
         {
             Trutupleu trutuple = new Trutupleu
             {
@@ -188,7 +188,7 @@ namespace TUNIWEB.Controllers
         [HttpPost]
         public IActionResult aceptado(string id)
         {
-            var jo = Operaciones.sol(_bd,id);
+            var jo = Operaciones.sol(_bd, id);
             if (jo != null)
             {
                 _bd.solicitar.Remove(jo);

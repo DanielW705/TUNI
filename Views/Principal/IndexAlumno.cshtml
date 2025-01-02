@@ -1,6 +1,97 @@
 ﻿@using ROP;
+@using TUNIWEB.Models.ClassValidation
 @using TUNIWEB.Models.ViewModel;
-@model Result<UsersIndexViewModel>
+@model UsersIndexViewModel
+@if (Model.publicaciones.Count > 0)
+{
+    <section class="publication-body">
+        <div class="index_section">
+            <div class="publications">
+                <section class="agregar_publicacion">
+                    <div class="menu_publicacion">
+                        <a href="" class="agregar">
+                            <i class="icon"></i>
+                        </a>
+                    </div>
+                </section>
+                @foreach (UserPublicationClass publicacion in Model.publicaciones)
+                {
+                    <section class="publicacion">
+                        <input id="IdPublicacion" type="hidden" value="@publicacion.ID">
+                        <div class="titulos">
+                            <h2 class="autor">@publicacion.Usuario</h2>
+                            <p class="fecha">@publicacion.fechaPublicacion.ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="body">
+                            <p class="text-body">@publicacion.texto</p>
+                            @if (!(publicacion.img is null))
+                            {
+                                <img class="pub-img" src="@publicacion.img.Route" alt="@publicacion.img.FileName" />
+                            }
+                        </div>
+                        <div class="options">
+                            <div class="options_button">
+                                <button class="like">
+                                    <i class="like"></i>
+                                </button>
+                                <button class="dislike">
+                                    <i class="dislike"></i>
+                                </button>
+                            </div>
+                            <div class="options_comments">
+                                <button class="comment">
+                                    <i class="comment"></i>
+                                </button>
+                            </div>
+                            <div class="see">
+                                <i class="eye"></i>
+                                <p>@publicacion.visitas</p>
+                            </div>
+                        </div>
+                        <div class="comments" style="height: 0%; display:none">
+                            <hr />
+                            @foreach (UserCommentClass comentario in publicacion.comentarios)
+                            {
+                                <div class="comment">
+                                    <h2 class="titulo">@comentario.Usuario</h2>
+                                    <hr />
+                                    <p class="comentario">@comentario.comentario</p>
+                                </div>
+                            }
+                        </div>
+                    </section>
+                }
+            </div>
+            <aside class="more_options">
+                <ul class="options">
+                    <li class="ver_relaciones">
+                        <button id="btn_ver_relaciones">
+                            <i class="icon"></i>
+                        </button>
+                    </li>
+                    <li class="ver_aceptados">
+                        <button id="btn_ver_aceptados">
+                            <i class="icon"></i>
+                        </button>
+                    </li>
+                    <li class="ver_rechazados">
+                        <button id="btn_ver_rechazados">
+                            <i class="icon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+}
 
-<script type="text/javascript" src="~/js/addNavButtons.js"></script>
+else
+{
+    <section class="message">
+        <p class="message">No hay ninguna publicacion</p>
+    </section>
+}
+
+<script type="module" src="~/js/addNavButtons.js"></script>
+<script type="text/javascript" src="~/js/index_section.js"></script>
 <script src="~/js/dist/browser/signalr.js"></script>

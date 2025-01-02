@@ -160,6 +160,8 @@
     <Compile Remove="Migrations\20241231200955_TUNIDB_WITH_DATA.Designer.cs" />
     <Compile Remove="Migrations\20241231215312_TUNIDB_WITH_DATA.cs" />
     <Compile Remove="Migrations\20241231215312_TUNIDB_WITH_DATA.Designer.cs" />
+    <Compile Remove="Migrations\20250102042956_TUNIWEB_WITH_DATA.cs" />
+    <Compile Remove="Migrations\20250102042956_TUNIWEB_WITH_DATA.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -182,6 +184,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

@@ -1,13 +1,8 @@
 ﻿'use strict';
+import { get_home_url, info_user } from './User_information.js';
 (async () => {
-    const get_all_info_user = async () => {
-        const cookie = await cookieStore.get('DataUser');
 
 
-        const decodeString = decodeURIComponent(cookie.value);
-
-        return JSON.parse(decodeString);
-    }
     const divNavOp = document.querySelector('.menu .login-options');
 
     const ancle_logout = document.createElement('a');
@@ -15,10 +10,6 @@
     const ancle_profile = document.createElement('a');
 
     const icono = document.getElementById('TUNI-ICON');
-
-    const info_user = await get_all_info_user();
-
-    const get_home_url = () => info_user.UserType === 'Alumno' ? '/Principal/IndexAlumno' : '/Principal/IndexUniversidad';
 
     icono.href = get_home_url();
 

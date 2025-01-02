@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TUNIWEB.Models;
 
 namespace TUNIWEB.Migrations
 {
     [DbContext(typeof(TUNIDbContext))]
-    partial class TUNIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250102045115_TUNIWEB_WITH_DATA")]
+    partial class TUNIWEB_WITH_DATA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
